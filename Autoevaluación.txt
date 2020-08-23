@@ -1,0 +1,115 @@
+
+PUNTAJE: 
+
+0: No realizado.
+0.25: Implementación con problemas mayores (funciona 25% de las veces o no funciona)
+0.5: Implementación con funcionamiento irregular (funciona 50% de las veces)
+0.75: Implementación con problemas menores (funciona 75% de las veces)
+1: Implementación completa sin problemas (funciona 100% de las veces)
+
+
+Requerimientos Funcionales Obligatorios.
+
+1. Clases y estructuras que forman el programa (1 pto): Como parte del diseño orientado a objetos de su solución, considere como mínimo 
+modelar las siguientes entidades (y sus respectivas relaciones) dentro de su programa
+
+a. Archivo de Texto Plano: Debe contener la representación de un archivo detexto plano en el programa, como mínimo debe tener un nombre, 
+fecha de modificación y un contenido (esto último como un String).
+
+b. Commit: Debe contener la represent ación de un commit en el programa, respetando la lista que lo enlaza con commits anteriores o 
+posteriores. Como mínimo debiese tener un autor, una marca de tiempo, un mensaje descriptivo y una representación de los cambios 
+generados por ese commit.
+
+c. Zonas de trabajo: Deben estar representadas las 4 zonas de trabajo propias de git: Workspace, Index, Local Repository y Remote 
+Repository. Cada una con sus características propias según el sistema de control de versiones git.
+
+d. Repositorio: Debe contener todos los elementos que forman parte de un repositorio git como un todo.2. Funcionalidades Mínimas (2.5 
+pto): Su programa debe contar con las siguientes funcionalidades durante su ejecución (estas funcionalidades pueden ser ejecutadas 
+mediante uno o más métodos dentro de su programa):
+
+a. gitInit: Esta funcionalidad solicita el nombre del repositorio y el autor para inicializar un nuevo repositorio git. El resto de los 
+comandos no pueden ser utilizados sin inicializar un repositorio git primero.
+
+b. gitAdd: Agrega al Index uno o más archivos de texto plano del Workspace.
+
+c. gitCommit: Crea un nuevo commit en el Local Repository con los contenidos del Index, solicitando un mensaje descriptivo para dicho
+commit.
+
+d. gitPush: Toma todos los commits del Local Repository y los envía al Remote Repository.
+
+e. gitPull: Toma todos los archivos del Remote Repository y los copia en el Workspace.
+
+f. gitStatus: Muestra el estado actual del repositorio git. Este comando debe mostrar lo siguiente al ser invocado:
+
+i. Información del repositorio (nombre y autor)
+ii. Número de archivos en el Workspace
+iii. Número de archivos en el Index
+iv. Número de commits en el Local Repository
+v. SI el Remote Repository está al día (o no) con los cambios del Local Repository
+
+3. Interacción con el usuario (0,5 pto): Su programa debe incluir un menú por terminal/consola que permita la interacción del usuario con 
+la solución, implementando las entidades y funcionalidades que permitan utilizar su simulación del sistema de control de versiones git.
+
+Las instrucciones de funcionamiento de su solución deben estar documentadas en su Informe de Laboratorio.
+
+Un ejemplo del menú se representa a continuación:
+
+### SIMULACIÓN DE GIT ###
+
+Escoja su opción:
+1. add
+2. commit
+3. pull
+4. push
+5. status
+6. Crear nuevo archivo
+INTRODUZCA SU OPCIÓN: _
+
+Requerimientos extra 
+
+1. gitLog (1 pto) : Esta funcionalidad debe mostrar una lista con los últimos 5 commits del Local Repository (indicando fecha, mensaje descriptivo y archivos añadidos). Si hay menos de 5 commits, muestra todos los que estén disponibles.
+
+2. gitBranch (2 pto): Esta funcionalidad debe permitir la creación de flujos alternativos de commits a través de “ramas”. Debe 
+implementar la rama por defecto (llamada “master”) y la posibilidad de crear ramas con nombres personalizables.
+
+3. gitCheckout (1 pto): Esta funcionalidad debe permitir el cambio de una rama a otra (requiere implementar gitBranch). Todos los cambios realizados desde el cambio de rama deben quedar registrados en esta nueva rama (y no en “master”).
+
+4. gitMerge (1 pto): Esta funcionalidad toma como parámetros una rama de origen y una rama de destino (requiere implementar gitBranch), sobreescribiendo el Local Repository de la rama de destino con los contenidos de la rama de origen.
+
+Requerimientos No Funcionales obligatorios. Nota que algunos son ineludibles, esto
+quiere decir que al no cumplir con dicho requerimiento, su proyecto será evaluado con la
+nota mínima.
+
+
+1. (obligatorio) La implementación debe ser en el lenguaje de programación Java, utilizando OpenJDK u OracleJDK compatible con la versión 8. Puede usar un IDE (como NetBeans, Eclipse o IntelliJ IDEA) como apoyo al desarrollo, pero el programa final debe poder ejecutarse sin necesitar uno. Se debe incluir un comando (en su documentación o mediante script) que permita compilar su proyecto sin necesitar un IDE. 
+
+2. (obligatorio) Todas las interacciones con el programa deben ser mediante consola/terminal. Puede recurrir al uso de System.in y 
+System.out (en Java). Para sus funcionalidades, solo se permite el uso de la biblioteca estándar de Java (sin importar bibliotecas
+externas).
+
+3. (obligatorio) Su solución debe demostrar la aplicación del paradigma orientado a objetos. No basta con que su solución esté 
+implementada en Java. Su diseño y correspondiente implementación debe seguir los lineamientos del paradigma Orientado a Objetos.
+
+4. (1 pto) Se debe documentar el código indicando una breve descripción de las clases creadas, sus atributos, métodos y relaciones. 
+Procure utilizar comentarios tipo Javadoc para esto.
+
+5. (1 pto) Se debe cuidar la organización del código (orden y claridad). Procure que su diseño de clases no viole los principios de 
+acoplamiento y cohesión.
+
+6. (1.5 pto) Como parte de su Informe de Laboratorio, debe incluir un diagrama de clases UML a nivel de análisis que describa las 
+entidades y relaciones del problema abordado.
+
+Este diagrama se debe crear antes del proceso de desarrollo.
+
+7. (1.5 pto) Como parte de su Informe de Laboratorio, debe incluir un diagrama de clases UML tras la implementación de la solución, este 
+diagrama debe ser coherente con la implementación en código de su solución. Este diagrama se debe crear después del desarrollo de la 
+solución.
+
+8. (1 pto) Historial de trabajo en GitHub tomando en consideración la evolución en el desarrollo de su proyecto en distintas etapas. Se 
+requieren al menos 10 commits distribuidos en un periodo de tiempo mayor o igual a 2 semanas . Los criterios que se consideran en la 
+evaluación de este ítem son: fecha primer commit, fecha último commit, total commits y máximo de commits diarios. A modo de ejemplo (y 
+solo como una referencia), si hace todos los commits el día antes de la entrega del proyecto, este ítem tendrá 0 pts. De manera similar, 
+si hace dos commits dos semanas antes de la entrega final y el resto los concentra en los últimos dos días, tendrá una evaluación del 25% 
+para este ítem (0.25 pts). Por el contrario, si demuestra constancia en los commits (con aportes claros entre uno y otro) a lo largo del 
+periodo evaluado, este ítem será evaluado con el total del puntaje.
+
