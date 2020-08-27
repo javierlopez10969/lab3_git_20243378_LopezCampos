@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="utils.ListaDeArchivos.nodoArchivo"/>
+    <fullyQualifiedTypeName name="modelo.Repositorio"/>
+    <fullyQualifiedTypeName name="modelo.Archivo"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+</qualifiedTypeNameHistroy>

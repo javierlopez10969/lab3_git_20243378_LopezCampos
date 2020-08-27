@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public interface Menu {
 	//Declaramos el repositorio
-    public static MiRepositorio repositorio = new MiRepositorio();
+    public static Repositorio repositorio = new MiRepositorio();
 	public static void main(String[]args){
 		Scanner entradaEscaner = new Scanner (System.in);
 		int x = -1;
@@ -30,13 +30,14 @@ public interface Menu {
             + "6. Crear nuevo archivo\n"
             + "7. Ver Workspace\n"
             + "8. Editar Archivo\n"
-            + "9. log\n"
+            + "9. Borrar Archivo\n"
+            + "10. log\n"
             + "12. Salir\n"  
             +"INTRODUZCA SU OPCIÓN:"
             + " _\n");
             x = entradaEscaner.nextInt();
-            System.out.println ("Entrada recibida por teclado es: \"" + x +"\"");
-            limpiarPantalla();
+            //System.out.println ("Entrada recibida por teclado es: \"" + x +"\n");
+            //limpiarPantalla();
             switch(x){
                 default:{
                     System.out.println("Ingrese una opción válida\n");
@@ -62,9 +63,26 @@ public interface Menu {
                     break;
                 }
                 case 6:{
+                	System.out.println("Crear archivo\n");
+                	System.out.println("Ingrese el nombre de su archivo a crear : ");
                     repositorio.crearArchivo();
                     break;
                 }
+                case 7:{
+                	System.out.println("Mostrar Workspace\n");
+                	repositorio.mostrarWorkspace();
+                	break;
+                }
+                case 8:{
+                	System.out.println("Editar Archivo\n");
+                	repositorio.editarArchivo();
+                	break;
+                }
+                case 9:{
+                	System.out.println("Borrar Archivo\n");
+                	repositorio.borrarArchivo();
+                	break;
+                } 
                 case 12:{
                     System.out.println("Adiós\n");
                     break;
@@ -74,7 +92,6 @@ public interface Menu {
         		System.out.println("INTRODUZCA SU OPCIÓN:");
 			}
         }
-     
         entradaEscaner.close();
 
     }

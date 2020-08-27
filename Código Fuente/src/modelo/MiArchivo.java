@@ -1,5 +1,7 @@
 //Importaciones
 package modelo;
+import java.util.Scanner;
+
 import utils.Contenido;
 
 public class MiArchivo implements Archivo{
@@ -16,29 +18,92 @@ public class MiArchivo implements Archivo{
 		setFechaUltimaModificacion();
 		contenido = new Contenido();
 	}
-	@Override
-	public void ingresarLinea(String linea) {
-		contenido.insertarFinal(linea);
-	}
-	@Override
-	public void ingresarLineaN(String linea) {
-		// TODO Auto-generated method stub
-	}
-	@Override
+
 	public void mostrarNombreFechas() {
-		System.out.println("Nombre Archivo : " + getNombre()  
-		+ "\n Fecaha de cración : " + getFechaCreacion()
-		+ "\n Última fecha de modifcación : " + getFechaUltimaModificacion());
+		System.out.println("Nombre Archivo : \n" + getNombre()  
+		+ "Fecha de cración : " + getFechaCreacion()
+		+ "Última fecha de modifcación : " + getFechaUltimaModificacion());
 		
 	}
-	@Override
-	public void mostrarTodo() {
+	
+	public void mostrar() {
 		System.out.println("Nombre Archivo : " + getNombre()  
-		+ "\n Fecaha de cración : " + getFechaCreacion()
+		+ "\n Fecha de creación : " + getFechaCreacion()
 		+ "\n Última fecha de modifcación : " + getFechaUltimaModificacion());
 		contenido.mostrarContenido();
-		
 	}
+	
+	//Edición de archivo
+	public void editarArchivo() {
+		int x = -1;
+		System.out.println("Edición de Archivo");
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		while(x!= 4) {
+			try {
+			System.out.println("Su archivo es :\n");
+			contenido.mostrarContenido();
+			System.out.println("\nQue desea hacer:\n"+
+			"1.-Insertar línea \n"+
+			"2.-Insertar Línea N \n" +	
+			"3.-Borrar Línea \n"+
+			"4.- Terminar Edición\n" );
+			x = scanner.nextInt(); 
+			switch (x) {
+			case 1:
+				String linea = "line";
+				System.out.println("Ingrese su linea");
+				Scanner scan = new Scanner(System.in);
+				try {
+					linea= scan.nextLine(); 
+				} catch (Exception s) {
+					System.out.println("F");
+				}
+				contenido.insertarFinal(linea);
+				break;
+			case 2:
+				
+				break;
+			case 3:
+				
+				break;
+			case 4:
+				break;
+			default:
+				System.out.println("Ingrese opción válida");
+				break;}
+			}catch (Exception s) {
+			System.out.println("F");}
+		}
+		System.out.println("Su archivo editado quedó como:");
+		setFechaUltimaModificacion();
+		mostrar();		
+	}
+	//Editar varias líneas
+	public void ingresarVariasLineas() {
+		System.out.println("Cuantas líneas quiere ingresar : ");
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		int n = 0;
+		try {n = scanner.nextInt(); 
+		} catch (Exception e) {
+			System.out.println("F");
+		}
+		//Comenzamos un cilco while
+		int i =  0;
+		while (i < n) {
+			String linea = "halo";
+			try {
+				linea= scanner.nextLine(); 
+			} catch (Exception e) {
+				System.out.println("F");
+			}
+			contenido.insertarFinal(linea);
+			i++;
+		}
+	}
+	
+	
 	//Setters and Getters
 	//Nombre
 	public String getNombre() {return nombre;}
@@ -52,4 +117,6 @@ public class MiArchivo implements Archivo{
 	//Editar contenido
 	public Contenido getContenido() {return contenido;}
 	public void setContenido(Contenido contenido) {this.contenido = contenido;}
+
+
 }

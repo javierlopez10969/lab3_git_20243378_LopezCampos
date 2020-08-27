@@ -47,18 +47,22 @@ public class Contenido {
 	public void insertarFinal(String linea) {
 		Lineas nodo = new Lineas(linea);
 		Lineas puntero = getCabeza() ;
-		int i;
-		i = 1 ;
-		//Mientras no llegemos al final del puntero
-		while(puntero.siguiente !=null) {
-			puntero = puntero.getSiguiente();
-			i ++;
+		if (puntero == null) {
+			setCabeza(nodo);
+		}else {
+			int i;
+			i = 1 ;
+			//Mientras no llegemos al final del puntero
+			while(puntero.siguiente !=null) {
+				puntero = puntero.getSiguiente();
+				i ++;
+			}
+			//Una vez llegado al final, asignamos el nuevo nodo
+			puntero.setSiguiente(nodo);	
+			//Seteamos el indice en donde se ecnuentra la linea
+			nodo.setIndice(i);				
 		}
-		//Una vez llegado al final, asignamos el nuevo nodo
-		puntero.setSiguiente(nodo);	
-		//Seteamos el indice en donde se ecnuentra la linea
-		nodo.setIndice(i);
-		setTamano(Tamano +1);		
+		setTamano(Tamano +1);
 	}
 	
 	//Insertar en un indice n
@@ -88,6 +92,9 @@ public class Contenido {
 	//Metodo de mostrar contenido
 	public void mostrarContenido() {
 		Lineas puntero = getCabeza();
+		if (puntero==null) {
+			System.out.println("Sin contenido\n");
+		}
 		while (puntero != null) {
 			System.out.println(puntero.getIndice() +" " + puntero.getLinea());
 			puntero = puntero.getSiguiente();
@@ -96,7 +103,9 @@ public class Contenido {
 	
 	//Setters and Getters
 	public Lineas getCabeza() {return Cabeza;}
-	public void setCabeza(Lineas cabeza) {Cabeza = cabeza;}
+	public void setCabeza(Lineas cabeza) {
+		Cabeza = cabeza;
+		cabeza.setIndice(0);}
 	public int getTamano() {return Tamano;}
 	public void setTamano(int tamano) {Tamano = tamano;}
 	

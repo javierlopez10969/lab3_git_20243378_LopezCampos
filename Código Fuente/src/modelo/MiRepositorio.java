@@ -1,10 +1,8 @@
 package modelo;
 
-import java.util.Scanner;
-
 import utils.ListaDeArchivos;
 
-public class MiRepositorio {
+public class MiRepositorio implements Repositorio{
 	//Atributos
 	private String nombreRepositorio;
 	private String autor;
@@ -22,7 +20,7 @@ public class MiRepositorio {
 	//Metodos
 	
 	//Constructor del repositorio
-	public void gitInit(String autor , String nombreRepositorio ) {
+	public void gitInit(String autor,String nombreRepositorio ) {
 		setAutor(autor);
 		setNombreRepositorio(nombreRepositorio);
 		setFechaDeCreacion(Tiempo.getActualTime() );
@@ -31,20 +29,23 @@ public class MiRepositorio {
 		localRepositroy = new MiCommit();
 		remoteRepositroy = new MiCommit();
 	}
+
+	//Metodos del Workspace
+	public void editarArchivo() {workspace.editarArchivo();}
+	public void mostrarArchivo() {workspace.mostrarArchivo();}
+	public void mostrarWorkspace() {workspace.mostrarWorkspace();}
+	public void borrarArchivo() {workspace.borrarArchivo();}
+	public void crearArchivo(){workspace.crearArchivo();}
 	
-	public void crearArchivo(){
-		@SuppressWarnings("resource")
-		Scanner scanner =  new Scanner(System.in);
-		try {
-			String nombreArchivo = scanner.nextLine(); 
-			System.out.println(nombreArchivo);
-			workspace.crearArchivo(nombreArchivo);
-		} catch (Exception e) {
-			
-		}
-		
-	}
-	//Limpiar Index
+	//Index
+	public void limpiarIndex(){index = new ListaDeArchivos();}
+	public void gitAdd(){}
+	
+	//Local Repository
+	public void gitPush(){}
+	
+	//Remote Repository	
+	public void gitPull(){}
 	
 	//Setters and Getters
 	public String getNombreRepositorio() {return nombreRepositorio;}
@@ -53,14 +54,9 @@ public class MiRepositorio {
 	public void setAutor(String autor) {this.autor = autor;}
 	public String getFechaDeCreacion() {return fechaDeCreacion;}
 	public void setFechaDeCreacion(String fechaDeCreacion) {this.fechaDeCreacion = fechaDeCreacion;}
-	
 	//Repositories
 	public Workspace getWorkspace() {return workspace;}
-	public void setWorkspace(Workspace workspace) {this.workspace = workspace;}
 	public ListaDeArchivos getIndex() {return index;}
-	public void setIndex(ListaDeArchivos index) {this.index = index;}
 	public PilaCommit getLocalRepositroy() {return localRepositroy;}
-	public void setLocalRepositroy(PilaCommit localRepositroy) {this.localRepositroy = localRepositroy;}
 	public PilaCommit getRemoteRepositroy() {return remoteRepositroy;}
-	public void setRemoteRepositroy(PilaCommit remoteRepositroy) {this.remoteRepositroy = remoteRepositroy;}
 }

@@ -9,7 +9,6 @@ public class ListaDeArchivos {
 	
 	//Creamos la clase nodo, una clase interna de lista enlazada
 	private class nodoArchivo{
-		@SuppressWarnings("unused")
 		private Archivo myArchivo;
 		private nodoArchivo siguiente = null;
 		
@@ -42,9 +41,68 @@ public class ListaDeArchivos {
 		puntero.setSiguiente(nodo);	
 		setTamano(tamano +1);		
 	}
+	//Metodo que permite borrar una archivo n
+	//Entradas : indice n
+	//Dominio : {0,tamano}
+	public void borrarArchivo(int n) {
+		if (n < tamano) {
+			nodoArchivo puntero = getCabeza() ;
+			int i = 1; 
+			//Mientras no llegemos al final del puntero
+			while(puntero.siguiente !=null && i < n) {
+				puntero = puntero.getSiguiente();
+				i++;
+			}
+			nodoArchivo borrar = puntero.siguiente;
+			puntero.siguiente = borrar.siguiente; 
+			borrar.siguiente = null;
+			setTamano(tamano -1);	
+		}
+
+	}
 	
-	public boolean isEmpty() {
-		return tamano == 0;
+	public boolean isEmpty() {return tamano == 0;}
+	
+	public void mostrarArchivos() {
+		if (!isEmpty()) {
+			nodoArchivo puntero =  getCabeza();
+			int i = 0 ;
+			while (puntero != null) {
+				System.out.println(i+"\n");
+				puntero.myArchivo.mostrar();
+				puntero = puntero.getSiguiente();
+				i++;
+			}
+		}else {
+			System.out.println("Workspace vacío\n");
+		}
+	}
+
+	
+	
+	//Metodo que dado un indice n, devuelva el archivo correspondiente en la lista
+	//De archivos
+	//Entradas : indice n 
+	public Archivo getArchivoN(int n){
+		//Si el n ingresado no supera el tamaño total de archivos
+		if (n > tamano) {
+			System.out.println("El indice excede el total de archivos");
+			return null;
+		}else{
+			nodoArchivo puntero =  getCabeza();
+			int i = 0 ;
+			//Mientras el puntero no sea nulo
+			while (i < n && puntero != null) {
+				System.out.println(i+".-");
+				puntero = puntero.getSiguiente();
+				i++;
+			}if (i!= n) {
+				System.out.println("No hay archivos disponibles");
+				return null;
+			}else {
+				return puntero.myArchivo;
+			}
+		}
 	}
 	
 	//Setter and getters
