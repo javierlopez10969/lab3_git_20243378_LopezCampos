@@ -11,11 +11,10 @@ public class MiRepositorio implements Repositorio{
 	//Zonas de trabajo
 	//Workspace
 	private Workspace workspace;
-	private ListaDeArchivos index;
+	private Index index;
 	
 	//Repositories
 	private PilaCommit localRepositroy;
-	
 	private PilaCommit remoteRepositroy;
 	//Metodos
 	
@@ -25,21 +24,20 @@ public class MiRepositorio implements Repositorio{
 		setNombreRepositorio(nombreRepositorio);
 		setFechaDeCreacion(Tiempo.getActualTime() );
 		workspace = new MiWorkspace();
-		index = new ListaDeArchivos();
+		index = new MiIndex();
 		localRepositroy = new MiCommit();
 		remoteRepositroy = new MiCommit();
 	}
 
 	//Metodos del Workspace
 	public void editarArchivo() {workspace.editarArchivo();}
-	public void mostrarArchivo() {workspace.mostrarArchivo();}
 	public void mostrarWorkspace() {workspace.mostrarWorkspace();}
 	public void borrarArchivo() {workspace.borrarArchivo();}
 	public void crearArchivo(){workspace.crearArchivo();}
 	
 	//Index
-	public void limpiarIndex(){index = new ListaDeArchivos();}
-	public void gitAdd(){}
+	//Menú que pregunta que archivos quiere añadir al index
+	public void gitAdd(){index.gitAdd(getWorkspace());}
 	
 	//Local Repository
 	public void gitPush(){}
@@ -56,7 +54,7 @@ public class MiRepositorio implements Repositorio{
 	public void setFechaDeCreacion(String fechaDeCreacion) {this.fechaDeCreacion = fechaDeCreacion;}
 	//Repositories
 	public Workspace getWorkspace() {return workspace;}
-	public ListaDeArchivos getIndex() {return index;}
+	public ListaDeArchivos getIndex() {return index.getIndex();}
 	public PilaCommit getLocalRepositroy() {return localRepositroy;}
 	public PilaCommit getRemoteRepositroy() {return remoteRepositroy;}
 }

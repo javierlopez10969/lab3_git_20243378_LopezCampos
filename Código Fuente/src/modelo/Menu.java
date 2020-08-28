@@ -39,11 +39,9 @@ public interface Menu {
             //System.out.println ("Entrada recibida por teclado es: \"" + x +"\n");
             //limpiarPantalla();
             switch(x){
-                default:{
-                    System.out.println("Ingrese una opción válida\n");
-                }
                 case 1:{
                     System.out.println("Add\n");
+                    repositorio.gitAdd();
                     break;
                 }
                 case 2:{
@@ -86,10 +84,15 @@ public interface Menu {
                 case 12:{
                     System.out.println("Adiós\n");
                     break;
-                }                
+                }   
+                default :{
+                	System.out.println("Ingrese opción válida\n");
+    				break;
+                }
+				
             }
         	}catch (Exception s) {
-        		System.out.println("INTRODUZCA SU OPCIÓN:");
+        		System.out.println("Ingrese opción válida\n");
 			}
         }
         entradaEscaner.close();

@@ -45,7 +45,7 @@ public class ListaDeArchivos {
 	//Entradas : indice n
 	//Dominio : {0,tamano}
 	public void borrarArchivo(int n) {
-		if (n < tamano) {
+		if (n < tamano && n > -1) {
 			nodoArchivo puntero = getCabeza() ;
 			int i = 1; 
 			//Mientras no llegemos al final del puntero
@@ -57,6 +57,8 @@ public class ListaDeArchivos {
 			puntero.siguiente = borrar.siguiente; 
 			borrar.siguiente = null;
 			setTamano(tamano -1);	
+		}else {
+			System.out.println("Indice supera los limites");
 		}
 
 	}
@@ -68,11 +70,28 @@ public class ListaDeArchivos {
 			nodoArchivo puntero =  getCabeza();
 			int i = 0 ;
 			while (puntero != null) {
-				System.out.println(i+"\n");
+				System.out.println("i :"+ i +".-");
 				puntero.myArchivo.mostrar();
 				puntero = puntero.getSiguiente();
 				i++;
 			}
+			System.out.println("\n");
+		}else {
+			System.out.println("Workspace vacío\n");
+		}
+	}
+	
+	public void mostrarNombreFechas() {
+		if (!isEmpty()) {
+			nodoArchivo puntero =  getCabeza();
+			int i = 0 ;
+			while (puntero != null) {
+				System.out.println("i :"+ i +".-");
+				puntero.myArchivo.mostrarNombreFechas();
+				puntero = puntero.getSiguiente();
+				i++;
+			}
+			System.out.println("\n");
 		}else {
 			System.out.println("Workspace vacío\n");
 		}
@@ -85,7 +104,7 @@ public class ListaDeArchivos {
 	//Entradas : indice n 
 	public Archivo getArchivoN(int n){
 		//Si el n ingresado no supera el tamaño total de archivos
-		if (n > tamano) {
+		if (n > tamano || n < 0) {
 			System.out.println("El indice excede el total de archivos");
 			return null;
 		}else{
