@@ -18,18 +18,35 @@ public class MiArchivo implements Archivo{
 		setFechaUltimaModificacion();
 		contenido = new Contenido();
 	}
+	//Constructor a partir de a otro archivo
+	public MiArchivo(Archivo myArchivo) {
+		nombre = myArchivo.getNombre();
+		fechaCreacion = myArchivo.getFechaCreacion();
+		fechaUltimaModificacion = myArchivo.getFechaUltimaModificacion();
+		contenido = new Contenido(myArchivo.getContenido());
+	}
+	
+	//Metodo que copia todas las variables de un archivo a uno nuevo archivo, esta pensado para el index
+	public Archivo copiarArchivo() {
+		//Copiamos todos los atributos
+		Archivo archivoSalida = new MiArchivo(this.getNombre());
+		archivoSalida.setContenido(new Contenido(this.contenido));
+		archivoSalida.setFechaCreacion(this.getFechaCreacion());
+		archivoSalida.setFechaUltimaModificacion(this.getFechaUltimaModificacion());
+		return archivoSalida;
+	}
 
 	public void mostrarNombreFechas() {
-		System.out.println("Nombre Archivo : \n" + getNombre()  
-		+ "Fecha de cración : " + getFechaCreacion()
-		+ "Última fecha de modifcación : " + getFechaUltimaModificacion());
+		System.out.println("Nombre Archivo :" + getNombre()  
+		+ "\nFecha de cración : " + getFechaCreacion()
+		+ "\nÚltima fecha de modifcación : " + getFechaUltimaModificacion());
 		
 	}
 	
 	public void mostrar() {
 		System.out.println("Nombre Archivo : " + getNombre()  
-		+ "\n Fecha de creación : " + getFechaCreacion()
-		+ "\n Última fecha de modifcación : " + getFechaUltimaModificacion());
+		+ "\nFecha de creación : " + getFechaCreacion()
+		+ "\nÚltima fecha de modifcación : " + getFechaUltimaModificacion());
 		contenido.mostrarContenido();
 		System.out.println("\n");
 	}
@@ -135,13 +152,16 @@ public class MiArchivo implements Archivo{
 	public void setNombre(String nombre) {this.nombre = nombre;}
 	//Fecha creacion
 	public String getFechaCreacion() {return fechaCreacion;}
+	public void setFechaCreacion(String newFecha) {this.fechaCreacion = newFecha;}
 	public void setFechaCreacion() {this.fechaCreacion = Tiempo.getActualTime();}
 	//Fecha modificacion
 	public String getFechaUltimaModificacion() {return fechaUltimaModificacion;}
+	public void setFechaUltimaModificacion(String newFecha) {this.fechaCreacion = newFecha;}
 	public void setFechaUltimaModificacion() {this.fechaUltimaModificacion = Tiempo.getActualTime() ;}
 	//Editar contenido
 	public Contenido getContenido() {return contenido;}
 	public void setContenido(Contenido contenido) {this.contenido = contenido;}
+	
 
 
 }

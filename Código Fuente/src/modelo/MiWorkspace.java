@@ -24,15 +24,7 @@ public class MiWorkspace implements Workspace {
 		}
 		//System.out.println(nombreArchivo);
 		Archivo archivo = new MiArchivo(nombreArchivo);
-		if (archivos.isEmpty()) {
-			//Lo añadimos al principio
-			System.out.println("No hay ningún archivo se procederá a crear el primer archivo");
-			archivos.insertarPrincipio(archivo);
-		}else {
-			System.out.println("Creando nuevo archivo");
-			//Lo añadimos al final
-			archivos.insertarFinal(archivo);
-		}
+		archivos.añadirArchivo(archivo);
 		System.out.println("Archivo : " + nombreArchivo + " añadido a workspace\n"
 		+ "Desea editarlo? si "+ "\\" + " no \n");
 		String respuesta = "YES";
@@ -109,5 +101,5 @@ public class MiWorkspace implements Workspace {
 	public Archivo getArchivoN(int n) {return archivoN(n);}
 	public Archivo archivoN(int n){return archivos.getArchivoN(n);}
 	public ListaDeArchivos getArchivos() {return archivos;}
-	
+	public int getTamano() {return archivos.getTamano();}
 }

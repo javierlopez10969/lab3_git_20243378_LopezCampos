@@ -7,12 +7,33 @@ public class Contenido {
 	private Lineas Cabeza = null;
 	private int tamano ;
 	
+	public Contenido() {
+		setTamano(0);
+	}
+	
+	//Constructor que copia desde un contenido para crear otro
+	public Contenido(Contenido contenido) {
+		//Solo si el contenido que estamos entregando no se encuentra vacío
+		if (!contenido.isEmpty()) {
+			Cabeza = new Lineas(contenido.getCabeza().getLinea());
+			tamano = contenido.tamano ;
+			Lineas punteroNuevo = Cabeza;
+			Lineas punteroOriginal = contenido.getCabeza();
+			//Copiamos todo el contenido
+			while (punteroOriginal != null) {
+				punteroNuevo.siguiente=punteroOriginal.getSiguiente();
+				punteroOriginal = punteroOriginal.getSiguiente();
+				punteroNuevo = punteroNuevo.getSiguiente();
+			}
+		}
+
+		
+	}
 	//Creamos la clase nodo, una clase interna de lista enlazada
 	private class Lineas{
 		//Atributos
 		private String Linea;
 		private Lineas siguiente = null;
-		private int Indice;
 		
 		//Metodos
 		//Constructor
@@ -25,9 +46,6 @@ public class Contenido {
 		}
 		public Lineas getSiguiente() {return siguiente;}
 		public void setSiguiente(Lineas siguiente) {this.siguiente = siguiente;}
-		public int getIndice() {return Indice;}
-		public void setIndice(int indice) {Indice = indice;}
-
 	}
 	
 	//Metodos
@@ -37,8 +55,6 @@ public class Contenido {
 		nodo.setSiguiente(Cabeza);
 		//Y la nueva cabeza es el nodo
 		this.Cabeza = nodo;		
-		//Seteamos el indice del nodo como 1
-		nodo.setIndice(0);
 		//Actualizamos el tamaño de la lista
 		setTamano(tamano + 1);
 	}
@@ -50,17 +66,13 @@ public class Contenido {
 		if (puntero == null) {
 			setCabeza(nodo);
 		}else {
-			int i;
-			i = 1 ;
 			//Mientras no llegemos al final del puntero
 			while(puntero.siguiente !=null) {
 				puntero = puntero.getSiguiente();
-				i ++;
 			}
 			//Una vez llegado al final, asignamos el nuevo nodo
 			puntero.setSiguiente(nodo);	
-			//Seteamos el indice en donde se ecnuentra la linea
-			nodo.setIndice(i);				
+			//Seteamos el indice en donde se ecnuentra la linea				
 		}
 		setTamano(tamano +1);
 	}
@@ -70,33 +82,30 @@ public class Contenido {
 		Lineas nodo = new Lineas(linea);
 		Lineas puntero = getCabeza() ;
 		//Preguntamos si la cabeza no se encuenta vacía
-		if (puntero == null) {
-			//Si se encuentra la ingresamos al inicio, e ignoramos el n
-			//Contenido vacío
-			setCabeza(nodo);
-			nodo.setIndice(0);
-			setTamano(tamano+1);
-		}else if (n > getTamano()) {
+		if (puntero == null || n>=getTamano() ) {
 			insertarFinal(linea);
-		}else if (puntero != null){
+		}else if(n==0) {
+			insertarPrincipio(linea);
+		}/*else if (n == 1) {
+			nodo.setSiguiente(puntero.getSiguiente());
+			puntero.setSiguiente(nodo);
+			
+		}*/
+		
+		else{
 			System.out.println("Insert N \n");
-			int i;
-			i = 0 ;
+			int i = 1;
 			//Mientras no llegemos al final del puntero
-			while(i < n && puntero !=null) {
+			while(i < n) {
 				System.out.println("i :"+ i +" linea :" +puntero.getLinea());
 				puntero = puntero.getSiguiente();
-				i ++;
+				i++;
 			}
 			//Seteamos el siguiente valor del puntero
 			nodo.setSiguiente(puntero.getSiguiente());
-			if (nodo.getSiguiente()!= null) {
-				nodo.getSiguiente().setIndice(i+1);
-			}
-			//Una vez llegado al final, asignamos el nuevo nodo
-			puntero.setSiguiente(nodo);	
-			//Seteamos el indice en donde se encuentra la linea
-			nodo.setIndice(i);
+			//y el siguiente de nuestro puntero es ahora nuestro nodo
+			puntero.setSiguiente(nodo);
+			
 			setTamano(tamano +1);
 		}
 	}
@@ -106,8 +115,10 @@ public class Contenido {
 		if (puntero==null) {
 			System.out.println("Sin contenido\n");
 		}
+		int i = 0;
 		while (puntero != null) {
-			System.out.println(puntero.getIndice() +" " + puntero.getLinea());
+			System.out.println(i +" " + puntero.getLinea());
+			i++;
 			puntero = puntero.getSiguiente();
 		}
 	}
@@ -135,8 +146,8 @@ public class Contenido {
 	//Setters and Getters
 	public Lineas getCabeza() {return Cabeza;}
 	public void setCabeza(Lineas cabeza) {
-		Cabeza = cabeza;
-		cabeza.setIndice(0);}
+		this.Cabeza = cabeza;
+		}
 	public int getTamano() {return tamano;}
 	public void setTamano(int tamano) {this.tamano = tamano;}
 	

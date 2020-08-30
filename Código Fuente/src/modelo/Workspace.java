@@ -17,7 +17,9 @@ public interface Workspace {
 	public boolean isEmpty();
 	//Setters and getters
 	public Archivo getArchivoN(int n);
-	//Función que devuelve todos los archivos presentes en el workspace
+	//Metodo que devuelve todos los archivos presentes en el workspace
 	public ListaDeArchivos getArchivos();
+	//Getter del total de archivos en el workspace
+	public int getTamano();
 	
 }

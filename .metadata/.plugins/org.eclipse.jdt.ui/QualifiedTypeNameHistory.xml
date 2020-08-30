@@ -3,5 +3,8 @@
     <fullyQualifiedTypeName name="utils.ListaDeArchivos.nodoArchivo"/>
     <fullyQualifiedTypeName name="modelo.Repositorio"/>
     <fullyQualifiedTypeName name="modelo.Archivo"/>
+    <fullyQualifiedTypeName name="modelo.Workspace"/>
+    <fullyQualifiedTypeName name="sun.net.www.content.text.plain"/>
+    <fullyQualifiedTypeName name="utils.ListaDeArchivos"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,32 @@
+Abra la terminal de su correspondiente sistema operativo.
+Asegurese que la consola esta abierta en esta carpeta llamada src.
+Hay distintos metodos para abrir la consola desde una determinada carpeta.A ejemplo le dejamos esta.
+En linux tanto en windows puede apretar click derecho en un espacio en blanco de la carpeta y seleccionar abrir Terminal.
+Si tiene problemas para abir la temrinal, busque un tutrorial en internet "Como abrir terminal desde una carpeta"-
+Asegurese de tener instalado java en su versión mas reciente.
+Una vez abierta la consola ubicada en esta carpeta ejecute el siguiente comando :
+
+javac Compilar.java
+
+Despúes de haber compilado este programa, ejecute el programa : 
+
+java Compilar
+
+Y ahora ejecute el programa principal : 
+
+java modelo.Menu
+
+Caso de error :
+
+En caso de que la compilación no se ejecutará correctamente ingrese los siguientes comandos.
+
+Comando 1 :
+
+javac ./utils/Contenido.java ./utils/ListaDeArchivos.java ./modelo/Main.java ./modelo/Index.java ./modelo/Archivo.java ./modelo/MiArchivo.java ./modelo/MiCommit.java ./modelo/MiIndex.java ./modelo/MiRepositorio.java ./modelo/MiWorkspace.java ./modelo/PilaCommit.java ./modelo/Repositorio.java ./modelo/Tiempo.java ./modelo/Workspace.java
+	
+
+Comando 2 : 
+
+java modelo.Menu
+
+

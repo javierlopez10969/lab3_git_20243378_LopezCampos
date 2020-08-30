@@ -934,3 +934,279 @@ Binding(CTRL+SHIFT+T,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
+!SESSION 2020-08-28 10:54:19.251 -----------------------------------------------
+eclipse.buildId=4.16.0.I20200604-0540
+java.version=11.0.7
+java.vendor=Ubuntu
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=es_CL
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.jface 2 0 2020-08-28 10:54:30.796
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-08-28 10:54:30.796
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5e1d1524,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@d0a2c82,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SESSION 2020-08-28 11:10:21.777 -----------------------------------------------
+eclipse.buildId=4.16.0.I20200604-0540
+java.version=11.0.7
+java.vendor=Ubuntu
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=es_CL
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.jface 2 0 2020-08-28 11:10:35.878
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-08-28 11:10:35.878
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@34eaf9c1,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5bbf744b,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.core.jobs 2 2 2020-08-28 11:10:48.094
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.oomph.internal.ui.EarlyStart$1
+!SESSION 2020-08-28 11:10:22.619 -----------------------------------------------
+eclipse.buildId=4.16.0.I20200604-0540
+java.version=11.0.7
+java.vendor=Ubuntu
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=es_CL
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.jface 2 0 2020-08-28 11:11:01.151
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-08-28 11:11:01.152
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@14af73e1,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@73da303e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.core.resources 4 2 2020-08-28 11:38:18.146
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 0
+java.lang.ClassCastException: class org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding cannot be cast to class org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding (org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding and org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding are in unnamed module of loader org.eclipse.osgi.internal.loader.EquinoxClassLoader @256aabbe)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.manageSyntheticAccessIfNecessary(FieldReference.java:557)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.analyseAssignment(FieldReference.java:107)
+	at org.eclipse.jdt.internal.compiler.ast.Assignment.analyseCode(Assignment.java:83)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.analyseCode(MethodDeclaration.java:129)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.internalAnalyseCode(TypeDeclaration.java:942)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.analyseCode(TypeDeclaration.java:301)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.analyseCode(CompilationUnitDeclaration.java:132)
+	at org.eclipse.jdt.internal.compiler.Compiler.process(Compiler.java:908)
+	at org.eclipse.jdt.internal.compiler.ProcessTaskManager.run(ProcessTaskManager.java:145)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+!ENTRY org.eclipse.core.resources 4 2 2020-08-28 11:38:18.296
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 0
+java.lang.ClassCastException: class org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding cannot be cast to class org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding (org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding and org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding are in unnamed module of loader org.eclipse.osgi.internal.loader.EquinoxClassLoader @256aabbe)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.manageSyntheticAccessIfNecessary(FieldReference.java:557)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.analyseAssignment(FieldReference.java:107)
+	at org.eclipse.jdt.internal.compiler.ast.Assignment.analyseCode(Assignment.java:83)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.analyseCode(MethodDeclaration.java:129)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.internalAnalyseCode(TypeDeclaration.java:942)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.analyseCode(TypeDeclaration.java:301)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.analyseCode(CompilationUnitDeclaration.java:132)
+	at org.eclipse.jdt.internal.compiler.Compiler.process(Compiler.java:908)
+	at org.eclipse.jdt.internal.compiler.ProcessTaskManager.run(ProcessTaskManager.java:145)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+!ENTRY org.eclipse.core.resources 4 75 2020-08-28 11:38:18.331
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 org.eclipse.jdt.core 4 75 2020-08-28 11:38:18.331
+!MESSAGE Errors running builder 'Java Builder' on project 'Código Fuente'.
+!STACK 0
+java.lang.ClassCastException: class org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding cannot be cast to class org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding (org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding and org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding are in unnamed module of loader org.eclipse.osgi.internal.loader.EquinoxClassLoader @256aabbe)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.manageSyntheticAccessIfNecessary(FieldReference.java:557)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.analyseAssignment(FieldReference.java:107)
+	at org.eclipse.jdt.internal.compiler.ast.Assignment.analyseCode(Assignment.java:83)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.analyseCode(MethodDeclaration.java:129)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.internalAnalyseCode(TypeDeclaration.java:942)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.analyseCode(TypeDeclaration.java:301)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.analyseCode(CompilationUnitDeclaration.java:132)
+	at org.eclipse.jdt.internal.compiler.Compiler.process(Compiler.java:908)
+	at org.eclipse.jdt.internal.compiler.ProcessTaskManager.run(ProcessTaskManager.java:145)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+!SUBENTRY 1 org.eclipse.jdt.core 4 75 2020-08-28 11:38:18.331
+!MESSAGE Errors running builder 'Java Builder' on project 'src'.
+!STACK 0
+java.lang.ClassCastException: class org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding cannot be cast to class org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding (org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding and org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding are in unnamed module of loader org.eclipse.osgi.internal.loader.EquinoxClassLoader @256aabbe)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.manageSyntheticAccessIfNecessary(FieldReference.java:557)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.analyseAssignment(FieldReference.java:107)
+	at org.eclipse.jdt.internal.compiler.ast.Assignment.analyseCode(Assignment.java:83)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.analyseCode(MethodDeclaration.java:129)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.internalAnalyseCode(TypeDeclaration.java:942)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.analyseCode(TypeDeclaration.java:301)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.analyseCode(CompilationUnitDeclaration.java:132)
+	at org.eclipse.jdt.internal.compiler.Compiler.process(Compiler.java:908)
+	at org.eclipse.jdt.internal.compiler.ProcessTaskManager.run(ProcessTaskManager.java:145)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+!ENTRY org.eclipse.core.resources 4 2 2020-08-28 11:38:25.610
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.jdt.internal.compiler.lookup.SyntheticMethodBinding.<init>(SyntheticMethodBinding.java:158)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.addSyntheticMethod(SourceTypeBinding.java:508)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.manageSyntheticAccessIfNecessary(FieldReference.java:557)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.analyseAssignment(FieldReference.java:107)
+	at org.eclipse.jdt.internal.compiler.ast.Assignment.analyseCode(Assignment.java:83)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.analyseCode(MethodDeclaration.java:129)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.internalAnalyseCode(TypeDeclaration.java:942)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.analyseCode(TypeDeclaration.java:301)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.analyseCode(CompilationUnitDeclaration.java:132)
+	at org.eclipse.jdt.internal.compiler.Compiler.process(Compiler.java:908)
+	at org.eclipse.jdt.internal.compiler.ProcessTaskManager.run(ProcessTaskManager.java:145)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+!ENTRY org.eclipse.core.resources 4 566 2020-08-28 11:38:25.626
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 org.eclipse.jdt.core 4 75 2020-08-28 11:38:25.626
+!MESSAGE Errors running builder 'Java Builder' on project 'Código Fuente'.
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.jdt.internal.compiler.lookup.SyntheticMethodBinding.<init>(SyntheticMethodBinding.java:158)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.addSyntheticMethod(SourceTypeBinding.java:508)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.manageSyntheticAccessIfNecessary(FieldReference.java:557)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.analyseAssignment(FieldReference.java:107)
+	at org.eclipse.jdt.internal.compiler.ast.Assignment.analyseCode(Assignment.java:83)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.analyseCode(MethodDeclaration.java:129)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.internalAnalyseCode(TypeDeclaration.java:942)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.analyseCode(TypeDeclaration.java:301)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.analyseCode(CompilationUnitDeclaration.java:132)
+	at org.eclipse.jdt.internal.compiler.Compiler.process(Compiler.java:908)
+	at org.eclipse.jdt.internal.compiler.ProcessTaskManager.run(ProcessTaskManager.java:145)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+!ENTRY org.eclipse.core.resources 4 2 2020-08-28 11:38:38.716
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 0
+java.lang.ClassCastException: class org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding cannot be cast to class org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding (org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding and org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding are in unnamed module of loader org.eclipse.osgi.internal.loader.EquinoxClassLoader @256aabbe)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.manageSyntheticAccessIfNecessary(FieldReference.java:557)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.analyseAssignment(FieldReference.java:107)
+	at org.eclipse.jdt.internal.compiler.ast.Assignment.analyseCode(Assignment.java:83)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.analyseCode(MethodDeclaration.java:129)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.internalAnalyseCode(TypeDeclaration.java:942)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.analyseCode(TypeDeclaration.java:301)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.analyseCode(CompilationUnitDeclaration.java:132)
+	at org.eclipse.jdt.internal.compiler.Compiler.process(Compiler.java:908)
+	at org.eclipse.jdt.internal.compiler.ProcessTaskManager.run(ProcessTaskManager.java:145)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+!ENTRY org.eclipse.core.resources 4 2 2020-08-28 11:38:38.843
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 0
+java.lang.ClassCastException: class org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding cannot be cast to class org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding (org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding and org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding are in unnamed module of loader org.eclipse.osgi.internal.loader.EquinoxClassLoader @256aabbe)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.manageSyntheticAccessIfNecessary(FieldReference.java:557)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.analyseAssignment(FieldReference.java:107)
+	at org.eclipse.jdt.internal.compiler.ast.Assignment.analyseCode(Assignment.java:83)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.analyseCode(MethodDeclaration.java:129)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.internalAnalyseCode(TypeDeclaration.java:942)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.analyseCode(TypeDeclaration.java:301)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.analyseCode(CompilationUnitDeclaration.java:132)
+	at org.eclipse.jdt.internal.compiler.Compiler.process(Compiler.java:908)
+	at org.eclipse.jdt.internal.compiler.ProcessTaskManager.run(ProcessTaskManager.java:145)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+!ENTRY org.eclipse.core.resources 4 75 2020-08-28 11:38:38.852
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 org.eclipse.jdt.core 4 75 2020-08-28 11:38:38.852
+!MESSAGE Errors running builder 'Java Builder' on project 'Código Fuente'.
+!STACK 0
+java.lang.ClassCastException: class org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding cannot be cast to class org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding (org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding and org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding are in unnamed module of loader org.eclipse.osgi.internal.loader.EquinoxClassLoader @256aabbe)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.manageSyntheticAccessIfNecessary(FieldReference.java:557)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.analyseAssignment(FieldReference.java:107)
+	at org.eclipse.jdt.internal.compiler.ast.Assignment.analyseCode(Assignment.java:83)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.analyseCode(MethodDeclaration.java:129)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.internalAnalyseCode(TypeDeclaration.java:942)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.analyseCode(TypeDeclaration.java:301)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.analyseCode(CompilationUnitDeclaration.java:132)
+	at org.eclipse.jdt.internal.compiler.Compiler.process(Compiler.java:908)
+	at org.eclipse.jdt.internal.compiler.ProcessTaskManager.run(ProcessTaskManager.java:145)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+!SUBENTRY 1 org.eclipse.jdt.core 4 75 2020-08-28 11:38:38.852
+!MESSAGE Errors running builder 'Java Builder' on project 'src'.
+!STACK 0
+java.lang.ClassCastException: class org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding cannot be cast to class org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding (org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding and org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding are in unnamed module of loader org.eclipse.osgi.internal.loader.EquinoxClassLoader @256aabbe)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.manageSyntheticAccessIfNecessary(FieldReference.java:557)
+	at org.eclipse.jdt.internal.compiler.ast.FieldReference.analyseAssignment(FieldReference.java:107)
+	at org.eclipse.jdt.internal.compiler.ast.Assignment.analyseCode(Assignment.java:83)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.analyseCode(MethodDeclaration.java:129)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.internalAnalyseCode(TypeDeclaration.java:942)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.analyseCode(TypeDeclaration.java:301)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.analyseCode(CompilationUnitDeclaration.java:132)
+	at org.eclipse.jdt.internal.compiler.Compiler.process(Compiler.java:908)
+	at org.eclipse.jdt.internal.compiler.ProcessTaskManager.run(ProcessTaskManager.java:145)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+!SESSION 2020-08-29 17:04:28.014 -----------------------------------------------
+eclipse.buildId=4.16.0.I20200604-0540
+java.version=11.0.7
+java.vendor=Ubuntu
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=es_CL
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2020-08-29 17:04:32.276
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jface 2 0 2020-08-29 17:04:37.036
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-08-29 17:04:37.036
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2cdb5974,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@8aa5ab4,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)

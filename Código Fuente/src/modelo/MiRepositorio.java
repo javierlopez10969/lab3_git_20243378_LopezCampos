@@ -14,8 +14,8 @@ public class MiRepositorio implements Repositorio{
 	private Index index;
 	
 	//Repositories
-	private PilaCommit localRepositroy;
-	private PilaCommit remoteRepositroy;
+	private Commit localRepositroy;
+	private Commit remoteRepositroy;
 	//Metodos
 	
 	//Constructor del repositorio
@@ -38,12 +38,37 @@ public class MiRepositorio implements Repositorio{
 	//Index
 	//Menú que pregunta que archivos quiere añadir al index
 	public void gitAdd(){index.gitAdd(getWorkspace());}
+	public void mostrarIndex() {index.getIndex().mostrarArchivos();}
 	
 	//Local Repository
 	public void gitPush(){}
 	
 	//Remote Repository	
 	public void gitPull(){}
+	
+	//git Status
+	//i. Información del repositorio (nombre y autor)
+	//ii. Número de archivos en el Workspace
+	//iii. Número de archivos en el Index
+	//iv. Número de commits en el Local Repository
+	//v. SI el Remote Repository está al día (o no) con los cambios del Local Repository
+	public void gitStatus() {
+		System.out.println(
+		"\nAutor : " + getAutor()+
+		"\nNombre Repositorio  : " + getNombreRepositorio() +
+		"\nFecha de creación  : " + getFechaDeCreacion() +
+		"\nTotal de archivos en workspace : " + workspace.getTamano()+
+		"\nTotal de archivos en el index  : " + index.getTamano()+
+		"\nTotal de commits en el local repository : " + localRepositroy.getTamano()+
+		remoteActualizado() );
+	}
+	
+	public String remoteActualizado() {
+		return "si";	}
+	public void gitLog() {
+		
+	}
+	
 	
 	//Setters and Getters
 	public String getNombreRepositorio() {return nombreRepositorio;}
@@ -55,6 +80,6 @@ public class MiRepositorio implements Repositorio{
 	//Repositories
 	public Workspace getWorkspace() {return workspace;}
 	public ListaDeArchivos getIndex() {return index.getIndex();}
-	public PilaCommit getLocalRepositroy() {return localRepositroy;}
-	public PilaCommit getRemoteRepositroy() {return remoteRepositroy;}
+	public Commit getLocalRepositroy() {return localRepositroy;}
+	public Commit getRemoteRepositroy() {return remoteRepositroy;}
 }

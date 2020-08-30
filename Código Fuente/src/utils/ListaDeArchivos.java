@@ -25,7 +25,7 @@ public class ListaDeArchivos {
 		//El siguiente elmenento es la cabeza
 		nodo.siguiente = cabeza;
 		//Y la nueva cabeza es el nodo
-		cabeza = nodo;		
+		setCabeza(nodo);		
 		//Actualizamos el tamaño de la lista
 		setTamano(tamano + 1);
 	}
@@ -41,6 +41,16 @@ public class ListaDeArchivos {
 		puntero.setSiguiente(nodo);	
 		setTamano(tamano +1);		
 	}
+	
+	//Añadir archivo
+	public void añadirArchivo(Archivo myArchivo) {
+		if (isEmpty()) {
+			insertarPrincipio(myArchivo);
+		}else {
+			insertarFinal(myArchivo);
+		}
+	}
+	
 	//Metodo que permite borrar una archivo n
 	//Entradas : indice n
 	//Dominio : {0,tamano}
@@ -77,7 +87,7 @@ public class ListaDeArchivos {
 			}
 			System.out.println("\n");
 		}else {
-			System.out.println("Workspace vacío\n");
+			System.out.println("Lista de archivos vacía\n");
 		}
 	}
 	
@@ -86,7 +96,7 @@ public class ListaDeArchivos {
 			nodoArchivo puntero =  getCabeza();
 			int i = 0 ;
 			while (puntero != null) {
-				System.out.println("i :"+ i +".-");
+				System.out.println("i :"+ i );
 				puntero.myArchivo.mostrarNombreFechas();
 				puntero = puntero.getSiguiente();
 				i++;
@@ -123,7 +133,7 @@ public class ListaDeArchivos {
 			}
 		}
 	}
-	
+
 	//Setter and getters
 	public nodoArchivo getCabeza() {return cabeza;}
 	public void setCabeza(nodoArchivo cabeza) {	this.cabeza = cabeza;}

@@ -6,6 +6,7 @@ public interface Repositorio {
 	public String getNombreRepositorio();
 	public String getFechaDeCreacion();
 	public void mostrarWorkspace();
+	public void mostrarIndex();
 	
 	//Metodos
 	//Constructor
@@ -19,4 +20,8 @@ public interface Repositorio {
 
 	//Operaciones del index
 	public void gitAdd();
+	public void gitPush();
+	public void gitPull();
+	public void gitStatus();
+	public void gitLog();
 }

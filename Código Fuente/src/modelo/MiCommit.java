@@ -1,30 +1,53 @@
 package modelo;
 
-import utils.ListaDeArchivos;
-
-public class MiCommit implements PilaCommit {
-	//Los commit se comportan como pilas
+public class MiCommit implements Commits {
+	/*
+	 Commit: Debe contener la representación de un commit en el programa,
+	respetando la lista que lo enlaza con commits anteriores o posteriores (esta lista
+	ordenada de commits puede estar representada dentro del mismo commit o en la
+	zona de trabajo que lo contiene) . Como mínimo debiese tener un autor, una
+	marca de tiempo, un mensaje descriptivo y una representación de los cambios
+	generados por ese commit. 
+	 */
+	//Los commit se comportan como pilas y a la vez como listas doblemente enlazadas, ya que hay un anterior
+	//Y un siguiente
+	//Commit más reciente
 	private Commit cima = null ;
-	private int Tamano ;
+	//Total de commits
+	private int tamano ;
 	
 	//Cada commit realizado se guardará en un elemento llamado Commit
 	private class Commit{
-		private ListaDeArchivos archivos;
+		//Lista de archivos o index con los archivos con cambios
+		private Index index;
 		private Commit siguiente = null;
-		public Commit(ListaDeArchivos archivos) {this.setArchivos(archivos);}
-		public ListaDeArchivos getArchivos() {return archivos;}
-		public void setArchivos(ListaDeArchivos archivos) {this.archivos = archivos;}
+		private String Autor;
+		private String Fecha;
+		private String mensajeDescriptivoString;
+		
+		public Commit(Index index) {
+			this.setIndex(index);
+		}
+		//Setters and getters
+		public String getAutor() {return Autor;}
+		public void setAutor(String autor) {Autor = autor;}
+		public String getFecha() {return Fecha;}
+		public void setFecha(String fecha) {Fecha = fecha;}
+		public String getMensajeDescriptivoString() {return mensajeDescriptivoString;}
+		public void setMensajeDescriptivoString(String mensajeDescriptivoString) {this.mensajeDescriptivoString = mensajeDescriptivoString;}
+		public Index getIndex() {return index;}
+		public void setIndex(Index index) {this.index = index;}
 		public Commit getSiguiente() {return siguiente;}
 		public void setSiguiente(Commit siguiente) {this.siguiente = siguiente;}
 		
 	}
 	//Insertar commit
 	@Override
-	public void pushCommit(ListaDeArchivos archivos) {
-		Commit nodo = new Commit(archivos);
+	public void pushCommit(Index index) {
+		Commit nodo = new Commit(index);
 		nodo.setSiguiente(cima);
 		setCima(nodo);
-		setTamano(Tamano +1 );
+		setTamano(getTamano() +1 );
 	}
 	@Override
 	public void popCommit() {
@@ -32,33 +55,28 @@ public class MiCommit implements PilaCommit {
 		if (puntero != null) {
 			setCima(puntero.getSiguiente());
 			puntero.setSiguiente(null);
-			setTamano(Tamano +1 );
+			setTamano(getTamano() +1 );
 		}
 	}
 
 	@Override
-	public ListaDeArchivos getCommit() {
+	public Index getCommit() {
 		Commit puntero = getCima() ;
 		if (puntero == null) {
 			return null;
 		}else {
-			return puntero.getArchivos();
+			return puntero.getIndex();
 		}
 	}
 
-	@Override
 	public boolean isEmpty() {
-		return Tamano == 0;
+		return getTamano() == 0;
 	}
 	
-	@Override
-	public int longitud() {
-		return Tamano;
-	}
 	
 	//Setters and Getters
 	public Commit getCima() {return cima;}
 	public void setCima(Commit cima) {this.cima = cima;}
-	public int getTamano() {return Tamano;}
-	public void setTamano(int tamano) {Tamano = tamano;}
+	public int getTamano() {return tamano;}
+	public void setTamano(int Tamano) {tamano = Tamano;}
 }

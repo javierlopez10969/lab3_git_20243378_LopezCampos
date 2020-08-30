@@ -7,8 +7,11 @@ public class Compilar {
 		switch (sSistemaOperativo) {
 		case "Linux":
 			try {
-				String cmd = "halt"; //Comando de apagado en linux
-				Runtime.getRuntime().exec(cmd); 
+				System.out.println("Compilando .. \n");
+				String compilar = "javac ./utils/Contenido.java ./utils/ListaDeArchivos.java ./modelo/Menu.java ./modelo/Index.java ./modelo/Archivo.java ./modelo/MiArchivo.java ./modelo/MiCommit.java ./modelo/MiIndex.java ./modelo/MiRepositorio.java ./modelo/MiWorkspace.java ./modelo/PilaCommit.java ./modelo/Repositorio.java ./modelo/Tiempo.java ./modelo/Workspace.java";
+				Runtime.getRuntime().exec(compilar); 
+				String ejecutar = "java .modelo.Main";
+				Runtime.getRuntime().exec(ejecutar); 
 			} catch (IOException ioe) {
 				System.out.println (ioe);
 			}
