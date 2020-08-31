@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Scanner;
+
 public class MiCommit implements Commits {
 	/*
 	 Commit: Debe contener la representación de un commit en el programa,
@@ -20,46 +22,83 @@ public class MiCommit implements Commits {
 	private class Commit{
 		//Lista de archivos o index con los archivos con cambios
 		private Index index;
-		private Commit siguiente = null;
-		private String Autor;
-		private String Fecha;
+		private String autor;
+		private String fecha;
 		private String mensajeDescriptivoString;
+		private Commit siguiente = null;
+
 		
-		public Commit(Index index) {
+		//Generar commit a partir de un index y un 
+		public Commit(Index index,String Autor, String Mensaje) {
+			//Asignamos el index entregado 
 			this.setIndex(index);
+			//Asignamos el autor entregado
+			setAutor(Autor);
+			setFecha();
+			setMensajeDescriptivoString(Mensaje);
+		}
+		
+		//Mostrar el commit
+		public void mostrarCommit() {
+			System.out.println("Autor : " + getAutor()+ "\n");
+			System.out.println("Fecha del commit : " + getFecha() + "\n");
+			System.out.println("Comentario : " + getMensajeDescriptivoString() + "\n");
+			getIndex().getIndex().mostrarNombreFechas();
+			
 		}
 		//Setters and getters
-		public String getAutor() {return Autor;}
-		public void setAutor(String autor) {Autor = autor;}
-		public String getFecha() {return Fecha;}
-		public void setFecha(String fecha) {Fecha = fecha;}
+		public String getAutor() {return autor;}
+		public void setAutor(String Autor) {this.autor = Autor;}
+		public String getFecha() {return fecha;}
+		public void setFecha() {this.fecha = Tiempo.getActualTime();}
 		public String getMensajeDescriptivoString() {return mensajeDescriptivoString;}
 		public void setMensajeDescriptivoString(String mensajeDescriptivoString) {this.mensajeDescriptivoString = mensajeDescriptivoString;}
 		public Index getIndex() {return index;}
 		public void setIndex(Index index) {this.index = index;}
 		public Commit getSiguiente() {return siguiente;}
 		public void setSiguiente(Commit siguiente) {this.siguiente = siguiente;}
-		
 	}
-	//Insertar commit
-	@Override
-	public void pushCommit(Index index) {
-		Commit nodo = new Commit(index);
-		nodo.setSiguiente(cima);
-		setCima(nodo);
-		setTamano(getTamano() +1 );
-	}
-	@Override
-	public void popCommit() {
-		Commit puntero = getCima() ;
-		if (puntero != null) {
-			setCima(puntero.getSiguiente());
-			puntero.setSiguiente(null);
-			setTamano(getTamano() +1 );
+	
+	//Insertar commit en el local repository
+	@SuppressWarnings("resource")
+	public void Commit(Index index, String autor) {
+		//Para que se ejecute el push primero el index entregado no debe estar vacío
+		if (!index.getIndex().isEmpty()) {
+			String comentrario;
+			Scanner scanner;
+			scanner = new Scanner(System.in);
+			System.out.println("Ingrese el comentario a su commit : ");
+			comentrario = scanner.nextLine();
+			//Creamos un nuevo commit a partir del index actual
+			if (comentrario == "") {
+				comentrario = "Sin comentario\n";
+			}
+			Commit nodo = new Commit(index,autor,comentrario);
+			insertarCommit(nodo);
 		}
 	}
+	//Función que revisa que todos los commits no se encuentren en el remote sean insertado
+	public void gitPush(Commits localRepository) {
+		
+	}
+	
+	public void gitPull(Commits localRepositoy) {
+		
+	}
+	
+	//Siempre se inserta en la cima el último commit añadido
+	public void insertarCommit(Commit commit) {
+		commit.setSiguiente(getCima());
+		setCima(commit);
+		setTamano(getTamano() +1 );
+	}
+	//Por implementar, revisar si hay cambios realizados con respecto al commit anterior
+	public Boolean cambios() {
+		
+		return true;
+	}
 
-	@Override
+
 	public Index getCommit() {
 		Commit puntero = getCima() ;
 		if (puntero == null) {
@@ -71,6 +110,28 @@ public class MiCommit implements Commits {
 
 	public boolean isEmpty() {
 		return getTamano() == 0;
+	}
+	
+	public void mostrarRepositorio() {
+		Commit puntero = getCima();
+		while (puntero!=null) {
+			puntero.mostrarCommit();
+			puntero = puntero.getSiguiente();
+		}
+	}
+	//Git log 
+	/*Esta funcionalidad debe mostrar una lista con los últimos 5 commits del
+	Local Repository (indicando fecha, mensaje descriptivo y archivos añadidos). Si hay
+	menos de 5 commits, muestra todos los que estén disponibles.*/
+	public void gitLog() {
+		System.out.println("Sus últimos 5 commits son  : ");
+		Commit puntero = getCima();
+		int i = 0;
+		while (puntero!=null && i < 5) {
+			puntero.mostrarCommit();
+			puntero = puntero.getSiguiente();
+			i ++ ;
+		}
 	}
 	
 	

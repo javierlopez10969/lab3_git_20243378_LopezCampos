@@ -5,14 +5,14 @@ import utils.ListaDeArchivos;
 public interface Workspace {
 	//Métodos necesarios para la implementación de workspace
 	//Crear archivo
-	public void crearArchivo();
+	public void crearArchivo() throws InterruptedException;
 	//Borrar Archivo
 	public void borrarArchivo();
 	//Mostrar Workspace
 	public void mostrarWorkspace () ;
 	public void mostrarNombreFecha();
 	//Editar Archivo
-	public void editarArchivo();
+	public void editarArchivo() throws InterruptedException;
 	//Esta vacío el workspace
 	public boolean isEmpty();
 	//Setters and getters

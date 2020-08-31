@@ -10,18 +10,24 @@ public class MiIndex implements Index {
 	//Limpiar Index
 	public void limpiarIndex(){setIndex(new ListaDeArchivos());}
 	//Menú gitAdd que se le entrega el workspace actual
-	public void gitAdd(Workspace workspace){
+	public void gitAdd(Workspace workspace) throws InterruptedException{
 
 		//Solo si el workspace no se encuentra vacío
 		if (!workspace.isEmpty()) {
 			//Variables de múltiples entradas
 			int x = -1;
 			System.out.println("Git Add\n");
+			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(System.in);
 			while(x < 5) {
 					//Mostramos los archivos en el workspace
+					
 					System.out.println("Workspace actual : ");
 					workspace.mostrarNombreFecha();
+					
+					System.out.println("Index Actualmente : \n");
+					index.mostrarArchivos();
+					Thread.sleep(2000);
 					System.out.println("\nQue desea hacer:\n"+
 					"1.-Agregar todos los archivos \n"+
 					"2.-Agregar varios archivos\n" +	
@@ -29,7 +35,12 @@ public class MiIndex implements Index {
 					"4.-Mostrar archivos en Index\n"+
 					"5.-Terminar Add\n"+
 					"Ingrese una opción : ");
-					x = scanner.nextInt(); 
+					try {
+						x = scanner.nextInt();
+					} catch (Exception e) {
+						System.out.println("Ha ocurrido un error" + e);
+					}
+					 
 					System.out.println("Entrada : " + x);
 					//Git add -All
 					if (x== 1) {
@@ -61,9 +72,10 @@ public class MiIndex implements Index {
 					else if (x== 4){
 						System.out.println("Index Actualmente : \n");
 						index.mostrarArchivos();
+						Thread.sleep(4000);
 					}
 					else if (x== 5){
-						System.out.println("Adiós\n");
+						System.out.println("Add Terminado\n");
 						break;
 					}
 					else{
@@ -71,7 +83,6 @@ public class MiIndex implements Index {
 						x = -1;
 					}
 			}
-			scanner.close();
 		}else {
 			System.out.println("Workspace vacío, no procede hacer add\n");
 		}
@@ -81,14 +92,20 @@ public class MiIndex implements Index {
 	public int agregarIndex(Workspace workspace, int indice) {
 		//Procedemos a preguntamos si podemos obtener el archivo
 		if (workspace.getArchivoN(indice)!= null) {
-			//Archivo archivo  = workspace.getArchivoN(indice).copiarArchivo();
+			//Creamos el archivo a partir de otro archivo
 			Archivo archivo = new MiArchivo(workspace.getArchivoN(indice));
-			System.out.println("El archivo original es :");
-			workspace.getArchivoN(indice).mostrar();
-			System.out.println("El archivo copiado es :");
-			archivo.mostrar();
-			index.añadirArchivo(archivo);
-			return 1;
+			//System.out.println("El archivo original es :");
+			//workspace.getArchivoN(indice).mostrar();
+			//System.out.println("El archivo copiado es :");
+			//archivo.mostrar();
+			//Solo si el archivo no se encuentra dentro del index
+			if (!index.isInside(archivo)) {
+				index.añadirArchivo(archivo);
+				return 1;
+			}else {
+				return 0;
+			}
+
 		}else {
 			System.out.println("Indice de archivo inválido");
 			return 0;
@@ -133,7 +150,7 @@ public class MiIndex implements Index {
 		//Si es menor o igual a 
 	}
 	
-	
+	public Boolean isEmpty() {return index.isEmpty();}
 	public int getTamano() {return index.getTamano();}
 	public ListaDeArchivos getIndex() {return index;}
 	public void setIndex(ListaDeArchivos index) {this.index = index;}

@@ -3,12 +3,13 @@ package modelo;
 import java.io.IOException;
 import java.util.Scanner;
 
+
 public interface Menu {
 	//Declaramos el repositorio
     public static Repositorio repositorio = new MiRepositorio();
 	public static void main(String[]args){
 		Scanner entradaEscaner = new Scanner (System.in);
-		int x = -1;int contador = 0 ;
+		int x = -1;
 		System.out.println("Bienvenido a la simulacion de git\n");/*
 		+"Para inicializar su repositorio, ingrese su nombre de usuario");
 		String autor = entradaEscaner.nextLine();
@@ -19,11 +20,8 @@ public interface Menu {
         while(x != 12){
         	try{
         	entradaEscaner = new Scanner (System.in);
-        	if (contador == 3 ) {
-        		limpiarPantalla();
-        		contador = 0;
-			}
-        	contador ++ ;
+    		Thread.sleep(1500);
+    		limpiarPantalla();
             System.out.println("### SIMULACIÓN DE GIT ###\n"
             //+  "Autor : " + repositorio.getAutor()
             //+ "\nNombre Repositorio : "+ repositorio.getNombreRepositorio()
@@ -46,60 +44,79 @@ public interface Menu {
             x = entradaEscaner.nextInt();
             //System.out.println ("Entrada recibida por teclado es: \"" + x +"\n");
             switch(x){
+            	//Add
                 case 1:{
-                    System.out.println("Add\n");
-                    try {
-                    	repositorio.gitAdd();
-					} catch (Exception e) {
-						System.out.println("Algo ha pasado mal\n");
-					}
+                    repositorio.gitAdd();
                     break;
                 }
                 case 2:{
                     System.out.println("Commit\n");
+                    repositorio.gitCommit();
                     break;
                 }
+                //pull
                 case 3:{
                     System.out.println("Pull\n");
+                    repositorio.gitPull();
                     break;
                 }
+                //push
                 case 4:{
                     System.out.println("Push\n");
+                    repositorio.gitPush();
                     break;
                 }
+                //Satus
                 case 5:{
                     System.out.println("Status\n");
                     repositorio.gitStatus();
                     break;
                 }
+                //Crear archivo
                 case 6:{
                 	System.out.println("Crear archivo\n");
                 	System.out.println("Ingrese el nombre de su archivo a crear : ");
                     repositorio.crearArchivo();
                     break;
                 }
+                //Mostrar el workspace actual con todo
                 case 7:{
-                	System.out.println("Mostrar Workspace\n");
+                	System.out.println("Workspace actualmente\n");
                 	repositorio.mostrarWorkspace();
+                	//Solo si el workspace no esta vacío esperamos 4 segundos para que el usuario observe el workspace
+                	if (!repositorio.workspaceEmpty()) {
+                		Thread.sleep(4000);
+					}                	
                 	break;
                 }
+                //Editar archivo
                 case 8:{
                 	System.out.println("Editar Archivo\n");
                 	repositorio.editarArchivo();
                 	break;
                 }
+                //Borrar archivo
                 case 9:{
                 	System.out.println("Borrar Archivo\n");
                 	repositorio.borrarArchivo();
                 	break;
                 }
+                //Ver index
                 case 10:{
                 	System.out.println("Ver Index\n");
                 	repositorio.mostrarIndex();
                 	break;
                 }
+                //Log
+                case 11:{
+                	System.out.println("Log \n");
+                	repositorio.gitLog();
+                	break;
+                }
+                //Salir
                 case 12:{
-                    System.out.println("Adiós\n");
+                    System.out.println("Adiós\n\n");
+                    System.out.println("Simulación de Git terminada .");
                     break;
                 }   
                 default :{
@@ -109,7 +126,7 @@ public interface Menu {
 				
             }
         	}catch (Exception s) {
-        		System.out.println("Algo salió mal");
+        		System.out.println("Algo salió mal" + s);
 			}
         }
         entradaEscaner.close();
@@ -117,18 +134,15 @@ public interface Menu {
     }
 	public static void limpiarPantalla() throws IOException {
 		String sSistemaOperativo = System.getProperty("os.name");
-		System.out.println(sSistemaOperativo);
-		switch (sSistemaOperativo) {
-			case "Linux":{
-				System.out.flush(); 
-				Runtime.getRuntime().exec("clear");
-			}
-			case "Windows":{
-				try {
-					Runtime.getRuntime().exec("cls");
-				} catch (IOException e) {
-				}
-			}
-		}
+		//System.out.println(sSistemaOperativo);
+		if (sSistemaOperativo.equals("Windows")) {
+			System.out.flush();
+			Runtime.getRuntime().exec("clear");
+		}else {
+			System.out.print("\033[H\033[2J");  
+			System.out.flush(); 
+			Runtime.getRuntime().exec("clear");
+		}		
+		
 	   } 
 }

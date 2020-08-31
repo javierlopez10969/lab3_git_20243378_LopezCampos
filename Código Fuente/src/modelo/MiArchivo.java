@@ -47,12 +47,12 @@ public class MiArchivo implements Archivo{
 		System.out.println("Nombre Archivo : " + getNombre()  
 		+ "\nFecha de creación : " + getFechaCreacion()
 		+ "\nÚltima fecha de modifcación : " + getFechaUltimaModificacion());
+		System.out.println("Contenido :");
 		contenido.mostrarContenido();
-		System.out.println("\n");
 	}
 	
 	//Edición de archivo
-	public void editarArchivo() {
+	public void editarArchivo() throws InterruptedException{
 		//Variables de múltiples entradas
 		String x = "-1";
 		String linea = "line";
@@ -68,7 +68,7 @@ public class MiArchivo implements Archivo{
 			"1.-Insertar línea \n"+
 			"2.-Insertar Línea N \n" +	
 			"3.-Borrar Línea \n"+
-			"4.- Terminar Edición\n" );
+			"4.-Terminar Edición\n" );
 			x = scanner.nextLine(); 
 			switch (x) {
 			case "1":
@@ -79,6 +79,7 @@ public class MiArchivo implements Archivo{
 					System.out.println("F");
 				}
 				contenido.insertarFinal(linea);
+				x = "-1";
 				break;
 			case "2":{			
 				System.out.println("Ingrese su linea");
@@ -120,6 +121,7 @@ public class MiArchivo implements Archivo{
 		System.out.println("Su archivo editado quedó como:");
 		setFechaUltimaModificacion();
 		mostrar();
+		Thread.sleep(3000);
 	}
 	//Editar varias líneas
 	public void ingresarVariasLineas() {

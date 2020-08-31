@@ -12,7 +12,7 @@ public class MiWorkspace implements Workspace {
 	//Metodos
 	//Este es el bloque de métodos complejos, ya que necesitan una itneracción fuerte con el usuario
 	//Se podría relacionar a workspace como un intermediario entre los datos almacenadaos y lo que ocurre con ellos
-	public void crearArchivo() {
+	public void crearArchivo() throws InterruptedException {
 		@SuppressWarnings("resource")
 		Scanner scanner =  new Scanner(System.in);
 		String nombreArchivo = "Jamon";
@@ -24,6 +24,8 @@ public class MiWorkspace implements Workspace {
 		}
 		//System.out.println(nombreArchivo);
 		Archivo archivo = new MiArchivo(nombreArchivo);
+		//Solo si el archivo no se encuentra en el workspace
+		if (!archivos.isInside(archivo)) {
 		archivos.añadirArchivo(archivo);
 		System.out.println("Archivo : " + nombreArchivo + " añadido a workspace\n"
 		+ "Desea editarlo? si "+ "\\" + " no \n");
@@ -37,6 +39,8 @@ public class MiWorkspace implements Workspace {
 		if (respuesta.equals("si")||respuesta.equals("YES")|| respuesta.equals("Si")
 		|| respuesta.equals("oui")|| respuesta.equals("Yes") ||respuesta.equals("1")) {
 			archivo.editarArchivo();
+		}}else {
+			System.out.println("Hay un archivo con el mismo nombre, no procede a crear nuevo archivo\n");
 		}		
 	}
 	//Método encargado de borrar un archivo
@@ -60,7 +64,7 @@ public class MiWorkspace implements Workspace {
 		
 	}
 	@Override
-	public void editarArchivo() {
+	public void editarArchivo() throws InterruptedException {
 		//Antes de editar preguntamos si el workspace no esta vacío
 		if (!isEmpty()) {
 			//Primero mostramos todo el workspace

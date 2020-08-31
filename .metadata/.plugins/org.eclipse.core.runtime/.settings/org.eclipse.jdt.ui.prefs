@@ -1,13 +1,9 @@
-content_assist_autoactivation_triggers_java=qwertyuiopsdfghjkl\u00F1zxcvbnmQWERTYUIOPASDFGHJKL\u00D1ZXCVBNM.
-content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"/>
+content_assist_autoactivation_triggers_java=qwertyuiopasdfghjkl\u00F1zxcvbnmQWERTYUIOPASDFGHJKL\u00D1ZXCVBNM{}()"".
 content_assist_number_of_computers=12
 content_assist_proposals_background=255,255,255
 content_assist_proposals_foreground=0,0,0
 eclipse.preferences.version=1
-org.eclipse.jdt.ui.exception.name=e
 org.eclipse.jdt.ui.formatterprofiles.version=19
-org.eclipse.jdt.ui.gettersetter.use.is=true
-org.eclipse.jdt.ui.overrideannotation=true
 sourceHoverBackgroundColor=255,255,255
 spelling_locale_initialized=true
 useAnnotationsPrefPage=true

@@ -5,7 +5,7 @@ import utils.Contenido;
 public interface Archivo {
 	public void mostrarNombreFechas();
 	public void mostrar();
-	public void editarArchivo();
+	public void editarArchivo() throws InterruptedException;
 	public Archivo copiarArchivo();
 	
 	//Setters and getters

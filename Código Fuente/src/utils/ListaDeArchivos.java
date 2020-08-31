@@ -73,7 +73,7 @@ public class ListaDeArchivos {
 
 	}
 	
-	public boolean isEmpty() {return tamano == 0;}
+	public Boolean isEmpty() {return tamano == 0;}
 	
 	public void mostrarArchivos() {
 		if (!isEmpty()) {
@@ -133,7 +133,22 @@ public class ListaDeArchivos {
 			}
 		}
 	}
-
+	//Metodo que consulta si un archivos se encuentra dentro de otra lista de archivos
+	public Boolean isInside(Archivo archivo) {
+		nodoArchivo puntero = getCabeza();
+		while (puntero != null) {
+			//Comparamos solo con el nombre
+			System.out.println("Name archivo : " + archivo.getNombre());
+			System.out.println("Name puntero : " + puntero.myArchivo.getNombre()+ "\n");
+			if (archivo.getNombre().equals(puntero.myArchivo.getNombre())) {
+				System.out.println("El archivo ya se encuentra en la lista de archivos\n");
+				return true;
+			}else {
+				puntero = puntero.getSiguiente();	
+			}	
+		}
+		return false;
+	}
 	//Setter and getters
 	public nodoArchivo getCabeza() {return cabeza;}
 	public void setCabeza(nodoArchivo cabeza) {	this.cabeza = cabeza;}
