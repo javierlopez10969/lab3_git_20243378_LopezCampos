@@ -8,9 +8,9 @@ public interface Workspace {
 	public void crearArchivo() throws InterruptedException;
 	//Borrar Archivo
 	public void borrarArchivo();
-	//Mostrar Workspace
-	public void mostrarWorkspace () ;
-	public void mostrarNombreFecha();
+	//Mostrar Workspace mediante strings
+	public String workspace2String();
+	public String nombreFecha2String();
 	//Editar Archivo
 	public void editarArchivo() throws InterruptedException;
 	//Esta vacío el workspace

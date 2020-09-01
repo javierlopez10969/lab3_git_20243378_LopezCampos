@@ -32,14 +32,19 @@ public class MiRepositorio implements Repositorio{
 
 	//Metodos del Workspace
 	public void editarArchivo() throws InterruptedException {workspace.editarArchivo();}
-	public void mostrarWorkspace() {workspace.mostrarWorkspace();}
+	public String workspace2String() {return workspace.workspace2String();}
 	public void borrarArchivo() {workspace.borrarArchivo();}
 	public void crearArchivo() throws InterruptedException{workspace.crearArchivo();}
 	
 	//Index
 	//Menú que pregunta que archivos quiere añadir al index
 	public void gitAdd() throws InterruptedException{index.gitAdd(getWorkspace());}
-	public void mostrarIndex() {index.getIndex().mostrarArchivos();}
+	public String index2String() {
+		if (index.isEmpty()) {
+			return "Index Vacío\n";
+		}
+		return index.getIndex().archivos2String();
+	}
 	
 	//Local Repository
 	public void gitCommit(){

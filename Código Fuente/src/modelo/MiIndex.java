@@ -23,10 +23,10 @@ public class MiIndex implements Index {
 					//Mostramos los archivos en el workspace
 					
 					System.out.println("Workspace actual : ");
-					workspace.mostrarNombreFecha();
+					System.out.println(workspace.nombreFecha2String());
 					
 					System.out.println("Index Actualmente : \n");
-					index.mostrarArchivos();
+					System.out.println(index.archivos2String());
 					Thread.sleep(2000);
 					System.out.println("\nQue desea hacer:\n"+
 					"1.-Agregar todos los archivos \n"+
@@ -71,7 +71,7 @@ public class MiIndex implements Index {
 					}
 					else if (x== 4){
 						System.out.println("Index Actualmente : \n");
-						index.mostrarArchivos();
+						System.out.println(index.archivos2String());
 						Thread.sleep(4000);
 					}
 					else if (x== 5){

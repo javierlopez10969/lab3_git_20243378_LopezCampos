@@ -35,22 +35,18 @@ public class MiArchivo implements Archivo{
 		archivoSalida.setFechaUltimaModificacion(this.getFechaUltimaModificacion());
 		return archivoSalida;
 	}
-
-	public void mostrarNombreFechas() {
-		System.out.println("Nombre Archivo :" + getNombre()  
-		+ "\nFecha de cración : " + getFechaCreacion()
-		+ "\nÚltima fecha de modifcación : " + getFechaUltimaModificacion());
+	
+	public String nombresFechas2String() {
+		return (getNombre()+"\n"+getFechaCreacion()+"\n"+getFechaUltimaModificacion());
+	}
+	
+	public String Archivo2String() {
+		return("Nombre Archivo : " +getNombre()+
+		"\nFecha de creación : " + getFechaCreacion() +
+		"\nÚltima fecha de modifcación : " + getFechaUltimaModificacion() +
+		"\nContenido : \n" + contenido.contenido2String());
+	}
 		
-	}
-	
-	public void mostrar() {
-		System.out.println("Nombre Archivo : " + getNombre()  
-		+ "\nFecha de creación : " + getFechaCreacion()
-		+ "\nÚltima fecha de modifcación : " + getFechaUltimaModificacion());
-		System.out.println("Contenido :");
-		contenido.mostrarContenido();
-	}
-	
 	//Edición de archivo
 	public void editarArchivo() throws InterruptedException{
 		//Variables de múltiples entradas
@@ -63,7 +59,8 @@ public class MiArchivo implements Archivo{
 		while(!x.equals("4")) {
 			try {
 			System.out.println("Su archivo es :\n");
-			contenido.mostrarContenido();
+			//contenido.mostrarContenido();
+			System.out.println(contenido.contenido2String());
 			System.out.println("\nQue desea hacer:\n"+
 			"1.-Insertar línea \n"+
 			"2.-Insertar Línea N \n" +	
@@ -120,7 +117,7 @@ public class MiArchivo implements Archivo{
 		}
 		System.out.println("Su archivo editado quedó como:");
 		setFechaUltimaModificacion();
-		mostrar();
+		System.out.println(Archivo2String());
 		Thread.sleep(3000);
 	}
 	//Editar varias líneas

@@ -3,11 +3,10 @@ package modelo;
 import utils.Contenido;
 
 public interface Archivo {
-	public void mostrarNombreFechas();
-	public void mostrar();
+	public String nombresFechas2String();
+	public String Archivo2String();
 	public void editarArchivo() throws InterruptedException;
 	public Archivo copiarArchivo();
-	
 	//Setters and getters
 	//Nombre del archivo
 	public String getNombre();

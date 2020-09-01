@@ -75,39 +75,39 @@ public class ListaDeArchivos {
 	
 	public Boolean isEmpty() {return tamano == 0;}
 	
-	public void mostrarArchivos() {
+	public String archivos2String() {
 		if (!isEmpty()) {
 			nodoArchivo puntero =  getCabeza();
+			String salidaString = "";
 			int i = 0 ;
 			while (puntero != null) {
-				System.out.println("i :"+ i +".-");
-				puntero.myArchivo.mostrar();
+				salidaString = salidaString +"i :"+ i +".-";
+				salidaString = salidaString + puntero.myArchivo.Archivo2String();
 				puntero = puntero.getSiguiente();
 				i++;
 			}
-			System.out.println("\n");
+			return (salidaString +"\n");
 		}else {
-			System.out.println("Lista de archivos vacía\n");
+			return("Lista de archivos vacía\n");
 		}
 	}
 	
-	public void mostrarNombreFechas() {
+	public String nombreFechas2String() {
 		if (!isEmpty()) {
+			String salidaString ="";
 			nodoArchivo puntero =  getCabeza();
 			int i = 0 ;
 			while (puntero != null) {
-				System.out.println("i :"+ i );
-				puntero.myArchivo.mostrarNombreFechas();
+				salidaString = salidaString + "i :"+ i;
+				salidaString = salidaString + puntero.myArchivo.nombresFechas2String();
 				puntero = puntero.getSiguiente();
 				i++;
 			}
-			System.out.println("\n");
+			return (salidaString +"\n");
 		}else {
-			System.out.println("Workspace vacío\n");
+			return ("Workspace vacío\n");
 		}
 	}
-
-	
 	
 	//Metodo que dado un indice n, devuelva el archivo correspondiente en la lista
 	//De archivos

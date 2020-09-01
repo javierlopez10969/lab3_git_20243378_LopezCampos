@@ -1,7 +1,10 @@
 package modelo;
 import java.text.SimpleDateFormat;
 import java.util.Date; 
-
+/*
+ * Clase global que no es para instanciar nunca, es solo para obtener la fecha actual en un determinado formato
+ * 
+ * */
 
 public class Tiempo {
 	private static String actualTime;

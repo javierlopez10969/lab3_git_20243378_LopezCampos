@@ -39,13 +39,15 @@ public class MiCommit implements Commits {
 		}
 		
 		//Mostrar el commit
-		public void mostrarCommit() {
-			System.out.println("Autor : " + getAutor()+ "\n");
-			System.out.println("Fecha del commit : " + getFecha() + "\n");
-			System.out.println("Comentario : " + getMensajeDescriptivoString() + "\n");
-			getIndex().getIndex().mostrarNombreFechas();
-			
+		public String commit2String() {
+			String salidaString = "" ;
+			salidaString = salidaString +("Autor : " + getAutor()+ "\n");
+			salidaString = salidaString +("Fecha del commit : " + getFecha() + "\n");
+			salidaString = salidaString +("Comentario : " + getMensajeDescriptivoString() + "\n");
+			salidaString = salidaString + getIndex().getIndex().archivos2String();
+			return salidaString;
 		}
+		
 		//Setters and getters
 		public String getAutor() {return autor;}
 		public void setAutor(String Autor) {this.autor = Autor;}
@@ -115,7 +117,7 @@ public class MiCommit implements Commits {
 	public void mostrarRepositorio() {
 		Commit puntero = getCima();
 		while (puntero!=null) {
-			puntero.mostrarCommit();
+			System.out.println(puntero.commit2String());
 			puntero = puntero.getSiguiente();
 		}
 	}
@@ -128,7 +130,7 @@ public class MiCommit implements Commits {
 		Commit puntero = getCima();
 		int i = 0;
 		while (puntero!=null && i < 5) {
-			puntero.mostrarCommit();
+			System.out.println(puntero.commit2String());
 			puntero = puntero.getSiguiente();
 			i ++ ;
 		}

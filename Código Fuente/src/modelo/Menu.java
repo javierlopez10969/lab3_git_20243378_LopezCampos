@@ -3,13 +3,23 @@ package modelo;
 import java.io.IOException;
 import java.util.Scanner;
 
-
+/**
+ * Una clase para mostrar y gestionar los distintos comandos 
+ * de la clase repositorio, y que estos interactuen con el usuario
+ * @version 1.0, 31/08/2020
+ * @author Javier López
+ */
 public interface Menu {
-	//Declaramos el repositorio
-    public static Repositorio repositorio = new MiRepositorio();
+	static Repositorio repositorio = new MiRepositorio(); //Declaramos el repositorio
+	
+	
+    /** 
+     * Mostrar los distintos comandos de la simulación de git
+     * @param void
+     */
 	public static void main(String[]args){
 		Scanner entradaEscaner = new Scanner (System.in);
-		int x = -1;
+		int x = -1;//La entrada la incicializamos en -1
 		System.out.println("Bienvenido a la simulacion de git\n");/*
 		+"Para inicializar su repositorio, ingrese su nombre de usuario");
 		String autor = entradaEscaner.nextLine();
@@ -82,7 +92,7 @@ public interface Menu {
                 //Mostrar el workspace actual con todo
                 case 7:{
                 	System.out.println("Workspace actualmente\n");
-                	repositorio.mostrarWorkspace();
+                	System.out.println(repositorio.workspace2String());
                 	//Solo si el workspace no esta vacío esperamos 4 segundos para que el usuario observe el workspace
                 	if (!repositorio.workspaceEmpty()) {
                 		Thread.sleep(4000);
@@ -104,7 +114,7 @@ public interface Menu {
                 //Ver index
                 case 10:{
                 	System.out.println("Ver Index\n");
-                	repositorio.mostrarIndex();
+                	System.out.println(repositorio.index2String());
                 	break;
                 }
                 //Log
@@ -132,16 +142,29 @@ public interface Menu {
         entradaEscaner.close();
 
     }
-	public static void limpiarPantalla() throws IOException {
+    /** 
+     * Metodo paraantener limpia la pantalla
+     * @param void
+     */
+	public static void limpiarPantalla(){
 		String sSistemaOperativo = System.getProperty("os.name");
 		//System.out.println(sSistemaOperativo);
 		if (sSistemaOperativo.equals("Windows")) {
-			System.out.flush();
-			Runtime.getRuntime().exec("clear");
+		    System.out.print("\033[H\033[2J");   
+		    System.out.flush(); 
+		    try {
+		    	Runtime.getRuntime().exec("cls");
+			} catch (IOException e) {
+				System.out.println(e);
+			}
 		}else {
 			System.out.print("\033[H\033[2J");  
 			System.out.flush(); 
-			Runtime.getRuntime().exec("clear");
+		    try {
+		    	Runtime.getRuntime().exec("clear");
+			} catch (IOException e) {
+				System.out.println(e);
+			}
 		}		
 		
 	   } 

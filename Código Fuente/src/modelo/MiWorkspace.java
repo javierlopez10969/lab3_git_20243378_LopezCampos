@@ -46,7 +46,8 @@ public class MiWorkspace implements Workspace {
 	//Método encargado de borrar un archivo
 	public void borrarArchivo() {
 		if (!isEmpty()) {
-			mostrarWorkspace();
+			//Mostramos el workspace
+			System.out.println(workspace2String());
 			System.out.println("Ingrese el indice delarchivo que desee borrar : \n");
 			int respuesta = 0;
 			Scanner scanner = new Scanner(System.in);
@@ -68,7 +69,7 @@ public class MiWorkspace implements Workspace {
 		//Antes de editar preguntamos si el workspace no esta vacío
 		if (!isEmpty()) {
 			//Primero mostramos todo el workspace
-			mostrarWorkspace();
+			System.out.println(workspace2String());
 			//Ahora le preguntamos que archivo quiere editar
 			System.out.println("Ingrese el indice del archivo que quiere editar:");
 			int indiceArchivo = 0;
@@ -97,8 +98,8 @@ public class MiWorkspace implements Workspace {
 	//Con el usuario
 
 	//Mostrar todo el workspace
-	public void mostrarWorkspace() {archivos.mostrarArchivos();}
-	public void mostrarNombreFecha() {archivos.mostrarNombreFechas();}
+	public String workspace2String() {return archivos.archivos2String();}
+	public String nombreFecha2String() {return archivos.nombreFechas2String();}
 	//El workspace se encuentra vacío
 	public boolean isEmpty() {return archivos.isEmpty();}
 	@Override

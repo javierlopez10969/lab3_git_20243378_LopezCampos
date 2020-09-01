@@ -122,6 +122,21 @@ public class Contenido {
 			puntero = puntero.getSiguiente();
 		}
 	}
+	//Traspasar el contenido a un string
+	public String contenido2String() {
+		Lineas puntero = getCabeza();
+		if (puntero==null) {
+			return("Sin contenido\n");
+		}
+		int i = 0;
+		String salidaString= "";
+		while (puntero != null) {
+			salidaString = salidaString + i +" " + puntero.getLinea() +"\n";
+			i++;
+			puntero = puntero.getSiguiente();
+		}
+		return salidaString;
+	}
 	public void borrarLinea(int n) {
 		if (getTamano() == 1) {
 			setCabeza(null);

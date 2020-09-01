@@ -6,8 +6,8 @@ public interface Repositorio {
 	public String getAutor();
 	public String getNombreRepositorio();
 	public String getFechaDeCreacion();
-	public void mostrarWorkspace();
-	public void mostrarIndex();
+	public String workspace2String();
+	public String index2String();
 	
 	//Metodos
 	//Constructor
