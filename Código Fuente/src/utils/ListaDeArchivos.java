@@ -1,21 +1,30 @@
 package utils;
 import modelo.Archivo;
 
-/*
- * Clase del tipo lista enlazada, la cual guarda todos los archivos posibles sin un limite
+/**
+ *  * Clase del tipo lista enlazada, la cual guarda todos los archivos posibles sin un limite
  * Sus atributos son el primer archivo de la lista
- * */
+ * @
+ * @author javier
+ */
+
 public class ListaDeArchivos {
 	//Atributos
+	
 	//Cabeza de la lista
 	private nodoArchivo cabeza = null;
 	private int tamano ;
 	
-	//Creamos la clase nodo, una clase interna de lista enlazada
+	/**
+	 * una clase interna de lista enlazada, sirve como nodo para enlazar cada contenido de archivo
+	 * @author javier
+	 *
+	 */
 	private class nodoArchivo{
 		private Archivo myArchivo;
 		private nodoArchivo siguiente = null;
 		
+		//Setters anf getters
 		public nodoArchivo(Archivo myArchivo ) {this.setMyArchivo(myArchivo);}
 		//public archivo getMyArchivo() {return myArchivo;}
 		public void setMyArchivo(Archivo myArchivo) {this.myArchivo = myArchivo;}
@@ -23,7 +32,10 @@ public class ListaDeArchivos {
 		public void setSiguiente(nodoArchivo siguiente) {this.siguiente = siguiente;}
 	}
 	
-	//Metodos
+	/**
+	 * Insertar la inicio de la lista
+	 * @param myArchivo  archivo que se quiere agregar a la lista
+	 */
 	public void insertarPrincipio(Archivo myArchivo){
 		nodoArchivo nodo = new nodoArchivo(myArchivo);
 		//El siguiente elmenento es la cabeza
@@ -34,6 +46,10 @@ public class ListaDeArchivos {
 		setTamano(tamano + 1);
 	}
 	
+	/**
+	 * Insertar un archivo al final de la lista
+	 * @param myArchivo  archivo que se quiere agregar a la lista
+	 */
 	//Insertar al final
 	public void insertarFinal(Archivo myArchivo) {
 		nodoArchivo nodo = new nodoArchivo(myArchivo) ;
@@ -46,7 +62,10 @@ public class ListaDeArchivos {
 		setTamano(tamano +1);		
 	}
 	
-	//Añadir archivo
+	/**
+	 * Añadir un archivo a la lista de archivos
+	 * @param myArchivo archivo que se quiere agregar a la lista
+	 */
 	public void añadirArchivo(Archivo myArchivo) {
 		if (isEmpty()) {
 			insertarPrincipio(myArchivo);
@@ -55,9 +74,10 @@ public class ListaDeArchivos {
 		}
 	}
 	
-	//Metodo que permite borrar una archivo n
-	//Entradas : indice n
-	//Dominio : {0,tamano}
+	/**
+	 * Metodo que permite borrar un archivo dado un indicen
+	 * @param n indice donde se quiere borrar el archivo de la lista
+	 */
 	public void borrarArchivo(int n) {
 		if (n < tamano && n > -1) {
 			nodoArchivo puntero = getCabeza() ;
@@ -77,15 +97,17 @@ public class ListaDeArchivos {
 
 	}
 	
-	public Boolean isEmpty() {return tamano == 0;}
-	
+	/**
+	 * Devolver todos los archivos y su contenido en un string
+	 * @return
+	 */
 	public String archivos2String() {
 		if (!isEmpty()) {
 			nodoArchivo puntero =  getCabeza();
 			String salidaString = "";
 			int i = 0 ;
 			while (puntero != null) {
-				salidaString = salidaString +"i :"+ i +".-";
+				salidaString = salidaString +"i :"+ i + ".-\n";
 				salidaString = salidaString + puntero.myArchivo.Archivo2String();
 				puntero = puntero.getSiguiente();
 				i++;
@@ -95,14 +117,17 @@ public class ListaDeArchivos {
 			return("Lista de archivos vacía\n");
 		}
 	}
-	
+	/**
+	 * Devolver todos los nombres y fechas archivos a través de uns string
+	 * @return
+	 */
 	public String nombreFechas2String() {
 		if (!isEmpty()) {
 			String salidaString ="";
 			nodoArchivo puntero =  getCabeza();
 			int i = 0 ;
 			while (puntero != null) {
-				salidaString = salidaString + "i :"+ i;
+				salidaString = salidaString + "i.- :"+ i+ ".-\n";
 				salidaString = salidaString + puntero.myArchivo.nombresFechas2String();
 				puntero = puntero.getSiguiente();
 				i++;
@@ -113,13 +138,15 @@ public class ListaDeArchivos {
 		}
 	}
 	
-	//Metodo que dado un indice n, devuelva el archivo correspondiente en la lista
-	//De archivos
-	//Entradas : indice n 
+	/**
+	 * Metodo que dado un indice n, devuelva el archivo correspondiente en la lista
+	 * @param n, indice donde se encuentra el archivo
+	 * @return Archivo, archivo con el indice || null si el indice supera los limites
+	 */
 	public Archivo getArchivoN(int n){
 		//Si el n ingresado no supera el tamaño total de archivos
 		if (n > tamano || n < 0) {
-			System.out.println("El indice excede el total de archivos");
+			System.out.println("El indice excede al limite de archivos");
 			return null;
 		}else{
 			nodoArchivo puntero =  getCabeza();
@@ -137,15 +164,21 @@ public class ListaDeArchivos {
 			}
 		}
 	}
-	//Metodo que consulta si un archivos se encuentra dentro de otra lista de archivos
+	
+	
+	/**
+	 * Metodo que consulta si un archivos se encuentra dentro de otra lista de archivos
+	 * @param archivo que se va a comparar con el resto de los archivos, se compara solo el nombre
+	 * @return Boolean true si se encuentra dentro, false si no se encuentra
+	 */
 	public Boolean isInside(Archivo archivo) {
 		nodoArchivo puntero = getCabeza();
 		while (puntero != null) {
 			//Comparamos solo con el nombre
-			System.out.println("Name archivo : " + archivo.getNombre());
-			System.out.println("Name puntero : " + puntero.myArchivo.getNombre()+ "\n");
+			//System.out.println("Name archivo : " + archivo.getNombre());
+			//System.out.println("Name puntero : " + puntero.myArchivo.getNombre()+ "\n");
 			if (archivo.getNombre().equals(puntero.myArchivo.getNombre())) {
-				System.out.println("El archivo ya se encuentra en la lista de archivos\n");
+				//System.out.println("El archivo ya se encuentra en la lista de archivos\n");
 				return true;
 			}else {
 				puntero = puntero.getSiguiente();	
@@ -153,6 +186,74 @@ public class ListaDeArchivos {
 		}
 		return false;
 	}
+	
+	/**
+	 * Ver si el archivo se encuentra dentro de un archivo además pregunta si es exactamente igual al archivo que se e|
+	 * Metodo de busqueda y comparación
+	 * Nos vamos a concentrar en comparar segun fechas y nombres, omitiendo contenido para no complejizar la función
+	 * @param archivo
+	 * @return true si se encuentra con el mismo contenido, false si no se encuentra, o si se encuentra pero con distinto contenido
+	 */
+	public Boolean isInsideAndEquals(Archivo archivo) {
+		nodoArchivo puntero = getCabeza();
+		while (puntero != null) {
+			//Comparamos solo con el nombre
+			//System.out.println("Name archivo : " + archivo.getNombre());
+			//System.out.println("Name puntero : " + puntero.myArchivo.getNombre()+ "\n");
+			if (archivo.getNombre().equals(puntero.myArchivo.getNombre())) {
+				//System.out.println("El archivo ya se encuentra en la lista de archivos\n");
+				if (archivo.equals(puntero.myArchivo)) {
+					//System.out.println("Y además son iguales\n");
+					return true;
+				}else {
+					//System.out.println("Y No son iguales\n");
+					return false;
+				}
+			}
+			puntero = puntero.getSiguiente();			
+		}
+		return false;
+	}
+	
+	/**
+	 * Idicar si dos listas de archivos son iguales
+	 * Se compara la lista de entrada con la de instancia
+	 * @param archivos lista de archivos a comparar
+	 * @return true son iguales , false son distintas
+	 */
+	public Boolean equals(ListaDeArchivos archivos) {
+		//Si ambas listas tienen un tamaño distinto podemos indicar que son distintas
+		if (this.getTamano() != archivos.getTamano()) {
+			return false;
+		}
+		//Declaramos puntero con la cabeza de archivos
+		nodoArchivo punterArchivo = archivos.getCabeza();
+		//Y declaramos un acumulador con el total de los archivos de la lista
+		int n =  archivos.getTamano();
+		int i = 0;
+		while (punterArchivo != null && i < archivos.getTamano()) {
+			//Si el archivo se encuentra dentro y además es igual
+			if (isInsideAndEquals(punterArchivo.myArchivo)) {
+				//Disminuimos el total
+				n--;
+			}
+			i++;
+			System.out.println("Avanzando : " +  i + "\n");
+			//Avanzamos el puntero
+			punterArchivo.getSiguiente();
+			
+		}
+		// si al final de recorrer todos los punteros el contador es igual a 0
+		if (n==0) {
+			//Devolvemos true porque todos los archivos se encuentran además de ser iguales
+			return true;
+		}
+		//Si se completo todo, y por lo menos hay un archivo distinto
+		return false;
+	}
+	
+	//Esta vacía la lista de archivos
+	public Boolean isEmpty() {return tamano == 0;}
 	//Setter and getters
 	public nodoArchivo getCabeza() {return cabeza;}
 	public void setCabeza(nodoArchivo cabeza) {	this.cabeza = cabeza;}

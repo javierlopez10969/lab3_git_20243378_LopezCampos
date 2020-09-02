@@ -7,28 +7,11 @@ public class Contenido {
 	private Lineas Cabeza = null;
 	private int tamano ;
 	
+	//Constructor de un contenido simple
 	public Contenido() {
 		setTamano(0);
 	}
-	
-	//Constructor que copia desde un contenido para crear otro
-	public Contenido(Contenido contenido) {
-		//Solo si el contenido que estamos entregando no se encuentra vacío
-		if (!contenido.isEmpty()) {
-			Cabeza = new Lineas(contenido.getCabeza().getLinea());
-			tamano = contenido.tamano ;
-			Lineas punteroNuevo = Cabeza;
-			Lineas punteroOriginal = contenido.getCabeza();
-			//Copiamos todo el contenido
-			while (punteroOriginal != null) {
-				punteroNuevo.siguiente=punteroOriginal.getSiguiente();
-				punteroOriginal = punteroOriginal.getSiguiente();
-				punteroNuevo = punteroNuevo.getSiguiente();
-			}
-		}
 
-		
-	}
 	//Creamos la clase nodo, una clase interna de lista enlazada
 	private class Lineas{
 		//Atributos

@@ -17,36 +17,18 @@ public class MiArchivo implements Archivo{
 		setFechaCreacion();
 		setFechaUltimaModificacion();
 		contenido = new Contenido();
-	}
-	//Constructor a partir de a otro archivo
-	public MiArchivo(Archivo myArchivo) {
-		nombre = myArchivo.getNombre();
-		fechaCreacion = myArchivo.getFechaCreacion();
-		fechaUltimaModificacion = myArchivo.getFechaUltimaModificacion();
-		contenido = new Contenido(myArchivo.getContenido());
-	}
-	
-	//Metodo que copia todas las variables de un archivo a uno nuevo archivo, esta pensado para el index
-	public Archivo copiarArchivo() {
-		//Copiamos todos los atributos
-		Archivo archivoSalida = new MiArchivo(this.getNombre());
-		archivoSalida.setContenido(new Contenido(this.contenido));
-		archivoSalida.setFechaCreacion(this.getFechaCreacion());
-		archivoSalida.setFechaUltimaModificacion(this.getFechaUltimaModificacion());
-		return archivoSalida;
-	}
-	
+	}	
 	public String nombresFechas2String() {
 		return ("Nombre Archivo : " + getNombre()+
 				"\nFecha de creación : " +getFechaCreacion()+
-				"\nÚltima fecha de modifcación : " + getFechaUltimaModificacion());
+				"\nÚltima fecha de modifcación : " + getFechaUltimaModificacion()+"\n");
 	}
 	
 	public String Archivo2String() {
 		return("Nombre Archivo : " +getNombre()+
 		"\nFecha de creación : " + getFechaCreacion() +
 		"\nÚltima fecha de modifcación : " + getFechaUltimaModificacion() +
-		"\nContenido : \n" + contenido.contenido2String());
+		"\nContenido : \n" + contenido.contenido2String()+"\n");
 	}
 		
 	//Edición de archivo
@@ -145,7 +127,21 @@ public class MiArchivo implements Archivo{
 			i++;
 		}
 	}
-	
+	/**
+	 * Función que devuelve si un archivo es igual a otro
+	 * @param archivo
+	 * @return true son iguales, false son distintos
+	 */
+	public Boolean equals(Archivo archivo) {
+		//Si el nombre, la fecha de creación y la ultima fecha son iguales
+		if (this.getNombre().equals(archivo.getNombre()) &&
+			this.getFechaCreacion().equals(archivo.getFechaCreacion()) &&
+			this.getFechaUltimaModificacion().equals(archivo.getFechaUltimaModificacion())) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
 	//Setters and Getters
 	//Nombre

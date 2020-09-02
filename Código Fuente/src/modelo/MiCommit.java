@@ -1,28 +1,25 @@
 package modelo;
-
 import java.util.Scanner;
 
 import utils.ListaDeArchivos;
 
+/**
+ *  Clase encargada de manejar los dos repositorios, local como remoto
+ * Se encarga de agregar cada commit como una pila enlazandola a  los commits anteriores
+ * Guarda todo por medios de ua clase de ella, la cual actua como un nodo de una lista enlazada
+ * Sus atributos son, cima o último commit, el total de commits
+ * Y la clase nodo contiene como atributos el valor de cada commit
+ * El workspace o archivos, autor, fecha del commit, comentario , y el commit siguiente a él
+ * @version 1.0, 2/09/2020
+ * @author Javier López
+ * */
 public class MiCommit {
-	/*
-	 Commit: Debe contener la representación de un commit en el programa,
-	respetando la lista que lo enlaza con commits anteriores o posteriores (esta lista
-	ordenada de commits puede estar representada dentro del mismo commit o en la
-	zona de trabajo que lo contiene) . Como mínimo debiese tener un autor, una
-	marca de tiempo, un mensaje descriptivo y una representación de los cambios
-	generados por ese commit. 
-	 */
-	//Los commit se comportan como pilas y a la vez como listas doblemente enlazadas, ya que hay un anterior
-	//Y un siguiente
-	//Commit más reciente
 	private Commit cima = null ;
 	//Total de commits
 	private int tamano ;
 	
 	/**
 	 * Cada commit realizado se guardará en una clase tipo nodo para lista enlazada llamada Commit
-	 * Contiene una lista de archivos con index
 	*/
 	private class Commit{
 		//Lista de archivos o index con los archivos con cambios
@@ -33,10 +30,12 @@ public class MiCommit {
 		private Commit siguiente = null;
 
 		/**
-		 * Metodo constructor que a partir de una lista de archivos dada, en este caso el index
-		 * Un autor, y un comentario respecto al commit generar un commit
+		 * Constructor de un commit
+		 * @param index workspace a guardar en el commit
+		 * @param autor autor del repositorio
+		 * @param Mensaje comentario que se quiere añadir en el Commmit
+		 * @return new Commit
 		 */
-		//Generar commit a partir de un index y un a
 		public Commit(MiIndex  index,String Autor, String Mensaje) {
 			//Asignamos el index entregado 
 			this.setWorkspace(index.getIndex());
@@ -46,7 +45,11 @@ public class MiCommit {
 			setMensajeDescriptivoString(Mensaje);
 		}
 		
-		//Mostrar el commit a traves 
+		
+		/**
+		 * Transformar todo el contenido del commit a string
+		 * @return String con el contenido del commit
+		 */
 		public String commit2String() {
 			String salidaString = "" ;
 			salidaString = salidaString +("Autor : " + getAutor()+ "\n");
@@ -69,24 +72,45 @@ public class MiCommit {
 		public void setSiguiente(Commit siguiente) {this.siguiente = siguiente;}
 	}
 	
-	//Insertar commit en el local repository
-	@SuppressWarnings("resource")
+	
+	
+    /** 
+     * Genera un commit a partir de dos preguntas, 
+     * El index no esta vacío y el index entregado contiene cambios con respecto al ultimo commit
+     * Este metodo solo se llama desde la instancia de un localRepository
+     * @param index workspace a guardar en el commit
+     * @param autor autor del repositorio
+     * @return void, pero agrega o no, un nuevo commit al Local Repository
+     */
 	public void Commit(MiIndex index, String autor) {
 		//Para que se ejecute el push primero el index entregado no debe estar vacío
 		//Además que debe ser distinto al último index entregado
 		if (!index.getIndex().isEmpty() && existenCambios(index.getIndex())) {
-			String comentrario;
-			Scanner scanner;
-			scanner = new Scanner(System.in);
+			String comentrario = "";
+			@SuppressWarnings("resource")
+			Scanner scanner = new Scanner(System.in);
 			System.out.println("Ingrese el comentario a su commit : ");
-			comentrario = scanner.nextLine();
+			try {
+				comentrario = scanner.nextLine();
+			} catch (Exception e) {
+				System.out.println("Ha ocurrido un error : "+e+"\n");
+			}
 			System.out.println("Desea  usar el autor predeterminado o cambiar el nombre del autor\n"
 			+ "1.- Autor Predeterminado\n"
 			+ "2.- Autor Distinto\n");
-			int x = scanner.nextInt();
+			int x = 1;
+			try {
+				x = scanner.nextInt();
+			} catch (Exception e) {
+				System.out.println("Ha ocurrido un error : "+e+"\n");
+			}
 			if (x==2) {
-				System.out.println("Ingrese el nombre de su autor\n");
-				autor = scanner.nextLine();
+				try {
+					System.out.println("Ingrese el nombre de su autor\n");
+					autor = scanner.nextLine();
+				} catch (Exception e) {
+					System.out.println("Ha ocurrido un error : "+e+"\n");
+				}
 			}
 			System.out.println("Autor : " + autor+ "\n");
 			//Creamos un nuevo commit a partir del index actual
@@ -100,51 +124,80 @@ public class MiCommit {
 			System.out.println("El index entregado no posee nuevos cambios con respecto al index anterior\n");
 		}
 	}
-	/*Función que revisa que todos los commits no se encuentren en el remote sean insertados
+	
+	
+	/**
+	 *  Función que revisa que todos los commits no se encuentren en el remote sean insertados
 	 * Esta función se llama desde la instancia de un remote repository
-	 * Además que tiene como parametro de entrada
+	 * @param localRepository variable del msimo tipo, es el local repository instanciado en el repositorio
+     * @return void, pero agrega o no, todos los commits del local que no se encuentren en el remote
 	 * */
 	public void gitPush(MiCommit localRepository) {
 		//Solo si el tamaño de local repository es distinto que el del repositorio actual
 		if (getTamano() != localRepository.getTamano()) {
 			System.out.println("Pusheando ...\n");
-			//Se actualiza el local repository insertando cada commit uno por uno
 			//Se actualiza el local repository asignandole el valor de la cima de local repository
-			setCima(localRepository.getCima());
+			this.setCima(localRepository.getCima());
 		}else {
 			System.out.println("El remote repository se encuentra actualizado\n");
 		}
 	}
 	
+	
+	/** 
+	 * Traer el ultimo commit a la zona de trabajos actuales
+	 * @param localRepositoy
+	 */
 	public void gitPull(MiCommit localRepositoy) {
-		//Toma el valor
+		//Solo es posible si el remote se encuentra actualizado
 	}
 	
-	//Siempre se inserta en la cima el último commit añadido
+	/**
+	 * Siempre se inserta en la cima el último commit añadido
+	 * @param commit
+	 */
 	public void insertarCommit(Commit commit) {
 		commit.setSiguiente(getCima());
 		setCima(commit);
 		setTamano(getTamano() +1 );
 	}
-	//Por implementar, revisar si hay cambios realizados con respecto al commit anterior
+	
+	
+	/**
+	 * Verificar si existen cambios en una lista de archivos con respecto al último commit
+	 * @param archivos, lista de archivos con la que se va a comparar con el ultimo commit si exiten cambios
+	 * @return  true existen cambios, false no existen cambios
+	 */
 	public Boolean existenCambios(ListaDeArchivos archivos) {
 		//Si el repositorio esta vacío, si existen cambios
 		if (isEmpty()) {
 			return true;
-		}else {
+		}
+		//Si no esta vacío el repositorio
+		else {
 			//Obtenemos el último commit del repositorio
 			Commit puntero = getCima();
 			//Pregunto si los index son iguales
-			if (puntero.getWorkspace() == archivos) {
-				//No hay cambios
+			if (puntero.getWorkspace().equals(archivos)) {
+				/*
+				System.out.println(
+				"Último workspace : \n "+puntero.getWorkspace().archivos2String() + "\n"+
+				"Nuevo workspace : \n "+archivos.archivos2String() + "\n");
+				//No hay cambios*/
 				return false;
+			}else {
+				/*
+				System.out.println(
+				"Último workspace : \n "+puntero.getWorkspace().archivos2String() + "\n"+
+				"Nuevo workspace : \n "+archivos.archivos2String() + "\n");
+				//Si hay cambios*/
+				return true;
 			}
 		}
-		//Si hay cambios
-		return true;
 	}	
 
-	/* gitLog
+	/**
+	 *  gitLog
 	 * Esta funcionalidad debe mostrar una lista con los últimos 5 commits del local repository por medio de un string
 	 * (indicando fecha, mensaje descriptivo y archivos añadidos). Si hay
 	 * menos de 5 commits, muestra todos los que estén disponibles.
@@ -167,9 +220,10 @@ public class MiCommit {
 		return salidaString;
 	}
 
-	/* repositorio2String
+	/**
+	 * repositorio2String
 	 * Esta funcionalidad debe mostrar una lista con todos los commits del local repository por medio de un string
-	 * (indicando fecha, mensaje descriptivo y archivos añadidos)
+	 * @return String indicando fecha, mensaje descriptivo y archivos añadidos
 	 * */
 	public String repositorio2String() {
 		String salidaString = "";
@@ -186,8 +240,13 @@ public class MiCommit {
 		return salidaString;
 	}
 	
-	//Metodo que verifica si actualmente esta vacío el repositorio
+	/**
+	 * Metodo que verifica si actualmente esta vacío el repositorio
+	 * @return
+	 */
 	public boolean isEmpty() {return getTamano() == 0;}
+	
+	
 	//Setters and Getters
 	public Commit getCima() {return cima;}
 	public void setCima(Commit cima) {this.cima = cima;}

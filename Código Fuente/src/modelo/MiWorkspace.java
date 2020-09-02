@@ -1,13 +1,16 @@
 package modelo;
-
 import java.util.Scanner;
-
 //Importaciones
 import utils.ListaDeArchivos;
-/*Clase encargada de la manipulación del workspace, podría ser una lista de archivos simplemente el workspace
+
+/* Clase encargada de la manipulación del workspace, podría ser una lista de archivos simplemente el workspace
  * Y que esa lista sea manipulada por el mismo repositorio, pero necesitamos que una clase se ocupe enteramente del workspace
+ * Para no dejar sobrecargada a la clase repositorio
  * Que edite, cree, y borre archivos, y llame a los disitnos metodos pertenecientes a la clase lista de archivos
+ * @version 1.2 2/09/2020
+ * @author Javier López
  * */
+
 public class MiWorkspace{
 	//Atributos
 	private ListaDeArchivos archivos = new ListaDeArchivos();

@@ -59,9 +59,11 @@ public interface Menu {
                     repositorio.gitAdd();
                     break;
                 }
+                //Commit
                 case 2:{
                     System.out.println("Commit\n");
                     repositorio.gitCommit();
+                    Thread.sleep(2000);
                     break;
                 }
                 //pull
@@ -134,30 +136,46 @@ public interface Menu {
                 	Thread.sleep(4000);
                 	break;
                 }
+                //Git Branch
+                case 13:{
+                	System.out.println("Git Branch\n");
+                	break;
+                }
+                //Git CheckOut
+                case 14:{
+                	System.out.println("Git CheckOut\n");
+                	break;
+                }
+                //Git Merge
+                case 15:{
+                	System.out.println("Git Merge\n");
+                	break;
+                }
                 //Salir
-                case 12:{
+                case 16:{
                     System.out.println("Adiós\n\n");
                     System.out.println("Simulación de Git terminada .");
                     break;
-                }   
+                } 
+                
                 
                 //FUNCIONES SECRETAS
                 //Mostrar local repository
-                case 13:{
+                case 18:{
                 	System.out.println("Función secreta mostrar toodo Local Repository\n");
                 	repositorio.mostrarRepositorioLocal();
                 	Thread.sleep(4000);
                 	break;
                 }
                 //Log de remote repository
-                case 14:{
+                case 19:{
                 	System.out.println("Log de Remote Repository\n");
                 	repositorio.gitLogRemote();
                 	Thread.sleep(4000);
                 	break;
                 }
                 //Mostrar remote repository
-                case 15:{
+                case 20:{
                 	System.out.println("Función secreta mostrar toodo Remote Repository\n");
                 	repositorio.mostrarRepositorioRemoto();
                 	Thread.sleep(4000);

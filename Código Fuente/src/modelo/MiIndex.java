@@ -1,14 +1,17 @@
 package modelo;
-
-
 import java.util.Scanner;
 
 import utils.ListaDeArchivos;
-	
+
+/* Clase de hacer el manejo del index, podría ser una lista de archivos simplemente como el workspace
+ * Y que esa lista sea manipulada por el mismo repositorio, pero necesitamos que una clase se ocupe enteramente del index
+ * Para no dejar sobrecargada a la clase repositorio
+ * Que agrege los ditintos archivos del workspace que el usuario quiera agregar al index
+ * @version 1.2, 2/09/2020
+ * @author Javier López
+ * */
 public class MiIndex{
 	private ListaDeArchivos index = new ListaDeArchivos();
-	//Limpiar Index
-	public void limpiarIndex(){setIndex(new ListaDeArchivos());}
 	//Menú gitAdd que se le entrega el workspace actual
 	public void gitAdd(MiWorkspace workspace) throws InterruptedException{
 		//Solo si el workspace no se encuentra vacío
@@ -95,12 +98,8 @@ public class MiIndex{
 	public int agregarIndex(MiWorkspace workspace, int indice) {
 		//Procedemos a preguntamos si podemos obtener el archivo
 		if (workspace.getArchivoN(indice)!= null) {
-			//Creamos el archivo a partir de otro archivo
-			Archivo archivo = new MiArchivo(workspace.getArchivoN(indice));
-			//System.out.println("El archivo original es :");
-			//workspace.getArchivoN(indice).mostrar();
-			//System.out.println("El archivo copiado es :");
-			//archivo.mostrar();
+			//Decimos que el archivo a añadir es el archivo que obtuvimos
+			Archivo archivo = workspace.getArchivoN(indice);
 			//Solo si el archivo no se encuentra dentro del index
 			if (!index.isInside(archivo)) {
 				index.añadirArchivo(archivo);
@@ -108,7 +107,6 @@ public class MiIndex{
 			}else {
 				return 0;
 			}
-
 		}else {
 			System.out.println("Indice de archivo inválido");
 			return 0;
@@ -128,6 +126,7 @@ public class MiIndex{
 			//git add all
 			int indice = 0;
 			System.out.println("Tamaño workspace : " + workspace.getTamano() + "\n");
+			//Mientras el indice sea menor al total vamos agregando todos los archivos
 			while ( indice < tamano) {
 				System.out.println("i:"+indice+"\n");
 				agregarIndex(workspace, indice);
@@ -137,13 +136,13 @@ public class MiIndex{
 		else {
 			Scanner scanner = new Scanner(System.in);
 			//git add algunos
-			while ( tamano >0) {
+			while (tamano >0) {
 				System.out.println("Ingrese el indice del archivo que quiere agregar al index");
 				int indice = 0;
 				try {
 					indice = scanner.nextInt();
 				} catch (Exception e) {
-					System.out.println("Algo salió mal");
+					System.out.println("Algo salió mal : " + e + "\n");
 				}
 				agregarIndex(workspace, indice);
 				tamano --;
@@ -154,8 +153,16 @@ public class MiIndex{
 		//Si es menor o igual a 
 	}
 	
+	/*Metodo que indica si el index se encuentra vacío
+	 * @return true : vacío || false : no vacío
+	 * */
 	public Boolean isEmpty() {return index.isEmpty();}
+	//Limpiar Index, asignamos una lista de archivos vacía
+	public void limpiarIndex(){setIndex(new ListaDeArchivos());}
+	//Obtener el tamaño total de archivos
 	public int getTamano() {return index.getTamano();}
+	//Obtener el index en sí
 	public ListaDeArchivos getIndex() {return index;}
+	//Asignar index
 	public void setIndex(ListaDeArchivos index) {this.index = index;}
 }
