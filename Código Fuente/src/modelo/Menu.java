@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @author Javier López
  */
 public interface Menu {
-	static Repositorio repositorio = new MiRepositorio(); //Declaramos el repositorio
+	static MiRepositorio repositorio = new MiRepositorio(); //Declaramos el repositorio
 	
 	
     /** 
@@ -74,12 +74,19 @@ public interface Menu {
                 case 4:{
                     System.out.println("Push\n");
                     repositorio.gitPush();
+                    //Solo si no se encuentra actualizado hacemos como que esperamos el push
+                    if (!repositorio.remoteActualizadoBoolean()) {
+                    	Thread.sleep(2000);
+                    	System.out.println("Commits actualizados\n");
+					}
+                                     
                     break;
                 }
                 //Satus
                 case 5:{
                     System.out.println("Status\n");
                     repositorio.gitStatus();
+                    Thread.sleep(4000);
                     break;
                 }
                 //Crear archivo
@@ -115,12 +122,16 @@ public interface Menu {
                 case 10:{
                 	System.out.println("Ver Index\n");
                 	System.out.println(repositorio.index2String());
-                	break;
+                	if (!repositorio.getIndex().isEmpty()) {
+                		Thread.sleep(4000);
+					}
+                    break;
                 }
                 //Log
                 case 11:{
                 	System.out.println("Log \n");
                 	repositorio.gitLog();
+                	Thread.sleep(4000);
                 	break;
                 }
                 //Salir
@@ -129,9 +140,32 @@ public interface Menu {
                     System.out.println("Simulación de Git terminada .");
                     break;
                 }   
+                
+                //FUNCIONES SECRETAS
+                //Mostrar local repository
+                case 13:{
+                	System.out.println("Función secreta mostrar toodo Local Repository\n");
+                	repositorio.mostrarRepositorioLocal();
+                	Thread.sleep(4000);
+                	break;
+                }
+                //Log de remote repository
+                case 14:{
+                	System.out.println("Log de Remote Repository\n");
+                	repositorio.gitLogRemote();
+                	Thread.sleep(4000);
+                	break;
+                }
+                //Mostrar remote repository
+                case 15:{
+                	System.out.println("Función secreta mostrar toodo Remote Repository\n");
+                	repositorio.mostrarRepositorioRemoto();
+                	Thread.sleep(4000);
+                	break;
+                }
                 default :{
                 	System.out.println("Ingrese opción válida\n");
-    				break;
+        			break;
                 }
 				
             }
@@ -148,16 +182,18 @@ public interface Menu {
      */
 	public static void limpiarPantalla(){
 		String sSistemaOperativo = System.getProperty("os.name");
-		//System.out.println(sSistemaOperativo);
-		if (sSistemaOperativo.equals("Windows")) {
-		    System.out.print("\033[H\033[2J");   
+		//System.out.println("Su sistema operativo es : "+sSistemaOperativo);
+		//SPliteamos el sSistema ya que puede haber más de un tipo de windows o Linux
+        String[] arrOfStr = sSistemaOperativo.split(" ", 1);
+        //System.out.println("System Real : " + arrOfStr[0]+ "\n");
+		if (arrOfStr[0].equals("Windows")) { 
 		    System.out.flush(); 
 		    try {
 		    	Runtime.getRuntime().exec("cls");
 			} catch (IOException e) {
 				System.out.println(e);
 			}
-		}else {
+		}else if (arrOfStr[0].equals("Linux")){
 			System.out.print("\033[H\033[2J");  
 			System.out.flush(); 
 		    try {

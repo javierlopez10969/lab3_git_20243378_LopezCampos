@@ -9,7 +9,7 @@ https://www.solvetic.com/tutoriales/article/6464-como-abrir-terminal-con-una-car
 https://answers.microsoft.com/es-es/windows/forum/all/c%C3%B3mo-abrir-cmd-desde-la-carpeta-actual/d924684f-d486-4382-b1f3-2b631b02caad
 
 
-Asegurese de tener instalado java en su versión mas reciente.
+Asegurese de tener instalado java en su versión mas reciente. Y de ejecutar todos los comandos desde la carpeta src.
 
 Una vez abierta la consola ubicada en esta carpeta ejecute el siguiente comando :
 Comando 1:   
@@ -37,7 +37,7 @@ En caso de que la compilación no se ejecutará correctamente ingrese los siguie
 
 Comando 1 :
 
-javac ./utils/Contenido.java ./utils/ListaDeArchivos.java ./modelo/Menu.java ./modelo/Index.java ./modelo/Archivo.java ./modelo/MiArchivo.java ./modelo/MiCommit.java ./modelo/MiIndex.java ./modelo/MiRepositorio.java ./modelo/MiWorkspace.java ./modelo/PilaCommit.java ./modelo/Repositorio.java ./modelo/Tiempo.java ./modelo/Workspace.java
+javac ./utils/Contenido.java ./utils/ListaDeArchivos.java ./modelo/Menu.java ./modelo/Archivo.java ./modelo/MiArchivo.java ./modelo/MiIndex.java ./modelo/MiRepositorio.java ./modelo/MiWorkspace.java ./modelo/Tiempo.java
 	
 Comando 1 alternativo :
 

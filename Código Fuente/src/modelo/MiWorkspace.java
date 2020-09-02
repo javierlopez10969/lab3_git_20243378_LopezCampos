@@ -4,8 +4,11 @@ import java.util.Scanner;
 
 //Importaciones
 import utils.ListaDeArchivos;
-
-public class MiWorkspace implements Workspace {
+/*Clase encargada de la manipulación del workspace, podría ser una lista de archivos simplemente el workspace
+ * Y que esa lista sea manipulada por el mismo repositorio, pero necesitamos que una clase se ocupe enteramente del workspace
+ * Que edite, cree, y borre archivos, y llame a los disitnos metodos pertenecientes a la clase lista de archivos
+ * */
+public class MiWorkspace{
 	//Atributos
 	private ListaDeArchivos archivos = new ListaDeArchivos();
 
@@ -15,31 +18,33 @@ public class MiWorkspace implements Workspace {
 	public void crearArchivo() throws InterruptedException {
 		@SuppressWarnings("resource")
 		Scanner scanner =  new Scanner(System.in);
-		String nombreArchivo = "Jamon";
+		String nombreArchivo = "Jamon";//Inicializamos la variable nombre, por si no toma las variables de entradas
 		try {
 			nombreArchivo = scanner.nextLine(); 
-			System.out.println(nombreArchivo);
 		} catch (Exception e) {
-			System.out.println("F");
+			System.out.println("Un error ha ocurrido " + e);
 		}
 		//System.out.println(nombreArchivo);
+		//Inicializamos un archivo a partir del nombre dado
 		Archivo archivo = new MiArchivo(nombreArchivo);
 		//Solo si el archivo no se encuentra en el workspace
 		if (!archivos.isInside(archivo)) {
 		archivos.añadirArchivo(archivo);
-		System.out.println("Archivo : " + nombreArchivo + " añadido a workspace\n"
-		+ "Desea editarlo? si "+ "\\" + " no \n");
-		String respuesta = "YES";
-		try {
-			respuesta = scanner.nextLine(); 
-		} catch (Exception e) {
-			System.out.println("F");
-		}
-		System.out.println(respuesta);
-		if (respuesta.equals("si")||respuesta.equals("YES")|| respuesta.equals("Si")
-		|| respuesta.equals("oui")|| respuesta.equals("Yes") ||respuesta.equals("1")) {
-			archivo.editarArchivo();
-		}}else {
+			//Le informamos que el archivo ha sido creado y añadido al workspace y le preguntamos si quiere editarlo
+			System.out.println("Archivo : " + nombreArchivo + " añadido a workspace\n"
+			+ "Desea editarlo? si "+ "\\" + " no \n");
+			String respuesta = "YES";
+			try {
+				respuesta = scanner.nextLine(); 
+			} catch (Exception e) {
+				System.out.println("F");
+			}
+			System.out.println(respuesta);
+			if (respuesta.equals("si")||respuesta.equals("YES")|| respuesta.equals("Si")
+			|| respuesta.equals("oui")|| respuesta.equals("Yes") ||respuesta.equals("1")) {
+				archivo.editarArchivo();
+			}
+		}else {
 			System.out.println("Hay un archivo con el mismo nombre, no procede a crear nuevo archivo\n");
 		}		
 	}
@@ -64,7 +69,7 @@ public class MiWorkspace implements Workspace {
 		
 		
 	}
-	@Override
+
 	public void editarArchivo() throws InterruptedException {
 		//Antes de editar preguntamos si el workspace no esta vacío
 		if (!isEmpty()) {
@@ -77,17 +82,16 @@ public class MiWorkspace implements Workspace {
 			Scanner scanner =  new Scanner(System.in);
 			try {
 				indiceArchivo = scanner.nextInt(); 
-				System.out.println(indiceArchivo);
 			} catch (Exception e) {
 				System.out.println("F");
 			}
-			System.out.println(indiceArchivo);
+			//System.out.println(indiceArchivo);
 			//Procedemos a preguntamos si podemos editar el archivo
 			if (archivos.getArchivoN(indiceArchivo)!= null) {
 				Archivo archivo  = archivos.getArchivoN(indiceArchivo);
 				archivo.editarArchivo();
 			}else {
-				System.out.println("Indice de archivo inválido");
+				System.out.println("Indice de archivo inválido\n");
 			}
 		}else {
 			System.out.println("No se puede editar, ya que el workspace se encuentra vacío\n");
@@ -102,7 +106,6 @@ public class MiWorkspace implements Workspace {
 	public String nombreFecha2String() {return archivos.nombreFechas2String();}
 	//El workspace se encuentra vacío
 	public boolean isEmpty() {return archivos.isEmpty();}
-	@Override
 	public Archivo getArchivoN(int n) {return archivoN(n);}
 	public Archivo archivoN(int n){return archivos.getArchivoN(n);}
 	public ListaDeArchivos getArchivos() {return archivos;}

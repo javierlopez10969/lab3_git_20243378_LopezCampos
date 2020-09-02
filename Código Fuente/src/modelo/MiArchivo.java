@@ -37,7 +37,9 @@ public class MiArchivo implements Archivo{
 	}
 	
 	public String nombresFechas2String() {
-		return (getNombre()+"\n"+getFechaCreacion()+"\n"+getFechaUltimaModificacion());
+		return ("Nombre Archivo : " + getNombre()+
+				"\nFecha de creación : " +getFechaCreacion()+
+				"\nÚltima fecha de modifcación : " + getFechaUltimaModificacion());
 	}
 	
 	public String Archivo2String() {

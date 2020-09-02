@@ -1,6 +1,10 @@
 package utils;
 import modelo.Archivo;
 
+/*
+ * Clase del tipo lista enlazada, la cual guarda todos los archivos posibles sin un limite
+ * Sus atributos son el primer archivo de la lista
+ * */
 public class ListaDeArchivos {
 	//Atributos
 	//Cabeza de la lista

@@ -5,13 +5,12 @@ import java.util.Scanner;
 
 import utils.ListaDeArchivos;
 	
-public class MiIndex implements Index {
+public class MiIndex{
 	private ListaDeArchivos index = new ListaDeArchivos();
 	//Limpiar Index
 	public void limpiarIndex(){setIndex(new ListaDeArchivos());}
 	//Menú gitAdd que se le entrega el workspace actual
-	public void gitAdd(Workspace workspace) throws InterruptedException{
-
+	public void gitAdd(MiWorkspace workspace) throws InterruptedException{
 		//Solo si el workspace no se encuentra vacío
 		if (!workspace.isEmpty()) {
 			//Variables de múltiples entradas
@@ -21,12 +20,16 @@ public class MiIndex implements Index {
 			Scanner scanner = new Scanner(System.in);
 			while(x < 5) {
 					//Mostramos los archivos en el workspace
-					
 					System.out.println("Workspace actual : ");
 					System.out.println(workspace.nombreFecha2String());
-					
+					//Mostramos los archivos en el index
 					System.out.println("Index Actualmente : \n");
-					System.out.println(index.archivos2String());
+					if (index.isEmpty()) {
+						System.out.println("Index vacío\n");
+					}else {
+						System.out.println(index.nombreFechas2String());
+					}
+					System.out.println( );
 					Thread.sleep(2000);
 					System.out.println("\nQue desea hacer:\n"+
 					"1.-Agregar todos los archivos \n"+
@@ -89,7 +92,7 @@ public class MiIndex implements Index {
 	}
 	
 	//Agregar archivo del workspace
-	public int agregarIndex(Workspace workspace, int indice) {
+	public int agregarIndex(MiWorkspace workspace, int indice) {
 		//Procedemos a preguntamos si podemos obtener el archivo
 		if (workspace.getArchivoN(indice)!= null) {
 			//Creamos el archivo a partir de otro archivo
@@ -111,8 +114,9 @@ public class MiIndex implements Index {
 			return 0;
 		}
 	}
+	
 	//Agregar varios archivo del workspace al index
-	public void agregarVariosIndex(Workspace workspace,int tamano) {
+	public void agregarVariosIndex(MiWorkspace workspace,int tamano) {
 		System.out.println("total : " + tamano);
 		//Si el tamaño es mayor que los archivos totales del workspace
 		if (tamano > workspace.getTamano() || tamano <= 0 ) {

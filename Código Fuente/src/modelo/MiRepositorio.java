@@ -2,7 +2,7 @@ package modelo;
 
 import utils.ListaDeArchivos;
 
-public class MiRepositorio implements Repositorio{
+public class MiRepositorio{
 	//Atributos
 	private String nombreRepositorio;
 	private String autor;
@@ -11,12 +11,12 @@ public class MiRepositorio implements Repositorio{
 	
 	//Zonas de trabajo
 	//Workspace
-	private Workspace workspace;
-	private Index index;
+	private MiWorkspace workspace;
+	private MiIndex  index;
 	
 	//Repositories
-	private Commits localRepositroy;
-	private Commits remoteRepositroy;
+	private MiCommit localRepository;
+	private MiCommit remoteRepository;
 	//Metodos
 	
 	//Constructor del repositorio
@@ -26,8 +26,8 @@ public class MiRepositorio implements Repositorio{
 		setFechaDeCreacion(Tiempo.getActualTime() );
 		workspace = new MiWorkspace();
 		index = new MiIndex();
-		localRepositroy = new MiCommit();
-		remoteRepositroy = new MiCommit();
+		localRepository = new MiCommit();
+		remoteRepository = new MiCommit();
 	}
 
 	//Metodos del Workspace
@@ -39,6 +39,7 @@ public class MiRepositorio implements Repositorio{
 	//Index
 	//Menú que pregunta que archivos quiere añadir al index
 	public void gitAdd() throws InterruptedException{index.gitAdd(getWorkspace());}
+	//Llamar al metodo del index para transformarlo a una variable del tipo string
 	public String index2String() {
 		if (index.isEmpty()) {
 			return "Index Vacío\n";
@@ -47,9 +48,11 @@ public class MiRepositorio implements Repositorio{
 	}
 	
 	//Local Repository
+	/* Crear un commit a partir de un index no vacío
+	 * */
 	public void gitCommit(){
 		if (!index.isEmpty()) {
-			localRepositroy.Commit(index, autor);
+			localRepository.Commit(index, autor);
 			index.limpiarIndex();
 		}else {
 			System.out.println("Index vacío no procede hacer el commit\n");
@@ -58,18 +61,23 @@ public class MiRepositorio implements Repositorio{
 	
 	//Remote Repository	
 	public void gitPush(){
-		if (localRepositroy.isEmpty()) {
-			System.out.println("Local repositroy vacío no procede hacer push\n");
-		}else {
+		if (localRepository.isEmpty()) {
+			System.out.println("Local repositroy vacío, no procede hacer push\n");
+		}
+		else if (remoteActualizadoBoolean()){
+			System.out.println("Remote repositroy se encuentra actualizado, no procede hacer push\n");
+		}
+		else {
 			System.out.println("Making push ...\n");
+			remoteRepository.gitPush(localRepository);
 		}
 		
 	}
 	public void gitPull(){
-		if (remoteRepositroy.isEmpty()) {
+		if (remoteRepository.isEmpty()) {
 			System.out.println("Local repositroy vacío no procede hacer pull\n");
 		}
-		else if (localRepositroy.getTamano() == remoteRepositroy.getTamano()) {
+		else if (localRepository.getTamano() == remoteRepository.getTamano()) {
 			System.out.println("Remote repository actualizado con commits más recientes\n");
 		}else {
 			System.out.println("Making pull ...\n");
@@ -91,22 +99,29 @@ public class MiRepositorio implements Repositorio{
 		"\nRama : " + branch +
 		"\nTotal de archivos en workspace : " + workspace.getTamano()+
 		"\nTotal de archivos en el index  : " + index.getTamano()+
-		"\nTotal de commits en el local repository : " + localRepositroy.getTamano()+
-		"\nEl remote se encuentra "+remoteActualizado() );
+		"\nTotal de commits en el local repository : " + localRepository.getTamano()+
+		"\nEl remote repository se encuentra " + remoteActualizadoString() );
 	}
 	
-	public String remoteActualizado() {
-		if (localRepositroy.isEmpty()) {
+	public String remoteActualizadoString() {
+		if (localRepository.isEmpty()) {
 			return "vacío, ya que no hay ningun commit realizado";
 		}
-		else if (remoteRepositroy.getTamano() == localRepositroy.getTamano()) {
+		else if (remoteRepository.getTamano() == localRepository.getTamano()) {
 			return "actualizado";
 		}else {
 			return "desactualziado";
 		}
 	}
-	public void gitLog() {localRepositroy.gitLog();}
-	
+	public Boolean remoteActualizadoBoolean() {
+		return remoteRepository.getTamano() == localRepository.getTamano();
+	}
+	//Función que se encarga de imprimir el resultado obtenido en gitLog del local repository
+	public void gitLog() {System.out.println(localRepository.gitLog());}
+	//Funciones secretas para el creador para ver los estados de los repositorios
+	public void gitLogRemote() {System.out.println(remoteRepository.gitLog());}
+	public void mostrarRepositorioLocal() {System.out.println(localRepository.repositorio2String());}
+	public void mostrarRepositorioRemoto() {System.out.println(remoteRepository.repositorio2String());}
 	
 	
 	//Setters and Getters
@@ -117,9 +132,7 @@ public class MiRepositorio implements Repositorio{
 	public String getFechaDeCreacion() {return fechaDeCreacion;}
 	public void setFechaDeCreacion(String fechaDeCreacion) {this.fechaDeCreacion = fechaDeCreacion;}
 	//Repositories
-	public Workspace getWorkspace() {return workspace;}
+	public MiWorkspace getWorkspace() {return workspace;}
 	public Boolean workspaceEmpty() {return workspace.isEmpty();}
 	public ListaDeArchivos getIndex() {return index.getIndex();}
-	public Commits getLocalRepositroy() {return localRepositroy;}
-	public Commits getRemoteRepositroy() {return remoteRepositroy;}
 }
