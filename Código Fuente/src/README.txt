@@ -37,13 +37,13 @@ En caso de que la compilación no se ejecutará correctamente ingrese los siguie
 
 Comando 1 :
 
-javac ./utils/Contenido.java ./utils/ListaDeArchivos.java ./modelo/Menu.java ./modelo/Archivo.java ./modelo/MiArchivo.java ./modelo/MiIndex.java ./modelo/MiRepositorio.java ./modelo/MiWorkspace.java ./modelo/Tiempo.java
+javac ./utils/Contenido.java ./utils/ListaDeArchivos.java ./modelo/Menu.java ./modelo/Archivo.java ./modelo/MiArchivo.java ./modelo/MiIndex.java ./modelo/MiRepositorio.java ./modelo/MiWorkspace.java ./modelo/Tiempo.java ./modelo/Branches.java
 	
 Comando 1 alternativo :
 
 javac ./utils/Menu.java
 
-Comando 2 : 
+Comando 2 ejecutar programa : 
 
 java modelo.Menu
 

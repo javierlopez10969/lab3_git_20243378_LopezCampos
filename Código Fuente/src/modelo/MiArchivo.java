@@ -127,21 +127,7 @@ public class MiArchivo implements Archivo{
 			i++;
 		}
 	}
-	/**
-	 * Función que devuelve si un archivo es igual a otro
-	 * @param archivo
-	 * @return true son iguales, false son distintos
-	 */
-	public Boolean equals(Archivo archivo) {
-		//Si el nombre, la fecha de creación y la ultima fecha son iguales
-		if (this.getNombre().equals(archivo.getNombre()) &&
-			this.getFechaCreacion().equals(archivo.getFechaCreacion()) &&
-			this.getFechaUltimaModificacion().equals(archivo.getFechaUltimaModificacion())) {
-			return true;
-		}else {
-			return false;
-		}
-	}
+
 	
 	//Setters and Getters
 	//Nombre

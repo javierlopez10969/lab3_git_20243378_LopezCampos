@@ -22,6 +22,7 @@ public class MiIndex{
 			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(System.in);
 			while(x < 5) {
+					Menu.limpiarPantalla();
 					//Mostramos los archivos en el workspace
 					System.out.println("Workspace actual : ");
 					System.out.println(workspace.nombreFecha2String());
@@ -32,8 +33,6 @@ public class MiIndex{
 					}else {
 						System.out.println(index.nombreFechas2String());
 					}
-					System.out.println( );
-					Thread.sleep(2000);
 					System.out.println("\nQue desea hacer:\n"+
 					"1.-Agregar todos los archivos \n"+
 					"2.-Agregar varios archivos\n" +	

@@ -42,10 +42,12 @@ public class MiWorkspace{
 			} catch (Exception e) {
 				System.out.println("F");
 			}
-			System.out.println(respuesta);
 			if (respuesta.equals("si")||respuesta.equals("YES")|| respuesta.equals("Si")
 			|| respuesta.equals("oui")|| respuesta.equals("Yes") ||respuesta.equals("1")) {
+				System.out.println("Editar el archivo \n");
 				archivo.editarArchivo();
+			}else {
+				System.out.println("No editar el archivo \n");
 			}
 		}else {
 			System.out.println("Hay un archivo con el mismo nombre, no procede a crear nuevo archivo\n");
@@ -109,8 +111,16 @@ public class MiWorkspace{
 	public String nombreFecha2String() {return archivos.nombreFechas2String();}
 	//El workspace se encuentra vacío
 	public boolean isEmpty() {return archivos.isEmpty();}
+
+	
+	//Setters anf getters
 	public Archivo getArchivoN(int n) {return archivoN(n);}
 	public Archivo archivoN(int n){return archivos.getArchivoN(n);}
+	public void setArchivos(ListaDeArchivos archivos) {
+		//Actualizamos tanto tamaño
+		this.archivos.setTamano(archivos.getTamano());
+		//Como los archivos
+		this.archivos = archivos;}
 	public ListaDeArchivos getArchivos() {return archivos;}
 	public int getTamano() {return archivos.getTamano();}
 }

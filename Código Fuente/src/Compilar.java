@@ -3,7 +3,7 @@ import java.io.IOException;
 public class Compilar {
 	public static void main(String[] args) {
 		String compilar = "javac ./modelo/Menu.java";
-		String compilar2 = "javac ./utils/Contenido.java ./utils/ListaDeArchivos.java ./modelo/Menu.java ./modelo/Archivo.java ./modelo/MiArchivo.java ./modelo/MiIndex.java ./modelo/MiRepositorio.java ./modelo/MiWorkspace.java ./modelo/Tiempo.java";
+		String compilar2 = "javac ./utils/Contenido.java ./utils/ListaDeArchivos.java ./modelo/Menu.java ./modelo/Archivo.java ./modelo/MiArchivo.java ./modelo/MiIndex.java ./modelo/MiRepositorio.java ./modelo/MiWorkspace.java ./modelo/Tiempo.java ./modelo/Branches.java";
 		String sSistemaOperativo = System.getProperty("os.name");
 		System.out.println("Su sistema operativo es : "+sSistemaOperativo);
         String[] arrOfStr = sSistemaOperativo.split(" ", 1);

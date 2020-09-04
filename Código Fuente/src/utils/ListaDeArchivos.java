@@ -227,20 +227,20 @@ public class ListaDeArchivos {
 			return false;
 		}
 		//Declaramos puntero con la cabeza de archivos
-		nodoArchivo punterArchivo = archivos.getCabeza();
+		nodoArchivo punteroArchivo = archivos.getCabeza();
 		//Y declaramos un acumulador con el total de los archivos de la lista
 		int n =  archivos.getTamano();
 		int i = 0;
-		while (punterArchivo != null && i < archivos.getTamano()) {
+		while (punteroArchivo != null && i < archivos.getTamano()) {
 			//Si el archivo se encuentra dentro y además es igual
-			if (isInsideAndEquals(punterArchivo.myArchivo)) {
+			if (isInsideAndEquals(punteroArchivo.myArchivo)) {
 				//Disminuimos el total
 				n--;
 			}
 			i++;
-			System.out.println("Avanzando : " +  i + "\n");
+			//System.out.println("Avanzando : " +  i + "\n");
 			//Avanzamos el puntero
-			punterArchivo.getSiguiente();
+			punteroArchivo.getSiguiente();
 			
 		}
 		// si al final de recorrer todos los punteros el contador es igual a 0

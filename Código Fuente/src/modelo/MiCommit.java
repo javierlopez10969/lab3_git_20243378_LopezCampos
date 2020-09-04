@@ -17,6 +17,7 @@ public class MiCommit {
 	private Commit cima = null ;
 	//Total de commits
 	private int tamano ;
+	private Scanner scanner;
 	
 	/**
 	 * Cada commit realizado se guardará en una clase tipo nodo para lista enlazada llamada Commit
@@ -138,6 +139,8 @@ public class MiCommit {
 			System.out.println("Pusheando ...\n");
 			//Se actualiza el local repository asignandole el valor de la cima de local repository
 			this.setCima(localRepository.getCima());
+			//Y se actualiza el tamaño del remote repository
+			this.setTamano(localRepository.getTamano());
 		}else {
 			System.out.println("El remote repository se encuentra actualizado\n");
 		}
@@ -145,11 +148,46 @@ public class MiCommit {
 	
 	
 	/** 
-	 * Traer el ultimo commit a la zona de trabajos actuales
+	 * Traer el ultimo commit del remote repository a la zona de trabajos actuales
+	 * Metodo se llama 
 	 * @param localRepositoy
 	 */
-	public void gitPull(MiCommit localRepositoy) {
-		//Solo es posible si el remote se encuentra actualizado
+	public ListaDeArchivos gitPull(MiCommit localRepository) {
+		scanner = new Scanner(System.in);
+		String respuestaString = "";
+		//Solo es posible si el local se encuentra actualizado
+		if (this.getTamano() < localRepository.getTamano()) {
+			System.out.println("El remote se encuentra desactualizado, ¿quiere proceder a transformar el local y el workspace al ultimo commit en remote repository?\n");
+			try {
+				respuestaString = scanner.nextLine();
+			} catch (Exception e) {
+				System.out.println("Ha ocurrido un error : "+ e);
+			}
+			if (respuestaString.equals("Si") || respuestaString.equals("si") || respuestaString.equals("1") || respuestaString.equals("yes") || 
+				respuestaString.equals("yup") || respuestaString.equals("1")) {
+				localRepository.setCima(this.getCima());
+				return this.getCima().getWorkspace();
+			}else {
+				return null;
+			}
+		}
+		else if (getTamano() == localRepository.getTamano()){
+			System.out.println("El remote se encuentra actualizado, ¿quiere proceder a redifinir el workspace ?\n");
+			try {
+				respuestaString = scanner.nextLine();
+			} catch (Exception e) {
+				System.out.println("Ha ocurrido un error : "+ e);
+			}
+			if (respuestaString.equals("Si") || respuestaString.equals("si") || respuestaString.equals("1") || respuestaString.equals("yes") || 
+				respuestaString.equals("yup") || respuestaString.equals("1")) {
+				//Obtenemos el ultimo workspace del repositorio
+				return getCima().getWorkspace();
+			}else {
+				return null;
+			}
+		}else {
+			return null;
+		}
 	}
 	
 	/**

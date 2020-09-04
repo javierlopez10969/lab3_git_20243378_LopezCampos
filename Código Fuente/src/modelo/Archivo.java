@@ -6,7 +6,6 @@ public interface Archivo {
 	public String nombresFechas2String();
 	public String Archivo2String();
 	public void editarArchivo() throws InterruptedException;
-	public Boolean equals(Archivo archivo);
 	//Setters and getters
 	//Nombre del archivo
 	public String getNombre();

@@ -10,24 +10,25 @@ import java.util.Scanner;
  * @author Javier López
  */
 public interface Menu {
-	static MiRepositorio repositorio = new MiRepositorio(); //Declaramos el repositorio
-	
-	
     /** 
      * Mostrar los distintos comandos de la simulación de git
      * @param void
      */
 	public static void main(String[]args){
+		MiRepositorio repositorio = new MiRepositorio(); //Declaramos el repositorio	
 		Scanner entradaEscaner = new Scanner (System.in);
 		int x = -1;//La entrada la incicializamos en -1
-		System.out.println("Bienvenido a la simulacion de git\n");/*
+		System.out.println("Bienvenido a la simulacion de git\n"
 		+"Para inicializar su repositorio, ingrese su nombre de usuario");
 		String autor = entradaEscaner.nextLine();
 		System.out.println("Ahora ingrese el nombre de su repositorio");
-		String nombreRepositorio = entradaEscaner.nextLine();*/
-		String autor = "Mohamed";String nombreRepositorio = "Ali";
+		String nombreRepositorio = entradaEscaner.nextLine();
+		//String autor = "Mohamed";String nombreRepositorio = "Ali";
+		//Inicializamos el repostorio
 		repositorio.gitInit(autor, nombreRepositorio);
-        while(x != 12){
+		//Ahora inicializamos las ramas , con el master actual
+		Branches branches = new Branches(repositorio);
+        while(x != 15){
         	try{
         	entradaEscaner = new Scanner (System.in);
     		Thread.sleep(1500);
@@ -48,7 +49,9 @@ public interface Menu {
             + "9.  Borrar Archivo\n"
             + "10. Ver Archivos en el index\n"
             + "11. log\n"
-            + "12. Salir\n"  
+            + "12. gitBranch\n"
+            + "13. gitCheckout\n"
+            + "15. Salir\n"  
             +"INTRODUZCA SU OPCIÓN:"
             + " _\n");
             x = entradaEscaner.nextInt();
@@ -63,6 +66,7 @@ public interface Menu {
                 case 2:{
                     System.out.println("Commit\n");
                     repositorio.gitCommit();
+                    System.out.println("Index vaciado\n");
                     Thread.sleep(2000);
                     break;
                 }
@@ -87,7 +91,7 @@ public interface Menu {
                 //Satus
                 case 5:{
                     System.out.println("Status\n");
-                    repositorio.gitStatus();
+                    System.out.println(repositorio.gitStatus()); 
                     Thread.sleep(4000);
                     break;
                 }
@@ -137,22 +141,24 @@ public interface Menu {
                 	break;
                 }
                 //Git Branch
-                case 13:{
+                case 12:{
                 	System.out.println("Git Branch\n");
+                	repositorio = branches.gitBranch();
                 	break;
                 }
                 //Git CheckOut
-                case 14:{
+                case 13:{
                 	System.out.println("Git CheckOut\n");
+                	repositorio = branches.gitCheckOut();
                 	break;
                 }
                 //Git Merge
-                case 15:{
+                case 14:{
                 	System.out.println("Git Merge\n");
                 	break;
                 }
                 //Salir
-                case 16:{
+                case 15:{
                     System.out.println("Adiós\n\n");
                     System.out.println("Simulación de Git terminada .");
                     break;
@@ -169,7 +175,7 @@ public interface Menu {
                 }
                 //Log de remote repository
                 case 19:{
-                	System.out.println("Log de Remote Repository\n");
+                	System.out.println("Función secreta Log de Remote Repository\n");
                 	repositorio.gitLogRemote();
                 	Thread.sleep(4000);
                 	break;
