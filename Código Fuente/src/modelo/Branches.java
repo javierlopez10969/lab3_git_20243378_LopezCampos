@@ -28,6 +28,8 @@ public class Branches {
 		} catch (Exception e) {
 			System.out.println("Ha ocurrido un error "+ e + "\n");
 		}
+		//Si el nombre nuevo no se encuentra ya dentro de una de las ramas
+		if (!isInside(respueString)) {		
 		//Decimos que la nueva Branch es exactamente igual a como ha quedado master
 		MiRepositorio newBranch = getMaster();
 		//Seteamos el nombre de la nueva branch
@@ -51,11 +53,16 @@ public class Branches {
 			}
 			newBranch.setAutor(respueString);
 		}
-		System.out.println("Autor : " + newBranch.getBranch() + "\n" +
+		System.out.println("Autor : " + newBranch.getAutor() + "\n" +
 		"Nueva Branch creada : \n" + newBranch.gitStatus());
 		insertarBranch(newBranch);
 		//Devolvemos la ultima branch
 		return getBranchN(getTamano()-1) ;
+		}else {
+			System.out.println("El nombre de esa rama ya existe, no procedemos a crear nueva rama\n"
+					+ "Volviendo a Master \n");
+			return getMaster();
+		}
 	}
 	
 	public void insertarBranch(MiRepositorio newBranch) {
@@ -121,14 +128,33 @@ public class Branches {
 		int i = 0; String salidaString ="";
 		MiRepositorio punteroMiRepositorio = getMaster();
 		while (i < getTamano() && punteroMiRepositorio!= null) {
-			salidaString = salidaString + i + ".-\n" +  punteroMiRepositorio.gitStatus(); 
-			punteroMiRepositorio = punteroMiRepositorio.getSiguiente();
+			salidaString = salidaString + i + ".-\n" +  punteroMiRepositorio.gitStatus() + "\n";  
+			punteroMiRepositorio = punteroMiRepositorio.getSiguiente() ;
 			i++;
 			
 		}
 		return salidaString;
 	}
 	
+	/**
+	 * Metodo para verficar si un nombre ya existe como rama
+	 * @param name
+	 * @return true, si hay un repositorio con la rama del mismo nombre, falso si no se encuentra
+	 */
+	public Boolean isInside(String name) {
+		int i = 0 ;
+		MiRepositorio punteroMiRepositorio = getMaster();
+		while (i < getTamano() && punteroMiRepositorio != null) {
+			//Si hay un repositorio branch con el mismo nombre, retornamos que si se encuentra
+			if (punteroMiRepositorio.getBranch().equals(name)) {
+				return true;
+			}
+			punteroMiRepositorio = punteroMiRepositorio.getSiguiente();
+			i++;
+		}
+		//En cambio si completamos todo el recorrido devolvemos verdadero
+		return false;
+	}
 	
 	
 	//Getters and Setters

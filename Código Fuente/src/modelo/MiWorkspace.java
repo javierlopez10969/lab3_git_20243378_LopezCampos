@@ -70,9 +70,7 @@ public class MiWorkspace{
 			scanner.close();
 		}else {
 			System.out.println("No se puede borrar ningún archivo, ya que el workspace se encuentra vacío\n");
-		}
-		
-		
+		}		
 	}
 
 	public void editarArchivo() throws InterruptedException {
@@ -113,9 +111,8 @@ public class MiWorkspace{
 	public boolean isEmpty() {return archivos.isEmpty();}
 
 	
-	//Setters anf getters
-	public Archivo getArchivoN(int n) {return archivoN(n);}
-	public Archivo archivoN(int n){return archivos.getArchivoN(n);}
+	//Setters and getters
+	public Archivo getArchivoN(int n) {return archivos.getArchivoN(n);}
 	public void setArchivos(ListaDeArchivos archivos) {
 		//Actualizamos tanto tamaño
 		this.archivos.setTamano(archivos.getTamano());

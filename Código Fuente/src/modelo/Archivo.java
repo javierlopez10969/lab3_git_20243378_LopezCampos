@@ -18,6 +18,9 @@ public interface Archivo {
 	public String getFechaUltimaModificacion() ;
 	public void setFechaUltimaModificacion();
 	public void setFechaUltimaModificacion(String newFecha);
+	//Contenido en string
+	public String getContenidoString();
+	public void setContenidoString(String Contenido);
 	//Editar contenido
 	public Contenido getContenido() ;
 	public void setContenido(Contenido contenido);

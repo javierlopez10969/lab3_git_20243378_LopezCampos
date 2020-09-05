@@ -84,14 +84,12 @@ public class MiRepositorio{
 		else {
 			//Si es distinto de  nulo el resultado seteamos el valor otorgado por este metodo
 			ListaDeArchivos archivos = remoteRepository.gitPull(localRepository);
-			System.out.println("La lista de archivos es : \n"+ archivos.archivos2String());
+			System.out.println("Workspace en remote es : \n"+ archivos.archivos2String());
 			if (archivos != null) {
-				System.out.println("Actualizar workspace, workspace antes : \n"+
-				workspace2String());
+				System.out.println("Actualizar workspace, workspace antes : \n"+ workspace2String());
 				//Actualizar zona de trabajo
 				workspace.setArchivos(archivos);
-				System.out.println("Workspace ahora : \n+"
-				+ workspace2String());	
+				System.out.println("Workspace ahora : \n+"+ workspace2String());	
 			}			
 		}		
 	}
@@ -104,7 +102,6 @@ public class MiRepositorio{
 	 * iv. Número de commits en el Local Repository
 	 * v. SI el Remote Repository está al día (o no) con los cambios del Local Repository
 	 */
-	
 	public String gitStatus() {
 		String salidaString = 
 		"\nAutor : " + getAutor()+

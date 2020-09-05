@@ -1,5 +1,6 @@
 package utils;
 import modelo.Archivo;
+import modelo.MiArchivo;
 
 /**
  *  * Clase del tipo lista enlazada, la cual guarda todos los archivos posibles sin un limite
@@ -23,7 +24,6 @@ public class ListaDeArchivos {
 	private class nodoArchivo{
 		private Archivo myArchivo;
 		private nodoArchivo siguiente = null;
-		
 		//Setters anf getters
 		public nodoArchivo(Archivo myArchivo ) {this.setMyArchivo(myArchivo);}
 		//public archivo getMyArchivo() {return myArchivo;}
@@ -160,7 +160,12 @@ public class ListaDeArchivos {
 				System.out.println("No hay archivos disponibles");
 				return null;
 			}else {
-				return puntero.myArchivo;
+				Archivo archivo = new MiArchivo(puntero.myArchivo.getNombre());
+				archivo.setFechaCreacion(puntero.myArchivo.getFechaCreacion());
+				archivo.setFechaUltimaModificacion(puntero.myArchivo.getFechaUltimaModificacion());
+				archivo.setContenidoString(puntero.myArchivo.getContenidoString());
+				return archivo;
+				//return puntero.myArchivo;
 			}
 		}
 	}

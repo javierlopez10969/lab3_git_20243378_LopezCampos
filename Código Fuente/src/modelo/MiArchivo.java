@@ -9,6 +9,9 @@ public class MiArchivo implements Archivo{
 	private String nombre;
 	private String fechaCreacion;
 	private String fechaUltimaModificacion;
+	//Contenido almacenado en String
+	private String contenidoString ;
+	//Contenido editable mediante listas enlazadas
 	private Contenido contenido;
 	
 	//Constructor
@@ -17,7 +20,8 @@ public class MiArchivo implements Archivo{
 		setFechaCreacion();
 		setFechaUltimaModificacion();
 		contenido = new Contenido();
-	}	
+	}
+
 	public String nombresFechas2String() {
 		return ("Nombre Archivo : " + getNombre()+
 				"\nFecha de creación : " +getFechaCreacion()+
@@ -25,10 +29,17 @@ public class MiArchivo implements Archivo{
 	}
 	
 	public String Archivo2String() {
-		return("Nombre Archivo : " +getNombre()+
+		String salidaString;
+		salidaString = "Nombre Archivo : " +getNombre()+
 		"\nFecha de creación : " + getFechaCreacion() +
 		"\nÚltima fecha de modifcación : " + getFechaUltimaModificacion() +
-		"\nContenido : \n" + contenido.contenido2String()+"\n");
+		"\nContenido : \n";
+		if (getContenido().isEmpty()) {
+			salidaString = salidaString + "Sin Contenido\n";
+		}else {
+			salidaString = salidaString + getContenidoString() +"\n"; 
+		}
+		return salidaString;
 	}
 		
 	//Edición de archivo
@@ -42,9 +53,10 @@ public class MiArchivo implements Archivo{
 		Scanner scanner = new Scanner(System.in);
 		while(!x.equals("4")) {
 			try {
+			setContenidoString(contenido.contenido2String());
 			System.out.println("Su archivo es :\n");
 			//contenido.mostrarContenido();
-			System.out.println(contenido.contenido2String());
+			System.out.println(contenidoString);
 			System.out.println("\nQue desea hacer:\n"+
 			"1.-Insertar línea \n"+
 			"2.-Insertar Línea N \n" +	
@@ -144,6 +156,9 @@ public class MiArchivo implements Archivo{
 	//Editar contenido
 	public Contenido getContenido() {return contenido;}
 	public void setContenido(Contenido contenido) {this.contenido = contenido;}
+	//Setear el contenido editado en el string
+	public String getContenidoString() {return this.contenidoString;}
+	public void setContenidoString(String contenido) {this.contenidoString = contenido;}
 	
 
 

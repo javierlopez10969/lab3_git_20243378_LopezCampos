@@ -155,7 +155,7 @@ public class MiCommit {
 	public ListaDeArchivos gitPull(MiCommit localRepository) {
 		scanner = new Scanner(System.in);
 		String respuestaString = "";
-		//Solo es posible si el local se encuentra actualizado
+		//Solo es posible si el remote se encuentra actualizado
 		if (this.getTamano() < localRepository.getTamano()) {
 			System.out.println("El remote se encuentra desactualizado, ¿quiere proceder a transformar el local y el workspace al ultimo commit en remote repository?\n");
 			try {
@@ -181,7 +181,7 @@ public class MiCommit {
 			if (respuestaString.equals("Si") || respuestaString.equals("si") || respuestaString.equals("1") || respuestaString.equals("yes") || 
 				respuestaString.equals("yup") || respuestaString.equals("1")) {
 				//Obtenemos el ultimo workspace del repositorio
-				return getCima().getWorkspace();
+				return this.getCima().getWorkspace();
 			}else {
 				return null;
 			}

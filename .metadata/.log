@@ -2342,3 +2342,768 @@ java.lang.IllegalArgumentException: End node is not a original child of the give
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1447)
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1420)
+
+!ENTRY org.eclipse.jdt.core 4 4 2020-09-04 22:26:22.128
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+//Importaciones
+package modelo;
+import java.util.Scanner;
+
+import utils.Contenido;
+
+public class MiArchivo implements Archivo{
+	//Atributos
+	private String nombre;
+	private String fechaCreacion;
+	private String fechaUltimaModificacion;
+	//Contenido almacenado en String
+	private String contenidoString ;
+	//Contenido editable mediante listas enlazadas
+	private Contenido contenido;
+	
+	//Constructor
+	public MiArchivo(String name){
+		setNombre(name);
+		setFechaCreacion();
+		setFechaUltimaModificacion();
+		contenido = new Contenido();
+	}
+
+	public String nombresFechas2String() {
+		return ("Nombre Archivo : " + getNombre()+
+				"\nFecha de creación : " +getFechaCreacion()+
+				"\nÚltima fecha de modifcación : " + getFechaUltimaModificacion()+"\n");
+	}
+	
+	public String Archivo2String() {
+		return("Nombre Archivo : " +getNombre()+
+		"\nFecha de creación : " + getFechaCreacion() +
+		"\nÚltima fecha de modifcación : " + getFechaUltimaModificacion() +
+		"\nContenido : \n");+ contenidoString +"\n");
+	}
+		
+	//Edición de archivo
+	public void editarArchivo() throws InterruptedException{
+		//Variables de múltiples entradas
+		String x = "-1";
+		String linea = "line";
+		int entero = 0;
+		System.out.println("Edición de Archivo");
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		while(!x.equals("4")) {
+			try {
+			setContenidoString(contenido.contenido2String());
+			System.out.println("Su archivo es :\n");
+			//contenido.mostrarContenido();
+			System.out.println(contenidoString);
+			System.out.println("\nQue desea hacer:\n"+
+			"1.-Insertar línea \n"+
+			"2.-Insertar Línea N \n" +	
+			"3.-Borrar Línea \n"+
+			"4.-Terminar Edición\n" );
+			x = scanner.nextLine(); 
+			switch (x) {
+			case "1":
+				System.out.println("Ingrese su linea");
+				try {
+					linea= scanner.nextLine(); 
+				} catch (Exception s) {
+					System.out.println("F");
+				}
+				contenido.insertarFinal(linea);
+				x = "-1";
+				break;
+			case "2":{			
+				System.out.println("Ingrese su linea");
+				try {
+					linea= scanner.nextLine(); 
+				} catch (Exception s) {
+					System.out.println("F");
+				}
+				System.out.println("Ingrese el indice su linea");
+				try {
+					entero = scanner.nextInt();
+				} catch (Exception s) {
+					System.out.println("F");
+				}
+				contenido.insertarN(entero, linea);
+				break;
+			}
+			case "3":
+				//Solo si el contenido no esta vacío
+				if(!contenido.isEmpty()) {
+					System.out.println("Ingrese el indice su linea que quiere borrar");
+					try {
+						entero = scanner.nextInt();
+					} catch (Exception s) {
+						System.out.println("F");
+					}
+					contenido.borrarLinea(entero);
+					break;
+				}else {
+					System.out.println("El Archivo esta vacío, ¿Qué quiere borrar?\n");
+				}
+			default:
+				System.out.println("Ingrese opción válida\n");
+				break;
+			}
+			}catch (Exception s) {
+			System.out.println("F");}
+		}
+		System.out.println("Su archivo editado quedó como:");
+		setFechaUltimaModificacion();
+		System.out.println(Archivo2String());
+		Thread.sleep(3000);
+	}
+	//Editar varias líneas
+	public void ingresarVariasLineas() {
+		System.out.println("Cuantas líneas quiere ingresar : ");
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		int n = 0;
+		try {n = scanner.nextInt(); 
+		} catch (Exception e) {
+			System.out.println("F");
+		}
+		//Comenzamos un cilco while
+		int i =  0;
+		while (i < n) {
+			String linea = "halo";
+			try {
+				linea= scanner.nextLine(); 
+			} catch (Exception e) {
+				System.out.println("F");
+			}
+			contenido.insertarFinal(linea);
+			i++;
+		}
+	}
+
+	
+	//Setters and Getters
+	//Nombre
+	public String getNombre() {return nombre;}
+	public void setNombre(String nombre) {this.nombre = nombre;}
+	//Fecha creacion
+	public String getFechaCreacion() {return fechaCreacion;}
+	public void setFechaCreacion(String newFecha) {this.fechaCreacion = newFecha;}
+	public void setFechaCreacion() {this.fechaCreacion = Tiempo.getActualTime();}
+	//Fecha modificacion
+	public String getFechaUltimaModificacion() {return fechaUltimaModificacion;}
+	public void setFechaUltimaModificacion(String newFecha) {this.fechaCreacion = newFecha;}
+	public void setFechaUltimaModificacion() {this.fechaUltimaModificacion = Tiempo.getActualTime() ;}
+	//Editar contenido
+	public Contenido getContenido() {return contenido;}
+	public void setContenido(Contenido contenido) {this.contenido = contenido;}
+	//Setear el contenido editado en el string
+	public String getContenidoString() {return this.contenidoString;}
+	public void setContenidoString(String contenido) {this.contenidoString = contenido;}
+	
+
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1276)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2020)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3750)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1932)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1963)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3023)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3302)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1513)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:450)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:200)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:268)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:596)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1138)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:736)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:802)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1315)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.access$0(JavaReconcilingStrategy.java:113)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2020-09-04 22:26:22.138
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1276)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2020)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3750)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1932)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1963)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3023)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3302)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1513)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:450)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:200)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:268)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:596)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1138)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:736)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:802)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1315)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.access$0(JavaReconcilingStrategy.java:113)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2020-09-04 22:26:22.139
+!MESSAGE Error in JDT Core during reconcile
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1276)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2020)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3750)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1932)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1963)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3023)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3302)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1513)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:450)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:200)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:268)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:596)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1138)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:736)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:802)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1315)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.access$0(JavaReconcilingStrategy.java:113)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.core 4 4 2020-09-04 22:26:22.169
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+//Importaciones
+package modelo;
+import java.util.Scanner;
+
+import utils.Contenido;
+
+public class MiArchivo implements Archivo{
+	//Atributos
+	private String nombre;
+	private String fechaCreacion;
+	private String fechaUltimaModificacion;
+	//Contenido almacenado en String
+	private String contenidoString ;
+	//Contenido editable mediante listas enlazadas
+	private Contenido contenido;
+	
+	//Constructor
+	public MiArchivo(String name){
+		setNombre(name);
+		setFechaCreacion();
+		setFechaUltimaModificacion();
+		contenido = new Contenido();
+	}
+
+	public String nombresFechas2String() {
+		return ("Nombre Archivo : " + getNombre()+
+				"\nFecha de creación : " +getFechaCreacion()+
+				"\nÚltima fecha de modifcación : " + getFechaUltimaModificacion()+"\n");
+	}
+	
+	public String Archivo2String() {
+		return("Nombre Archivo : " +getNombre()+
+		"\nFecha de creación : " + getFechaCreacion() +
+		"\nÚltima fecha de modifcación : " + getFechaUltimaModificacion() +
+		"\nContenido : \n");+ contenidoString +"\n");
+	}
+		
+	//Edición de archivo
+	public void editarArchivo() throws InterruptedException{
+		//Variables de múltiples entradas
+		String x = "-1";
+		String linea = "line";
+		int entero = 0;
+		System.out.println("Edición de Archivo");
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		while(!x.equals("4")) {
+			try {
+			setContenidoString(contenido.contenido2String());
+			System.out.println("Su archivo es :\n");
+			//contenido.mostrarContenido();
+			System.out.println(contenidoString);
+			System.out.println("\nQue desea hacer:\n"+
+			"1.-Insertar línea \n"+
+			"2.-Insertar Línea N \n" +	
+			"3.-Borrar Línea \n"+
+			"4.-Terminar Edición\n" );
+			x = scanner.nextLine(); 
+			switch (x) {
+			case "1":
+				System.out.println("Ingrese su linea");
+				try {
+					linea= scanner.nextLine(); 
+				} catch (Exception s) {
+					System.out.println("F");
+				}
+				contenido.insertarFinal(linea);
+				x = "-1";
+				break;
+			case "2":{			
+				System.out.println("Ingrese su linea");
+				try {
+					linea= scanner.nextLine(); 
+				} catch (Exception s) {
+					System.out.println("F");
+				}
+				System.out.println("Ingrese el indice su linea");
+				try {
+					entero = scanner.nextInt();
+				} catch (Exception s) {
+					System.out.println("F");
+				}
+				contenido.insertarN(entero, linea);
+				break;
+			}
+			case "3":
+				//Solo si el contenido no esta vacío
+				if(!contenido.isEmpty()) {
+					System.out.println("Ingrese el indice su linea que quiere borrar");
+					try {
+						entero = scanner.nextInt();
+					} catch (Exception s) {
+						System.out.println("F");
+					}
+					contenido.borrarLinea(entero);
+					break;
+				}else {
+					System.out.println("El Archivo esta vacío, ¿Qué quiere borrar?\n");
+				}
+			default:
+				System.out.println("Ingrese opción válida\n");
+				break;
+			}
+			}catch (Exception s) {
+			System.out.println("F");}
+		}
+		System.out.println("Su archivo editado quedó como:");
+		setFechaUltimaModificacion();
+		System.out.println(Archivo2String());
+		Thread.sleep(3000);
+	}
+	//Editar varias líneas
+	public void ingresarVariasLineas() {
+		System.out.println("Cuantas líneas quiere ingresar : ");
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		int n = 0;
+		try {n = scanner.nextInt(); 
+		} catch (Exception e) {
+			System.out.println("F");
+		}
+		//Comenzamos un cilco while
+		int i =  0;
+		while (i < n) {
+			String linea = "halo";
+			try {
+				linea= scanner.nextLine(); 
+			} catch (Exception e) {
+				System.out.println("F");
+			}
+			contenido.insertarFinal(linea);
+			i++;
+		}
+	}
+
+	
+	//Setters and Getters
+	//Nombre
+	public String getNombre() {return nombre;}
+	public void setNombre(String nombre) {this.nombre = nombre;}
+	//Fecha creacion
+	public String getFechaCreacion() {return fechaCreacion;}
+	public void setFechaCreacion(String newFecha) {this.fechaCreacion = newFecha;}
+	public void setFechaCreacion() {this.fechaCreacion = Tiempo.getActualTime();}
+	//Fecha modificacion
+	public String getFechaUltimaModificacion() {return fechaUltimaModificacion;}
+	public void setFechaUltimaModificacion(String newFecha) {this.fechaCreacion = newFecha;}
+	public void setFechaUltimaModificacion() {this.fechaUltimaModificacion = Tiempo.getActualTime() ;}
+	//Editar contenido
+	public Contenido getContenido() {return contenido;}
+	public void setContenido(Contenido contenido) {this.contenido = contenido;}
+	//Setear el contenido editado en el string
+	public String getContenidoString() {return this.contenidoString;}
+	public void setContenidoString(String contenido) {this.contenidoString = contenido;}
+	
+
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1276)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2020)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3750)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1932)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1963)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3023)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3302)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1513)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1231)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:820)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:271)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:263)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:196)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:186)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:175)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$3.run(SelectionListenerWithASTManager.java:160)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 2 2020-09-04 22:26:22.172
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.core.manipulation".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1276)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2020)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3750)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1932)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1963)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3023)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3302)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1513)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1231)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:820)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:271)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:263)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:196)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:186)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:175)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$3.run(SelectionListenerWithASTManager.java:160)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 0 2020-09-04 22:26:22.175
+!MESSAGE Error in JDT Core during AST creation
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1276)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2020)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3750)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1932)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1963)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3023)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3302)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1513)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1231)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:820)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:271)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:263)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:196)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:186)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:175)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$3.run(SelectionListenerWithASTManager.java:160)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core 4 4 2020-09-04 22:26:22.564
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+//Importaciones
+package modelo;
+import java.util.Scanner;
+
+import utils.Contenido;
+
+public class MiArchivo implements Archivo{
+	//Atributos
+	private String nombre;
+	private String fechaCreacion;
+	private String fechaUltimaModificacion;
+	//Contenido almacenado en String
+	private String contenidoString ;
+	//Contenido editable mediante listas enlazadas
+	private Contenido contenido;
+	
+	//Constructor
+	public MiArchivo(String name){
+		setNombre(name);
+		setFechaCreacion();
+		setFechaUltimaModificacion();
+		contenido = new Contenido();
+	}
+
+	public String nombresFechas2String() {
+		return ("Nombre Archivo : " + getNombre()+
+				"\nFecha de creación : " +getFechaCreacion()+
+				"\nÚltima fecha de modifcación : " + getFechaUltimaModificacion()+"\n");
+	}
+	
+	public String Archivo2String() {
+		return("Nombre Archivo : " +getNombre()+
+		"\nFecha de creación : " + getFechaCreacion() +
+		"\nÚltima fecha de modifcación : " + getFechaUltimaModificacion() +
+		"\nContenido : \n");+ contenidoString +"\n");
+	}
+		
+	//Edición de archivo
+	public void editarArchivo() throws InterruptedException{
+		//Variables de múltiples entradas
+		String x = "-1";
+		String linea = "line";
+		int entero = 0;
+		System.out.println("Edición de Archivo");
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		while(!x.equals("4")) {
+			try {
+			setContenidoString(contenido.contenido2String());
+			System.out.println("Su archivo es :\n");
+			//contenido.mostrarContenido();
+			System.out.println(contenidoString);
+			System.out.println("\nQue desea hacer:\n"+
+			"1.-Insertar línea \n"+
+			"2.-Insertar Línea N \n" +	
+			"3.-Borrar Línea \n"+
+			"4.-Terminar Edición\n" );
+			x = scanner.nextLine(); 
+			switch (x) {
+			case "1":
+				System.out.println("Ingrese su linea");
+				try {
+					linea= scanner.nextLine(); 
+				} catch (Exception s) {
+					System.out.println("F");
+				}
+				contenido.insertarFinal(linea);
+				x = "-1";
+				break;
+			case "2":{			
+				System.out.println("Ingrese su linea");
+				try {
+					linea= scanner.nextLine(); 
+				} catch (Exception s) {
+					System.out.println("F");
+				}
+				System.out.println("Ingrese el indice su linea");
+				try {
+					entero = scanner.nextInt();
+				} catch (Exception s) {
+					System.out.println("F");
+				}
+				contenido.insertarN(entero, linea);
+				break;
+			}
+			case "3":
+				//Solo si el contenido no esta vacío
+				if(!contenido.isEmpty()) {
+					System.out.println("Ingrese el indice su linea que quiere borrar");
+					try {
+						entero = scanner.nextInt();
+					} catch (Exception s) {
+						System.out.println("F");
+					}
+					contenido.borrarLinea(entero);
+					break;
+				}else {
+					System.out.println("El Archivo esta vacío, ¿Qué quiere borrar?\n");
+				}
+			default:
+				System.out.println("Ingrese opción válida\n");
+				break;
+			}
+			}catch (Exception s) {
+			System.out.println("F");}
+		}
+		System.out.println("Su archivo editado quedó como:");
+		setFechaUltimaModificacion();
+		System.out.println(Archivo2String());
+		Thread.sleep(3000);
+	}
+	//Editar varias líneas
+	public void ingresarVariasLineas() {
+		System.out.println("Cuantas líneas quiere ingresar : ");
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		int n = 0;
+		try {n = scanner.nextInt(); 
+		} catch (Exception e) {
+			System.out.println("F");
+		}
+		//Comenzamos un cilco while
+		int i =  0;
+		while (i < n) {
+			String linea = "halo";
+			try {
+				linea= scanner.nextLine(); 
+			} catch (Exception e) {
+				System.out.println("F");
+			}
+			contenido.insertarFinal(linea);
+			i++;
+		}
+	}
+
+	
+	//Setters and Getters
+	//Nombre
+	public String getNombre() {return nombre;}
+	public void setNombre(String nombre) {this.nombre = nombre;}
+	//Fecha creacion
+	public String getFechaCreacion() {return fechaCreacion;}
+	public void setFechaCreacion(String newFecha) {this.fechaCreacion = newFecha;}
+	public void setFechaCreacion() {this.fechaCreacion = Tiempo.getActualTime();}
+	//Fecha modificacion
+	public String getFechaUltimaModificacion() {return fechaUltimaModificacion;}
+	public void setFechaUltimaModificacion(String newFecha) {this.fechaCreacion = newFecha;}
+	public void setFechaUltimaModificacion() {this.fechaUltimaModificacion = Tiempo.getActualTime() ;}
+	//Editar contenido
+	public Contenido getContenido() {return contenido;}
+	public void setContenido(Contenido contenido) {this.contenido = contenido;}
+	//Setear el contenido editado en el string
+	public String getContenidoString() {return this.contenidoString;}
+	public void setContenidoString(String contenido) {this.contenidoString = contenido;}
+	
+
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1276)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2020)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3750)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1932)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1963)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3023)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3302)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1513)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1231)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:820)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:271)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:263)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:196)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:175)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$3.run(SelectionListenerWithASTManager.java:160)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 2 2020-09-04 22:26:22.566
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.core.manipulation".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1276)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2020)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3750)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1932)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1963)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3023)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3302)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1513)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1231)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:820)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:271)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:263)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:196)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:175)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$3.run(SelectionListenerWithASTManager.java:160)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 0 2020-09-04 22:26:22.568
+!MESSAGE Error in JDT Core during AST creation
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1276)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2020)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3750)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1932)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1963)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3023)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3302)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1513)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1231)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:820)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:271)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:263)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:196)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:175)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$3.run(SelectionListenerWithASTManager.java:160)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)

@@ -100,7 +100,7 @@ public class MiIndex{
 			//Decimos que el archivo a añadir es el archivo que obtuvimos
 			Archivo archivo = workspace.getArchivoN(indice);
 			//Solo si el archivo no se encuentra dentro del index
-			if (!index.isInside(archivo)) {
+			if (!index.isInside(archivo)){
 				index.añadirArchivo(archivo);
 				return 1;
 			}else {
@@ -148,8 +148,6 @@ public class MiIndex{
 			}
 			scanner.close();
 		}
-		
-		//Si es menor o igual a 
 	}
 	
 	/*Metodo que indica si el index se encuentra vacío

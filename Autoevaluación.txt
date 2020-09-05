@@ -41,9 +41,9 @@ f. gitStatus:                                          1
 
 1. gitLog (1 pto) :                                    1
 
-2. gitBranch (2 pto):                                  0
+2. gitBranch (2 pto):                                  1
 
-3. gitCheckout (1 pto):                                0
+3. gitCheckout (1 pto):                                1
 
 4. gitMerge (1 pto):                                   0
 
