@@ -22,6 +22,42 @@ public class MiRepositorio implements Cloneable{
 	private MiRepositorio siguiente = null;
 	//Metodos
 	
+	public MiRepositorio() {
+	}
+	//Seteador de atributos a partir de otro repositorio copiador
+	public void copiarAtributos(MiRepositorio repositorio) {
+		MiIndex index = new MiIndex();
+		int TamanoWorkspace = repositorio.getWorkspace().getTamano();
+		if (TamanoWorkspace>0) {
+			index.agregarVariosIndex(repositorio.getWorkspace(),TamanoWorkspace);
+			this.workspace = new MiWorkspace();
+			//Copiamos todo el workspace mediante una función del index
+			this.setWorkspace(index.getIndex());
+		}else {
+			this.workspace = new MiWorkspace();
+		}
+		//Seteamos el index
+		this.index = new MiIndex();
+		MiCommit oldLocal = repositorio.getLocalRepository();
+		MiCommit oldRemote = repositorio.getRemoteRepository();
+		MiCommit newLocal = repositorio.getLocalRepository();
+		MiCommit newRemote = repositorio.getRemoteRepository();
+		try {
+			newLocal = (MiCommit)oldLocal.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			newRemote = (MiCommit)oldRemote.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setLocalRepository(newLocal);
+		this.setRemoteRepository(newRemote);
+	}
 	//Constructor del repositorio
 	public void gitInit(String autor,String nombreRepositorio ) {
 		setAutor(autor);
@@ -159,7 +195,10 @@ public class MiRepositorio implements Cloneable{
 	public MiWorkspace getWorkspace() {return workspace;}
 	public Boolean workspaceEmpty() {return workspace.isEmpty();}
 	public ListaDeArchivos getIndex() {return index.getIndex();}
-	
+	public void setLocalRepository(MiCommit localRepository) {this.localRepository = localRepository;}
+	public void setRemoteRepository(MiCommit remoteRepository) {this.remoteRepository = remoteRepository;}
+	public MiCommit getLocalRepository() {return localRepository;}
+	public MiCommit getRemoteRepository() {return remoteRepository;}
 	//Branches
 	public String getBranch() {return branch;}
 	public void setBranch(String branch) {this.branch = branch;}

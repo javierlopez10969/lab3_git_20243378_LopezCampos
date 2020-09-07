@@ -13,7 +13,7 @@ import utils.ListaDeArchivos;
  * @version 1.0, 2/09/2020
  * @author Javier López
  * */
-public class MiCommit {
+public class MiCommit implements Cloneable {
 	private Commit cima = null ;
 	//Total de commits
 	private int tamano ;
@@ -291,6 +291,19 @@ public class MiCommit {
 		}
 		return salidaString;
 	}
+	
+   public MiCommit clone() throws CloneNotSupportedException {
+	   try
+	   {
+		   MiCommit clonedMyClass = (MiCommit)super.clone();
+	       // if you have custom object, then you need create a new one in here
+	       return clonedMyClass ;
+	   } catch (CloneNotSupportedException e) {
+	       e.printStackTrace();
+	       return new MiCommit();
+	   }
+   }
+	
 	
 	/**
 	 * Metodo que verifica si actualmente esta vacío el repositorio

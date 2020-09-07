@@ -2,6 +2,7 @@ package utils;
 import modelo.Archivo;
 import modelo.MiArchivo;
 
+
 /**
  *  * Clase del tipo lista enlazada, la cual guarda todos los archivos posibles sin un limite
  * Sus atributos son el primer archivo de la lista
@@ -261,7 +262,7 @@ public class ListaDeArchivos {
 		}
 		//Si se completo todo, y por lo menos hay un archivo distinto
 		return false;
-	}
+		}
 	
 	//Esta vacía la lista de archivos
 	public Boolean isEmpty() {return tamano == 0;}

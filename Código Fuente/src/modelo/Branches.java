@@ -39,6 +39,7 @@ public class Branches {
 		//Por mientras la seteamos en el master normal
 		MiRepositorio newBranch = getMaster();
 		try {
+			//La clonamos
 			newBranch = (MiRepositorio)master.clone();
 		} catch (CloneNotSupportedException e1) {
 			// TODO Auto-generated catch block
@@ -46,6 +47,8 @@ public class Branches {
 		}
 		//Seteamos el nombre de la nueva branch
 		newBranch.setBranch(respueString);
+		//Seteamos correctamente los atributos
+		newBranch.copiarAtributos(getMaster());
 		//Y preguntamos si quiere seguir con el mismo autor o uno nuevo
 		System.out.println("¿Quiere cambiar de autor? \n"+
 		"Sí / no \n");
@@ -62,6 +65,9 @@ public class Branches {
 				respueString = scanner.nextLine();
 			} catch (Exception e) {
 				System.out.println("Ha ocurrido un error \n"+ e);
+			}
+			if (respueString.equals("")) {
+				respueString = "Ryan Gosling";	
 			}
 			newBranch.setAutor(respueString);
 		}

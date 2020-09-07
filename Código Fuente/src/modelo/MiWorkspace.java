@@ -11,7 +11,7 @@ import utils.ListaDeArchivos;
  * @author Javier López
  * */
 
-public class MiWorkspace{
+public class MiWorkspace implements Cloneable{
 	//Atributos
 	private ListaDeArchivos archivos = new ListaDeArchivos();
 
