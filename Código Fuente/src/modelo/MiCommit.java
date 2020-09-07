@@ -14,10 +14,12 @@ import utils.ListaDeArchivos;
  * @author Javier López
  * */
 public class MiCommit implements Cloneable {
+	//Atributos
 	private Commit cima = null ;
 	//Total de commits
 	private int tamano ;
 	private Scanner scanner;
+	
 	
 	/**
 	 * Cada commit realizado se guardará en una clase tipo nodo para lista enlazada llamada Commit
@@ -73,7 +75,7 @@ public class MiCommit implements Cloneable {
 		public void setSiguiente(Commit siguiente) {this.siguiente = siguiente;}
 	}
 	
-	
+	//METODOS---------------------------------------------------------------------------------------------------------------------------------------------------
 	
     /** 
      * Genera un commit a partir de dos preguntas, 
@@ -292,6 +294,10 @@ public class MiCommit implements Cloneable {
 		return salidaString;
 	}
 	
+	/**
+	 * Metodo implementado de ultimo moemento, sirve para clonar una lista de Commits
+	 * Y asi diferenciar direcciones de memoria
+	 */
    public MiCommit clone() throws CloneNotSupportedException {
 	   try
 	   {

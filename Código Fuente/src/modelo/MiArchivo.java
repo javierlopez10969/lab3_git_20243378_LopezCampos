@@ -4,6 +4,12 @@ import java.util.Scanner;
 
 import utils.Contenido;
 
+/**
+ * Clase que implementa los que presentado en la interfaz Archivo
+ * Es la abstracción de un archivo de texto plano
+ * @author javier
+ *
+ */
 public class MiArchivo implements Archivo{
 	//Atributos
 	private String nombre;
@@ -14,20 +20,32 @@ public class MiArchivo implements Archivo{
 	//Contenido editable mediante listas enlazadas
 	private Contenido contenido;
 	
-	//Constructor
+	
+	//METODOS---------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	/**
+	 * Constructor a partir del nombre del archivo
+	 * @param name
+	 */
 	public MiArchivo(String name){
 		setNombre(name);
 		setFechaCreacion();
 		setFechaUltimaModificacion();
 		contenido = new Contenido();
 	}
-
+	
+	/**
+	 * Muestra el archivo, pero solo su nombre y fechas
+	 */
 	public String nombresFechas2String() {
 		return ("Nombre Archivo : " + getNombre()+
 				"\nFecha de creación : " +getFechaCreacion()+
 				"\nÚltima fecha de modifcación : " + getFechaUltimaModificacion()+"\n");
 	}
 	
+	/**
+	 * Muestra el archivo con todos sus atributos
+	 */
 	public String Archivo2String() {
 		String salidaString;
 		salidaString = "Nombre Archivo : " +getNombre()+
@@ -42,10 +60,14 @@ public class MiArchivo implements Archivo{
 		return salidaString;
 	}
 		
-	//Edición de archivo
+	/**
+	 * Menu que permite la edición de las lienas del contenido editable
+	 * Fucniona con insertar las distinas lineas
+	 */
 	public void editarArchivo() throws InterruptedException{
 		//Variables de múltiples entradas
 		String x = "-1";
+		
 		String linea = "line";
 		int entero = 0;
 		System.out.println("Edición de Archivo");
@@ -116,7 +138,10 @@ public class MiArchivo implements Archivo{
 		System.out.println(Archivo2String());
 		Thread.sleep(3000);
 	}
-	//Editar varias líneas
+	
+	/**
+	 * Editar varias lineas, es un editar lineas general, que depende de cuantas lineas uno ingrese
+	 */
 	public void ingresarVariasLineas() {
 		System.out.println("Cuantas líneas quiere ingresar : ");
 		@SuppressWarnings("resource")

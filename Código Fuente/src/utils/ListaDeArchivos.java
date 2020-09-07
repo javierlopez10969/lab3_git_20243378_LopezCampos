@@ -33,6 +33,8 @@ public class ListaDeArchivos {
 		public void setSiguiente(nodoArchivo siguiente) {this.siguiente = siguiente;}
 	}
 	
+	//Metodos
+	
 	/**
 	 * Insertar la inicio de la lista
 	 * @param myArchivo  archivo que se quiere agregar a la lista

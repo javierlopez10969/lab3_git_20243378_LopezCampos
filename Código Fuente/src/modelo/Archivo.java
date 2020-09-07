@@ -1,7 +1,11 @@
 package modelo;
-
 import utils.Contenido;
 
+/**
+ * Interfaz de la clase archivo, para posteriormente implementarla en la clase MiArchivo
+ * @author javier
+ *
+ */
 public interface Archivo {
 	public String nombresFechas2String();
 	public String Archivo2String();

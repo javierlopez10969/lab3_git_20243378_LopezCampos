@@ -10,12 +10,21 @@ import java.util.Date;
  * */
 
 public class Tiempo {
+	//Atributo de clase String
 	private static String actualTime;
 	
+	/**
+	 * Obtener el tiempo actual
+	 * @return uns tring con el tiempo actualmente
+	 */
 	public static String getActualTime() {
 		Tiempo.setActualTime() ;
 		return actualTime;
 	}
+	
+	/**
+	 * Actualizar el tiempoa actual
+	 */
 	public static void setActualTime() {
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date date = new Date();

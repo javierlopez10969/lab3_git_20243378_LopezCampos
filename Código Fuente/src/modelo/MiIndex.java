@@ -11,8 +11,17 @@ import utils.ListaDeArchivos;
  * @author Javier López
  * */
 public class MiIndex{
+	//Lista de archivos del index
 	private ListaDeArchivos index = new ListaDeArchivos();
-	//Menú gitAdd que se le entrega el workspace actual
+	
+	
+	//Metodos
+	
+	/**
+	 * Menú gitAdd que se le entrega el workspace actual
+	 * @param workspace
+	 * @throws InterruptedException
+	 */
 	public void gitAdd(MiWorkspace workspace) throws InterruptedException{
 		//Solo si el workspace no se encuentra vacío
 		if (!workspace.isEmpty()) {
@@ -96,7 +105,12 @@ public class MiIndex{
 		}
 	}
 	
-	//Agregar archivo del workspace
+	/**
+	 * Agregar archivo del workspace
+	 * @param workspace
+	 * @param indice
+	 * @return
+	 */
 	public int agregarIndex(MiWorkspace workspace, int indice) {
 		//Procedemos a preguntamos si podemos obtener el archivo
 		if (workspace.getArchivoN(indice)!= null) {
@@ -115,7 +129,11 @@ public class MiIndex{
 		}
 	}
 	
-	//Agregar varios archivo del workspace al index
+	/**
+	 * Agregar varios archivo del workspace al index
+	 * @param workspace
+	 * @param tamano
+	 */
 	public void agregarVariosIndex(MiWorkspace workspace,int tamano) {
 		System.out.println("total : " + tamano);
 		//Si el tamaño es mayor que los archivos totales del workspace

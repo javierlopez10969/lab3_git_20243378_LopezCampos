@@ -1,12 +1,23 @@
 package modelo;
 
 import java.util.Scanner;
-
+/**
+ * Clase Branches que permite almacenar distintos repositorios, con disitntas nombres de rama
+ * Contiene disitntos metodos para crear ramas e intercambiarse y/o moverse entre ellas
+ * @author javier
+ *
+ */
 public class Branches {
+	//Atributos
+	
 	//Rama master o rama 
 	private MiRepositorio master;
 	//Total de ramas
 	private int tamano;
+	
+	
+	
+	//METODOS---------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	/**
 	 * Constructor de las distitnas ramas a partir 
@@ -17,7 +28,10 @@ public class Branches {
 		//Decimos que el tamaño total de branches es uno
 		setTamano(1);
 	}
-	
+	/**
+	 * GitBranch, funcionalidad extra, que permite el crear una nueva rama a partir de master
+	 * @return
+	 */
 	public MiRepositorio gitBranch() {
 		System.out.println("¿Cuál es el nombre de su rama nueva a crear a partir de master ? \n");
 		String respueString = "";
@@ -83,6 +97,11 @@ public class Branches {
 		}
 	}
 	
+	/**
+	 * Insertar Branch, una vez creada la branch en el metodo gitBranch, se procede a insertar la nueva 
+	 * Rama creada al final de la lista enlazada de repositorios
+	 * @param newBranch
+	 */
 	public void insertarBranch(MiRepositorio newBranch) {
 		if (getTamano() == 1) {
 			master.setSiguiente(newBranch);
@@ -100,6 +119,10 @@ public class Branches {
 		}
 	}
 	
+	/**
+	 * Metodo que nos permite cambiar de ramas, le pregutna al usuario a cual rama se quiere cambiar
+	 * @return MiRepositorio, repositorio en el cual nos vamos a cambiar, se efectua el cambio en el metodo main
+	 */
 	public MiRepositorio gitCheckOut() {
 		if (getTamano() == 1) {
 			System.out.println("Actualmente solo hay una rama, para hacer checkout, deberá crear una rama nueva\n");
@@ -126,7 +149,11 @@ public class Branches {
 		}
 	}
 	
-	
+	/**
+	 * Metodo que nos permite obtener una rama n, para despues cambiarnos a esa rama
+	 * @param n, indice donde nos queremos cambiar
+	 * @return Mi Repositroio, devuelve el repositorio al cual nos queremos cambiar
+	 */
 	public MiRepositorio getBranchN(int n) {
 		if (n == 0) {
 			return getMaster();
@@ -142,6 +169,10 @@ public class Branches {
 		}
 	}
 	
+	/**
+	 * Transforma todas las ramas presentes a un estado string, para posteriormente mostrarlas por pantalla
+	 * @return
+	 */
 	public String branches2String() {
 		int i = 0; String salidaString ="";
 		MiRepositorio punteroMiRepositorio = getMaster();

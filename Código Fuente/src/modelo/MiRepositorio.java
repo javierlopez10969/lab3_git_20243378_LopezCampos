@@ -20,11 +20,20 @@ public class MiRepositorio implements Cloneable{
 	
 	//Repositorio siguiente en caso de crear más ramas
 	private MiRepositorio siguiente = null;
+	
+	
 	//Metodos
 	
+	/**
+	 * Metodo constructor de repositorio
+	 */
 	public MiRepositorio() {
 	}
-	//Seteador de atributos a partir de otro repositorio copiador
+	
+	
+	/*
+	 * Seteador de atributos a partir de otro repositorio copiador
+	 */
 	public void copiarAtributos(MiRepositorio repositorio) {
 		MiIndex index = new MiIndex();
 		int TamanoWorkspace = repositorio.getWorkspace().getTamano();
@@ -58,7 +67,11 @@ public class MiRepositorio implements Cloneable{
 		this.setLocalRepository(newLocal);
 		this.setRemoteRepository(newRemote);
 	}
-	//Constructor del repositorio
+	/**
+	 * Constructor del repositorio con gitinit
+	 * @param autor
+	 * @param nombreRepositorio
+	 */
 	public void gitInit(String autor,String nombreRepositorio ) {
 		setAutor(autor);
 		setNombreRepositorio(nombreRepositorio);
@@ -70,12 +83,14 @@ public class MiRepositorio implements Cloneable{
 	}
 
 	//Metodos del Workspace
+	//Se hacen llamadas a los metodos del workspace
 	public void editarArchivo() throws InterruptedException {workspace.editarArchivo();}
 	public String workspace2String() {return workspace.workspace2String();}
 	public void borrarArchivo() {workspace.borrarArchivo();}
 	public void crearArchivo() throws InterruptedException{workspace.crearArchivo();}
 	
-	//Index
+	//MetodosIndex
+	
 	//Menú que pregunta que archivos quiere añadir al index
 	public void gitAdd() throws InterruptedException{index.gitAdd(getWorkspace());}
 	//Llamar al metodo del index para transformarlo a una variable del tipo string
@@ -86,7 +101,8 @@ public class MiRepositorio implements Cloneable{
 		return index.getIndex().archivos2String();
 	}
 	
-	//Local Repository
+	
+	//Metodos Local Repository
 	/* Crear un commit a partir de un index no vacío
 	 * */
 	public void gitCommit(){
@@ -98,7 +114,11 @@ public class MiRepositorio implements Cloneable{
 		}
 	}
 	
-	//Remote Repository	
+	//Función que se encarga de imprimir el resultado obtenido en gitLog del local repository
+	public void gitLog() {System.out.println(localRepository.gitLog());}
+	
+	
+	//Metodos Remote Repository	
 	public void gitPush(){
 		if (localRepository.isEmpty()) {
 			System.out.println("Local repositroy vacío, no procede hacer push\n");
@@ -151,6 +171,10 @@ public class MiRepositorio implements Cloneable{
 		return salidaString ;
 	}
 	
+	/**
+	 * Metodo que revisa si los remote se encuentra actualizado de acuerdo al tamaño
+	 * @return
+	 */
 	public String remoteActualizadoString() {
 		if (localRepository.isEmpty()) {
 			return "vacío, ya que no hay ningun commit realizado";
@@ -162,6 +186,9 @@ public class MiRepositorio implements Cloneable{
 		}
 	}
 	
+	/**
+	 * Clonador de repositorio
+	 */
 	   public MiRepositorio clone() throws CloneNotSupportedException {
 		   try
 		   {
@@ -176,8 +203,6 @@ public class MiRepositorio implements Cloneable{
 	
 	
 	public Boolean remoteActualizadoBoolean() {return remoteRepository.getTamano() == localRepository.getTamano();}
-	//Función que se encarga de imprimir el resultado obtenido en gitLog del local repository
-	public void gitLog() {System.out.println(localRepository.gitLog());}
 	//Funciones secretas para el creador para ver los estados de los repositorios
 	public void gitLogRemote() {System.out.println(remoteRepository.gitLog());}
 	public void mostrarRepositorioLocal() {System.out.println(localRepository.repositorio2String());}

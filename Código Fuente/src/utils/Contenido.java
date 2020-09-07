@@ -1,10 +1,15 @@
 package utils;
 
-
+/**
+ * Case que permite la edición de un archivo de texto plano
+ * @author javier
+ *
+ */
 public class Contenido {
 	//Atributos
 	//Cabeza de la lista
 	private Lineas Cabeza = null;
+	//Total de lineas
 	private int tamano ;
 	
 	//Constructor de un contenido simple
@@ -12,6 +17,10 @@ public class Contenido {
 		setTamano(0);
 	}
 	
+	/**
+	 * Metodo constructor de copia de un archivo
+	 * @return
+	 */
 	public Contenido copiarContenido() {
 		Contenido contenidoSalida = new Contenido();
 		contenidoSalida.setTamano(this.getTamano());
@@ -33,7 +42,11 @@ public class Contenido {
 		}
 		return contenidoSalida;
 	}
-	//Creamos la clase nodo, una clase interna de lista enlazada
+	/**
+	 * Creamos la clase nodo, una clase interna de lista enlazada
+	 * @author javier
+	 *
+	 */
 	private class Lineas{
 		//Atributos
 		private String Linea;
@@ -51,6 +64,11 @@ public class Contenido {
 	}
 	
 	//Metodos
+	
+	/**
+	 * Insertar una linea en la cabeza del contenido
+	 * @param linea
+	 */
 	public void insertarPrincipio(String linea){
 		Lineas nodo = new Lineas(linea);
 		//El siguiente elmenento es la cabeza
@@ -61,7 +79,10 @@ public class Contenido {
 		setTamano(tamano + 1);
 	}
 	
-	//Insertar al final
+	/**
+	 * Insertar al final del contenido una linea
+	 * @param linea
+	 */
 	public void insertarFinal(String linea) {
 		Lineas nodo = new Lineas(linea);
 		Lineas puntero = getCabeza() ;
@@ -79,7 +100,11 @@ public class Contenido {
 		setTamano(tamano +1);
 	}
 	
-	//Insertar en un indice n
+	/**
+	 * Insertar una linea segun un indice n
+	 * @param n
+	 * @param linea
+	 */
 	public void insertarN(int n,String linea) {
 		Lineas nodo = new Lineas(linea);
 		Lineas puntero = getCabeza() ;
@@ -124,7 +149,12 @@ public class Contenido {
 			puntero = puntero.getSiguiente();
 		}
 	}
-	//Traspasar el contenido a un string
+	
+	
+	/**
+	 * Traspasar el contenido a un string
+	 * @return string con el contenido
+	 */
 	public String contenido2String() {
 		Lineas puntero = getCabeza();
 		if (puntero==null) {
@@ -139,6 +169,11 @@ public class Contenido {
 		}
 		return salidaString;
 	}
+	
+	/**
+	 * Metodo para borrar una linea dado un indice n
+	 * @param n
+	 */
 	public void borrarLinea(int n) {
 		if (getTamano() == 1) {
 			setCabeza(null);
@@ -158,13 +193,15 @@ public class Contenido {
 		}
 	}
 	
+	/**
+	 * MEtodo que nos indica si no hay nignuna linea
+	 * @return
+	 */
 	public Boolean isEmpty() {return tamano == 0;}
 	
 	//Setters and Getters
 	public Lineas getCabeza() {return Cabeza;}
-	public void setCabeza(Lineas cabeza) {
-		this.Cabeza = cabeza;
-		}
+	public void setCabeza(Lineas cabeza) {this.Cabeza = cabeza;}
 	public int getTamano() {return tamano;}
 	public void setTamano(int tamano) {this.tamano = tamano;}
 	

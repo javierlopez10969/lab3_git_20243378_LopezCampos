@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Una clase para mostrar y gestionar los distintos comandos 
+ * Una clase para mostrar y recibir los distintos comandos
  * de la clase repositorio, y que estos interactuen con el usuario
+ * El controlador de eventos, efectivamente lo controla la clase MiRepositorio
  * @version 1.0, 31/08/2020
  * @author Javier López
  */
@@ -204,6 +205,7 @@ public class Menu {
     }
     /** 
      * Metodo paraantener limpia la pantalla
+     * Depende del sistema operativo
      * @param void
      */
 	public static void limpiarPantalla(){

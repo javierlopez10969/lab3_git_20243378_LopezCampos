@@ -16,8 +16,12 @@ public class MiWorkspace implements Cloneable{
 	private ListaDeArchivos archivos = new ListaDeArchivos();
 
 	//Metodos
-	//Este es el bloque de métodos complejos, ya que necesitan una itneracción fuerte con el usuario
-	//Se podría relacionar a workspace como un intermediario entre los datos almacenadaos y lo que ocurre con ellos
+	
+	/**
+	 * Este es el bloque de métodos complejos, ya que necesitan una itneracción fuerte con el usuario
+	 * Se podría relacionar a workspace como un intermediario entre los datos almacenadaos y lo que ocurre con ellos
+	 * @throws InterruptedException
+	 */
 	public void crearArchivo() throws InterruptedException {
 		@SuppressWarnings("resource")
 		Scanner scanner =  new Scanner(System.in);
@@ -56,7 +60,11 @@ public class MiWorkspace implements Cloneable{
 			System.out.println("Hay un archivo con el mismo nombre, no procede a crear nuevo archivo\n");
 		}		
 	}
-	//Método encargado de borrar un archivo
+	
+	
+	/**
+	 * Método encargado de borrar un archivo
+	 */
 	public void borrarArchivo() {
 		if (!isEmpty()) {
 			//Mostramos el workspace
@@ -76,6 +84,10 @@ public class MiWorkspace implements Cloneable{
 		}		
 	}
 
+	/**
+	 * Metodo, que muestra un menú de interacción, para la edición de una archivo
+	 * @throws InterruptedException
+	 */
 	public void editarArchivo() throws InterruptedException {
 		//Antes de editar preguntamos si el workspace no esta vacío
 		if (!isEmpty()) {
