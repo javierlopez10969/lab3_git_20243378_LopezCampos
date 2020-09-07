@@ -151,7 +151,7 @@ public class MiArchivo implements Archivo{
 	public void setFechaCreacion() {this.fechaCreacion = Tiempo.getActualTime();}
 	//Fecha modificacion
 	public String getFechaUltimaModificacion() {return fechaUltimaModificacion;}
-	public void setFechaUltimaModificacion(String newFecha) {this.fechaCreacion = newFecha;}
+	public void setFechaUltimaModificacion(String newFecha) {this.fechaUltimaModificacion= newFecha;}
 	public void setFechaUltimaModificacion() {this.fechaUltimaModificacion = Tiempo.getActualTime() ;}
 	//Editar contenido
 	public Contenido getContenido() {return contenido;}

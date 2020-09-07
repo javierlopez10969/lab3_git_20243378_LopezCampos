@@ -160,10 +160,15 @@ public class ListaDeArchivos {
 				System.out.println("No hay archivos disponibles");
 				return null;
 			}else {
+				//Creamos un archivo desde 0
 				Archivo archivo = new MiArchivo(puntero.myArchivo.getNombre());
 				archivo.setFechaCreacion(puntero.myArchivo.getFechaCreacion());
-				archivo.setFechaUltimaModificacion(puntero.myArchivo.getFechaUltimaModificacion());
 				archivo.setContenidoString(puntero.myArchivo.getContenidoString());
+				archivo.setContenido(puntero.myArchivo.getContenido().copiarContenido());
+				String fechaString = puntero.myArchivo.getFechaUltimaModificacion();
+				//System.out.println("Fecha de modificación Original : " +fechaString +"\n");
+				archivo.setFechaUltimaModificacion(fechaString);
+				//System.out.println("Fecha de modificación : " + archivo.getFechaUltimaModificacion() +"\n");
 				return archivo;
 				//return puntero.myArchivo;
 			}
@@ -206,9 +211,9 @@ public class ListaDeArchivos {
 			//System.out.println("Name archivo : " + archivo.getNombre());
 			//System.out.println("Name puntero : " + puntero.myArchivo.getNombre()+ "\n");
 			if (archivo.getNombre().equals(puntero.myArchivo.getNombre())) {
-				//System.out.println("El archivo ya se encuentra en la lista de archivos\n");
-				if (archivo.equals(puntero.myArchivo)) {
-					//System.out.println("Y además son iguales\n");
+				System.out.println("El archivo ya se encuentra en la lista de archivos\n");
+				if (archivo.equals(puntero.myArchivo) || archivo.Archivo2String().equals(archivo.Archivo2String())) {
+					System.out.println("Y además son iguales\n");
 					return true;
 				}else {
 					//System.out.println("Y No son iguales\n");
@@ -226,10 +231,13 @@ public class ListaDeArchivos {
 	 * @param archivos lista de archivos a comparar
 	 * @return true son iguales , false son distintas
 	 */
-	public Boolean equals(ListaDeArchivos archivos) {
+	public Boolean listaDeArhivosIguales(ListaDeArchivos archivos) {
 		//Si ambas listas tienen un tamaño distinto podemos indicar que son distintas
 		if (this.getTamano() != archivos.getTamano()) {
 			return false;
+		}
+		else if (this.equals(archivos)) {
+			return true;
 		}
 		//Declaramos puntero con la cabeza de archivos
 		nodoArchivo punteroArchivo = archivos.getCabeza();
@@ -243,10 +251,8 @@ public class ListaDeArchivos {
 				n--;
 			}
 			i++;
-			//System.out.println("Avanzando : " +  i + "\n");
 			//Avanzamos el puntero
 			punteroArchivo.getSiguiente();
-			
 		}
 		// si al final de recorrer todos los punteros el contador es igual a 0
 		if (n==0) {

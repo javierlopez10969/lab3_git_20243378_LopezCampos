@@ -2,7 +2,7 @@ package modelo;
 
 import utils.ListaDeArchivos;
 
-public class MiRepositorio{
+public class MiRepositorio implements Cloneable{
 	//Atributos
 	private String nombreRepositorio;
 	private String autor;
@@ -125,6 +125,19 @@ public class MiRepositorio{
 			return "desactualziado";
 		}
 	}
+	
+	   public MiRepositorio clone() throws CloneNotSupportedException {
+		   try
+		   {
+			   MiRepositorio clonedMyClass = (MiRepositorio)super.clone();
+		       // if you have custom object, then you need create a new one in here
+		       return clonedMyClass ;
+		   } catch (CloneNotSupportedException e) {
+		       e.printStackTrace();
+		       return new MiRepositorio();
+		   }
+	   }
+	
 	
 	public Boolean remoteActualizadoBoolean() {return remoteRepository.getTamano() == localRepository.getTamano();}
 	//Función que se encarga de imprimir el resultado obtenido en gitLog del local repository

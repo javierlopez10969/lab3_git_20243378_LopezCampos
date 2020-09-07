@@ -51,6 +51,9 @@ public class MiIndex{
 					if (x== 1) {
 						//Indicamos que index ahora es igual al index
 						agregarVariosIndex(workspace, workspace.getTamano());
+						System.out.println("Git Add All \n");
+						System.out.println("Su index quedo como : \n"+index.archivos2String());
+						break;
 					}
 					//Agregar varios archivos
 					else if (x== 2){

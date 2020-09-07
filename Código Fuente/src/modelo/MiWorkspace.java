@@ -27,6 +27,9 @@ public class MiWorkspace{
 		} catch (Exception e) {
 			System.out.println("Un error ha ocurrido " + e);
 		}
+		if (nombreArchivo.equals("") || nombreArchivo.equals("\n")) {
+			nombreArchivo = "NuevoArchivo.c";
+		}
 		//System.out.println(nombreArchivo);
 		//Inicializamos un archivo a partir del nombre dado
 		Archivo archivo = new MiArchivo(nombreArchivo);

@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @version 1.0, 31/08/2020
  * @author Javier López
  */
-public interface Menu {
+public class Menu {
     /** 
      * Mostrar los distintos comandos de la simulación de git
      * @param void
@@ -23,6 +23,8 @@ public interface Menu {
 		String autor = entradaEscaner.nextLine();
 		System.out.println("Ahora ingrese el nombre de su repositorio");
 		String nombreRepositorio = entradaEscaner.nextLine();
+		if (autor.equals("")|| autor.equals("\n")) {autor = "Samuel L Jackson";}
+		if (nombreRepositorio.equals("")|| nombreRepositorio.equals("\n")) {nombreRepositorio = "Mi Repositorio";}
 		//String autor = "Mohamed";String nombreRepositorio = "Ali";
 		//Inicializamos el repostorio
 		repositorio.gitInit(autor, nombreRepositorio);

@@ -28,10 +28,22 @@ public class Branches {
 		} catch (Exception e) {
 			System.out.println("Ha ocurrido un error "+ e + "\n");
 		}
+		if (respueString.equals("")|| respueString.equals("\n")) {
+			respueString = "MiRama";
+		}
 		//Si el nombre nuevo no se encuentra ya dentro de una de las ramas
 		if (!isInside(respueString)) {		
 		//Decimos que la nueva Branch es exactamente igual a como ha quedado master
+		MiRepositorio master = getMaster();
+ 		//Intentamos copiar el repositorio master en una nueva dirección de memoria
+		//Por mientras la seteamos en el master normal
 		MiRepositorio newBranch = getMaster();
+		try {
+			newBranch = (MiRepositorio)master.clone();
+		} catch (CloneNotSupportedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		//Seteamos el nombre de la nueva branch
 		newBranch.setBranch(respueString);
 		//Y preguntamos si quiere seguir con el mismo autor o uno nuevo
@@ -128,7 +140,7 @@ public class Branches {
 		int i = 0; String salidaString ="";
 		MiRepositorio punteroMiRepositorio = getMaster();
 		while (i < getTamano() && punteroMiRepositorio!= null) {
-			salidaString = salidaString + i + ".-\n" +  punteroMiRepositorio.gitStatus() + "\n";  
+			salidaString = salidaString + i + ".-\n" +  punteroMiRepositorio.gitStatus() + "\n\n\n";  
 			punteroMiRepositorio = punteroMiRepositorio.getSiguiente() ;
 			i++;
 			

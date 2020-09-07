@@ -11,7 +11,28 @@ public class Contenido {
 	public Contenido() {
 		setTamano(0);
 	}
-
+	
+	public Contenido copiarContenido() {
+		Contenido contenidoSalida = new Contenido();
+		contenidoSalida.setTamano(this.getTamano());
+		Lineas punteroLineas = this.getCabeza(); int i = 1 ;
+		if (punteroLineas == null) {
+			return contenidoSalida;
+		}
+		contenidoSalida.insertarPrincipio(punteroLineas.getLinea());
+		punteroLineas = punteroLineas.getSiguiente();
+		if (punteroLineas == null) {
+			return contenidoSalida;
+		}
+		while (punteroLineas!=null && i < this.getTamano()) {
+			String lineaString = punteroLineas.getLinea() ;
+			//System.out.println(lineaString + i + "tamano : " + this.getTamano() +"\n");
+			contenidoSalida.insertarFinal(lineaString);
+			i++;
+			punteroLineas = punteroLineas.getSiguiente();
+		}
+		return contenidoSalida;
+	}
 	//Creamos la clase nodo, una clase interna de lista enlazada
 	private class Lineas{
 		//Atributos
@@ -24,9 +45,7 @@ public class Contenido {
 		
 		//Setters and Getters
 		public String getLinea() {return Linea;}
-		public void setLinea(String Linea) {
-			this.Linea = Linea;
-		}
+		public void setLinea(String Linea) {this.Linea = Linea;}
 		public Lineas getSiguiente() {return siguiente;}
 		public void setSiguiente(Lineas siguiente) {this.siguiente = siguiente;}
 	}

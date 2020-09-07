@@ -86,7 +86,7 @@ public class MiCommit {
 	public void Commit(MiIndex index, String autor) {
 		//Para que se ejecute el push primero el index entregado no debe estar vacío
 		//Además que debe ser distinto al último index entregado
-		if (!index.getIndex().isEmpty() && existenCambios(index.getIndex())) {
+		if (!index.getIndex().isEmpty() && this.existenCambios(index.getIndex())) {
 			String comentrario = "";
 			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(System.in);
@@ -95,6 +95,9 @@ public class MiCommit {
 				comentrario = scanner.nextLine();
 			} catch (Exception e) {
 				System.out.println("Ha ocurrido un error : "+e+"\n");
+			}
+			if (comentrario.equals("") || comentrario.equals("\n")) {
+				comentrario = "Mi Commit UwU";
 			}
 			System.out.println("Desea  usar el autor predeterminado o cambiar el nombre del autor\n"
 			+ "1.- Autor Predeterminado\n"
@@ -105,12 +108,18 @@ public class MiCommit {
 			} catch (Exception e) {
 				System.out.println("Ha ocurrido un error : "+e+"\n");
 			}
+			System.out.println(x +"\n");
 			if (x==2) {
+				@SuppressWarnings("resource")
+				Scanner scanner2 = new Scanner(System.in);
+				System.out.println("Ingrese el nombre de su autor\n");
 				try {
-					System.out.println("Ingrese el nombre de su autor\n");
-					autor = scanner.nextLine();
+					autor = scanner2.nextLine();
 				} catch (Exception e) {
 					System.out.println("Ha ocurrido un error : "+e+"\n");
+				}
+				if (autor.equals("") || autor.equals("\n")) {
+					autor = "Ryan Gosling";
 				}
 			}
 			System.out.println("Autor : " + autor+ "\n");
@@ -165,9 +174,13 @@ public class MiCommit {
 			}
 			if (respuestaString.equals("Si") || respuestaString.equals("si") || respuestaString.equals("1") || respuestaString.equals("yes") || 
 				respuestaString.equals("yup") || respuestaString.equals("1")) {
+				//Seteamos una nueva Cima de Local Repository
 				localRepository.setCima(this.getCima());
+				//Y un nuevo tamaño para local repository
+				localRepository.setTamano(this.getTamano());
 				return this.getCima().getWorkspace();
 			}else {
+				System.out.println("No hacer Pull\n");
 				return null;
 			}
 		}
@@ -208,27 +221,28 @@ public class MiCommit {
 	 */
 	public Boolean existenCambios(ListaDeArchivos archivos) {
 		//Si el repositorio esta vacío, si existen cambios
-		if (isEmpty()) {
+		if (this.isEmpty()) {
 			return true;
 		}
 		//Si no esta vacío el repositorio
 		else {
 			//Obtenemos el último commit del repositorio
-			Commit puntero = getCima();
+			ListaDeArchivos lastWorkspace = getCima().getWorkspace();
 			//Pregunto si los index son iguales
-			if (puntero.getWorkspace().equals(archivos)) {
-				/*
+			if (lastWorkspace.equals(archivos) || lastWorkspace.listaDeArhivosIguales(archivos)
+			|| lastWorkspace.archivos2String().equals(archivos.archivos2String())) {
 				System.out.println(
-				"Último workspace : \n "+puntero.getWorkspace().archivos2String() + "\n"+
+				"No hay cambios \n"+
+				"Último workspace : \n "+lastWorkspace.archivos2String() + "\n"+
 				"Nuevo workspace : \n "+archivos.archivos2String() + "\n");
-				//No hay cambios*/
+				//No hay cambios
 				return false;
-			}else {
-				/*
+			}else {	
 				System.out.println(
-				"Último workspace : \n "+puntero.getWorkspace().archivos2String() + "\n"+
+				"Si hay cambios \n"+
+				"Último workspace : \n "+ lastWorkspace.archivos2String() + "\n"+
 				"Nuevo workspace : \n "+archivos.archivos2String() + "\n");
-				//Si hay cambios*/
+				//Si hay cambios
 				return true;
 			}
 		}
@@ -283,7 +297,6 @@ public class MiCommit {
 	 * @return
 	 */
 	public boolean isEmpty() {return getTamano() == 0;}
-	
 	
 	//Setters and Getters
 	public Commit getCima() {return cima;}
