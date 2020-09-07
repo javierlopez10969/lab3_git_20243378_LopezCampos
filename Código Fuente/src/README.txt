@@ -41,7 +41,7 @@ javac ./utils/Contenido.java ./utils/ListaDeArchivos.java ./modelo/Menu.java ./m
 	
 Comando 1 alternativo :
 
-javac ./utils/Menu.java
+javac ./modelo/Menu.java
 
 Comando 2 ejecutar programa : 
 
