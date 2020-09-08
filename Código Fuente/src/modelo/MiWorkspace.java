@@ -39,7 +39,7 @@ public class MiWorkspace implements Cloneable{
 		Archivo archivo = new MiArchivo(nombreArchivo);
 		//Solo si el archivo no se encuentra en el workspace
 		if (!archivos.isInside(archivo)) {
-		archivos.añadirArchivo(archivo);
+		archivos.anadirArchivo(archivo);
 			//Le informamos que el archivo ha sido creado y añadido al workspace y le preguntamos si quiere editarlo
 			System.out.println("Archivo : " + nombreArchivo + " añadido a workspace\n"
 			+ "Desea editarlo? si "+ "\\" + " no \n");

@@ -69,7 +69,7 @@ public class ListaDeArchivos {
 	 * Añadir un archivo a la lista de archivos
 	 * @param myArchivo archivo que se quiere agregar a la lista
 	 */
-	public void añadirArchivo(Archivo myArchivo) {
+	public void anadirArchivo(Archivo myArchivo) {
 		if (isEmpty()) {
 			insertarPrincipio(myArchivo);
 		}else {

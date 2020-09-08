@@ -118,7 +118,7 @@ public class MiIndex{
 			Archivo archivo = workspace.getArchivoN(indice);
 			//Solo si el archivo no se encuentra dentro del index
 			if (!index.isInside(archivo)){
-				index.añadirArchivo(archivo);
+				index.anadirArchivo(archivo);
 				return 1;
 			}else {
 				return 0;

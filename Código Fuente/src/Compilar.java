@@ -6,7 +6,7 @@ public class Compilar {
 		String compilar2 = "javac ./utils/Contenido.java ./utils/ListaDeArchivos.java ./modelo/Menu.java ./modelo/Archivo.java ./modelo/MiArchivo.java ./modelo/MiIndex.java ./modelo/MiRepositorio.java ./modelo/MiWorkspace.java ./modelo/Tiempo.java ./modelo/Branches.java";
 		String sSistemaOperativo = System.getProperty("os.name");
 		System.out.println("Su sistema operativo es : "+sSistemaOperativo);
-        String[] arrOfStr = sSistemaOperativo.split(" ", 1);
+        String[] arrOfStr = sSistemaOperativo.split(" ", 0);
         System.out.println("System Real : " + arrOfStr[0]+ "\n");
 		switch (arrOfStr[0]) {
 		case "Linux":
@@ -25,6 +25,7 @@ public class Compilar {
 				System.out.println("Compilando ..");
 				Runtime.getRuntime().exec(compilar);
 				Runtime.getRuntime().exec(compilar2); 
+				System.out.println("Programa Compilado");
 			} catch (IOException ioe) {
 				System.out.println ("Algo salio mal :C" + ioe);
 			}
@@ -36,6 +37,7 @@ public class Compilar {
 				System.out.println("Compilando ..");
 				Runtime.getRuntime().exec(compilar);
 				Runtime.getRuntime().exec(compilar2); 
+				System.out.println("Programa Compilado");
 			} catch (IOException ioe) {
 				System.out.println ("Algo salio mal :C" + ioe);
 			}

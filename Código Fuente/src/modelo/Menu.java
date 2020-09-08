@@ -212,15 +212,12 @@ public class Menu {
 		String sSistemaOperativo = System.getProperty("os.name");
 		//System.out.println("Su sistema operativo es : "+sSistemaOperativo);
 		//SPliteamos el sSistema ya que puede haber más de un tipo de windows o Linux
-        String[] arrOfStr = sSistemaOperativo.split(" ", 1);
+        String[] arrOfStr = sSistemaOperativo.split(" ",0);
         //System.out.println("System Real : " + arrOfStr[0]+ "\n");
 		if (arrOfStr[0].equals("Windows")) { 
 		    System.out.flush(); 
-		    try {
-		    	Runtime.getRuntime().exec("cls");
-			} catch (IOException e) {
-				System.out.println(e);
-			}
+            System.out.print("\033[H\033[2J");
+             System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		}else if (arrOfStr[0].equals("Linux")){
 			System.out.print("\033[H\033[2J");  
 			System.out.flush(); 
@@ -231,5 +228,9 @@ public class Menu {
 			}
 		}		
 		
-	   } 
+	   }
+
+   public static void LimpiarWindows() throws IOException, InterruptedException {
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+    } 
 }
